@@ -1,0 +1,122 @@
+# Control cases: correct fr-CA in BOTH clean and seeded builds. A test
+# suite or judge that flags any of these as a defect is producing a false
+# positive. fr_clean == fr_seeded for every entry here EXCEPT C10, which
+# is the clean-mode-only counterpart of defect A06 at the same
+# data-testid — see its entry below for why it is the one exception.
+
+- id: C01
+  category: non_literal_but_correct
+  page: calculator
+  data_testid: calculator-apply-now
+  description: >
+    Deliberately non-literal: not a word-for-word rendering of "Apply
+    now", but a natural, correct fr-CA call to action.
+  en_text: "Apply now"
+  fr_clean: "Faites votre demande dès maintenant"
+  fr_seeded: "Faites votre demande dès maintenant"
+  expected_layer: both
+
+- id: C02
+  category: correct_translation
+  page: landing
+  data_testid: landing-get-started-link
+  en_text: "Get started"
+  fr_clean: "Commencer"
+  fr_seeded: "Commencer"
+  expected_layer: both
+
+- id: C03
+  category: correct_translation
+  page: landing
+  data_testid: landing-learn-more-link
+  en_text: "Learn more"
+  fr_clean: "En savoir plus"
+  fr_seeded: "En savoir plus"
+  expected_layer: both
+
+- id: C04
+  category: correct_translation
+  page: header
+  data_testid: header-signin-link
+  en_text: "Sign in"
+  fr_clean: "Ouvrir une session"
+  fr_seeded: "Ouvrir une session"
+  expected_layer: both
+
+- id: C05
+  category: correct_babel_formatting
+  page: dashboard
+  data_testid: dashboard-balance-amount
+  description: Account balance (12458.30 CAD) formatted with Babel's fr_CA currency output, used as-is.
+  en_text: "$12,458.30"
+  fr_clean: "12 458,30 $"
+  fr_seeded: "12 458,30 $"
+  expected_layer: deterministic
+
+- id: C06
+  category: correct_babel_formatting
+  page: summary
+  data_testid: summary-submitted-date
+  description: Submission date (2026-09-16, APP_TODAY) formatted with Babel's fr_CA long date output.
+  en_text: "September 16, 2026"
+  fr_clean: "16 septembre 2026"
+  fr_seeded: "16 septembre 2026"
+  expected_layer: deterministic
+
+- id: C07
+  category: correct_babel_formatting
+  page: calculator
+  data_testid: calculator-rate-value
+  description: Fixed 5.2% rate formatted with Babel's fr_CA percent output (one decimal place, NBSP before the sign).
+  en_text: "5.2%"
+  fr_clean: "5,2 %"
+  fr_seeded: "5,2 %"
+  expected_layer: deterministic
+
+- id: C08a
+  category: correct_plural_rule
+  page: dashboard
+  data_testid: dashboard-pending-applications-count
+  description: Pending applications fixed at 1; CLDR "one" category in both en and fr.
+  en_text: "1 pending application"
+  fr_clean: "1 demande en attente"
+  fr_seeded: "1 demande en attente"
+  expected_layer: deterministic
+
+- id: C08b
+  category: correct_plural_rule
+  page: dashboard
+  data_testid: dashboard-recent-transactions-count
+  description: Recent transactions count fixed at 3; CLDR "other" category in both en and fr.
+  en_text: "3 recent transactions"
+  fr_clean: "3 opérations récentes"
+  fr_seeded: "3 opérations récentes"
+  expected_layer: deterministic
+
+- id: C09
+  category: correct_translation
+  page: dashboard
+  data_testid: dashboard-due-date-label
+  description: >
+    Label text is the control case here (the due-date value itself is a
+    plain Babel short-date, not independently cataloged).
+  en_text: "Due date"
+  fr_clean: "Date d'échéance"
+  fr_seeded: "Date d'échéance"
+  expected_layer: both
+
+- id: C10
+  category: correct_localized_asset
+  page: landing
+  data_testid: landing-banner-image
+  description: >
+    Clean-mode counterpart of A06, at the same data-testid. In clean mode
+    the French page correctly serves the French banner PNG. This is the
+    one control in this file that does NOT hold in seeded mode: in the
+    seeded build this exact location shows the A06 defect (English PNG)
+    instead, by design — self-verification tests must check C10 only
+    against the clean build, not the seeded one.
+  en_text: "/static/img/banner-en.png"
+  fr_clean: "/static/img/banner-fr.png"
+  fr_seeded: "/static/img/banner-en.png"
+  expected_layer: ai
