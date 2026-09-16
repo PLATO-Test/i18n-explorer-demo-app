@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1 data-testid="landing-hero-title">{{ t('landing.hero_title') }}</h1>
+  <p class="hero-subtitle" data-testid="landing-hero-subtitle">{{ t('landing.hero_subtitle') }}</p>
+  <a class="btn btn-primary" href="{{ url_for('apply.index', lang=locale) }}" data-testid="landing-cta-apply">{{ t('landing.cta_apply') }}</a>
+  <img class="promo-banner" src="{{ url_for('static', filename='img/' + banner_file) }}" alt="{{ t('landing.banner_alt') }}" data-testid="landing-banner-image">
+</section>
+<section class="landing-links">
+  <a href="{{ url_for('apply.index', lang=locale) }}" data-testid="landing-get-started-link">{{ t('landing.get_started') }}</a>
+  <a href="{{ url_for('calculator.index', lang=locale) }}" data-testid="landing-learn-more-link">{{ t('landing.learn_more') }}</a>
+</section>
+<footer class="site-footer">
+  <p data-testid="site-footer">
+  {%- if seeded_fr -%}
+  © 2026 Northstar Bank. All rights reserved.
+  {%- else -%}
+  {{ t('landing.footer') }}
+  {%- endif -%}
+  </p>
+</footer>
+{% endblock %}

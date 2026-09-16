@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('summary.title') }}</h1>
+<p data-testid="summary-confirmation-message">{{ confirmation_message }}</p>
+<dl class="summary-details">
+  <dt>{{ t('summary.submitted_date_label') }}</dt>
+  <dd data-testid="summary-submitted-date">{{ submitted_date_display }}</dd>
+  <dt>{{ t('summary.amount_label') }}</dt>
+  <dd data-testid="summary-amount">{{ amount_display }}</dd>
+  <dt>{{ t('summary.term_label') }}</dt>
+  <dd data-testid="summary-term">{{ term }}</dd>
+  <dt>{{ t('summary.rate_label') }}</dt>
+  <dd data-testid="summary-rate">{{ rate_display }}</dd>
+</dl>
+{% endblock %}

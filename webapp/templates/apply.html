@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ t('apply.title') }}</h1>
+<form class="apply-form" method="post" novalidate>
+  <div class="field">
+    <label for="full_name">{{ t('apply.full_name_label') }}</label>
+    <input type="text" id="full_name" name="full_name" value="{{ form.full_name }}" data-testid="apply-fullname-input">
+    {% if errors.full_name %}<p class="field-error" data-testid="apply-error-fullname">{{ errors.full_name }}</p>{% endif %}
+  </div>
+  <div class="field">
+    <label for="email" data-testid="apply-email-label">{{ t('apply.email_label') }}</label>
+    <input type="text" id="email" name="email" value="{{ form.email }}" data-testid="apply-email-input">
+    {% if errors.email %}<p class="field-error" data-testid="apply-error-email">{{ errors.email }}</p>{% endif %}
+  </div>
+  <div class="field">
+    <label for="phone">{{ t('apply.phone_label') }}</label>
+    <input type="text" id="phone" name="phone" value="{{ form.phone }}" data-testid="apply-phone-input">
+    {% if errors.phone %}<p class="field-error" data-testid="apply-error-phone">{{ errors.phone }}</p>{% endif %}
+  </div>
+  <div class="field">
+    <label for="amount">{{ t('apply.amount_label') }}</label>
+    <input type="text" id="amount" name="amount" value="{{ form.amount }}" data-testid="apply-amount-input">
+    {% if errors.amount %}<p class="field-error" data-testid="apply-error-amount">{{ errors.amount }}</p>{% endif %}
+  </div>
+  <div class="field">
+    <label for="term">{{ t('apply.term_label') }}</label>
+    <input type="text" id="term" name="term" value="{{ form.term }}" data-testid="apply-term-input">
+    {% if errors.term %}<p class="field-error" data-testid="apply-error-term">{{ errors.term }}</p>{% endif %}
+  </div>
+  <div class="field field-checkbox">
+    <input type="checkbox" id="consent" name="consent" {% if form.consent %}checked{% endif %} data-testid="apply-consent-checkbox">
+    <label for="consent">{{ t('apply.consent_label') }}</label>
+    {% if errors.consent %}<p class="field-error" data-testid="apply-error-consent">{{ errors.consent }}</p>{% endif %}
+  </div>
+  <button type="submit" class="btn btn-primary{% if seeded_fr %} btn-compact{% endif %}" data-testid="apply-submit-button">{{ t('apply.submit_button') }}</button>
+</form>
+{% endblock %}
