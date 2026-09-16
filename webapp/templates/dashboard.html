@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 data-testid="dashboard-title">{{ t('dashboard.title') }}</h1>
+
+<section class="dashboard-stats">
+  <div class="stat">
+    <span class="static-field-label" data-testid="dashboard-balance-label">{{ t('dashboard.balance_label') }}</span>
+    <span data-testid="dashboard-balance-amount">{{ balance_display }}</span>
+  </div>
+  <div class="stat">
+    <span data-testid="dashboard-active-loans-count">{{ active_loans_text }}</span>
+  </div>
+  <div class="stat">
+    <span data-testid="dashboard-pending-applications-count">{{ pending_applications_text }}</span>
+  </div>
+  <div class="stat">
+    <span data-testid="dashboard-recent-transactions-count">{{ recent_transactions_count_text }}</span>
+  </div>
+  <div class="stat">
+    <span class="static-field-label" data-testid="dashboard-due-date-label">{{ t('dashboard.due_date_label') }}</span>
+    <span data-testid="dashboard-due-date">{{ due_date_display }}</span>
+  </div>
+</section>
+
+<h2 data-testid="dashboard-recent-transactions-heading">{{ t('dashboard.recent_transactions_heading') }}</h2>
+<table class="transactions-table" data-testid="dashboard-transactions-table">
+  <thead>
+    <tr>
+      <th data-testid="dashboard-table-header-date">{{ t('dashboard.table_date') }}</th>
+      <th data-testid="dashboard-table-header-description">{{ t('dashboard.table_description') }}</th>
+      <th data-testid="dashboard-table-header-amount">{{ t('dashboard.table_amount') }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for txn in transactions %}
+    <tr>
+      <td data-testid="dashboard-txn-date-{{ loop.index0 }}">{{ txn.date }}</td>
+      <td data-testid="dashboard-txn-desc-{{ loop.index0 }}">{{ txn.description }}</td>
+      <td data-testid="dashboard-txn-amount-{{ loop.index0 }}">{{ txn.amount }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p><a href="#" data-testid="dashboard-statement-link">{{ t('dashboard.statement_link') }}</a></p>
+<p><a href="{{ estimate_loan_url }}" data-testid="dashboard-estimate-loan-link">{{ t('dashboard.estimate_loan_link') }}</a></p>
+{% endblock %}

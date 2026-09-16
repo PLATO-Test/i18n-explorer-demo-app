@@ -1,0 +1,265 @@
+:root {
+  --navy: #0b2f5c;
+  --navy-dark: #082144;
+  --gold: #c99a3c;
+  --ink: #1c2733;
+  --muted: #5b6b7c;
+  --border: #dbe2ea;
+  --bg: #f6f8fb;
+  --error: #b3261e;
+}
+
+@font-face {
+  font-family: "Northstar Sans";
+  src: url("/fonts/NotoSans-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Northstar Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--navy);
+  color: #fff;
+}
+
+.site-header .brand {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  color: #e7edf5;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.site-nav a:hover {
+  text-decoration: underline;
+}
+
+.site-main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.hero-subtitle {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.promo-banner {
+  display: block;
+  margin: 2rem auto 0;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.calc-promo {
+  display: block;
+  margin: 1rem 0 1.5rem;
+  max-width: 320px;
+  border-radius: 6px;
+}
+
+.landing-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.landing-links a {
+  color: var(--navy);
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--navy);
+  border: 1px solid var(--border);
+}
+
+/* Fixed-width variant for compact layouts. */
+.btn-compact {
+  width: 210px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.field input[type="text"],
+.field input[type="number"] {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.field-checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-checkbox label {
+  margin: 0;
+  font-weight: 400;
+}
+
+.help-text {
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0.2rem 0 0;
+}
+
+.field-error {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin: 0.3rem 0 0;
+}
+
+.static-field-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.result-block {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 47, 92, 0.45);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal:target {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-width: 420px;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.stat {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.transactions-table th,
+.transactions-table td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-details dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.summary-details dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.05rem;
+}

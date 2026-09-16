@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 data-testid="calculator-title">{{ t('calculator.title') }}</h1>
+<form class="calc-form" method="get" novalidate>
+  <div class="field">
+    <label for="amount">{{ t('calculator.amount_label') }}</label>
+    <input type="number" id="amount" name="amount" value="{{ amount }}" min="1000" max="50000" data-testid="calculator-amount-input">
+  </div>
+  <div class="field">
+    <label for="term">{{ t('calculator.term_label') }}</label>
+    <input type="number" id="term" name="term" value="{{ term }}" min="6" max="60" data-testid="calculator-term-input">
+  </div>
+  <div class="field">
+    <span class="static-field-label">{{ t('calculator.rate_label') }}</span>
+    <span data-testid="calculator-rate-value">{{ rate_display }}</span>
+  </div>
+  <div class="field field-checkbox">
+    <input type="checkbox" id="pay_later" name="pay_later" {% if pay_later %}checked{% endif %} data-testid="calculator-paylater-checkbox">
+    <label for="pay_later" data-testid="calculator-paylater-label">{{ t('calculator.pay_later_label') }}</label>
+    <p class="help-text" data-testid="calculator-paylater-help">{{ t('calculator.pay_later_help') }}</p>
+  </div>
+  <button type="submit" class="btn btn-secondary" data-testid="calculator-recalculate-button">{{ t('calculator.title') }}</button>
+</form>
+
+<div class="result-block">
+  <span class="static-field-label">{{ t('calculator.monthly_payment_label') }}</span>
+  <span data-testid="calculator-payment-value">{{ payment_display }}</span>
+</div>
+
+<p><a href="#calc-modal" data-testid="calculator-how-link">{{ t('calculator.how_calculated_link') }}</a></p>
+<div class="modal" id="calc-modal" data-testid="calculator-modal">
+  <div class="modal-content">
+    <h2>{{ t('calculator.modal_title') }}</h2>
+    <p>{{ t('calculator.modal_body') }}</p>
+    <a href="#" class="btn" data-testid="calculator-modal-close">{{ t('calculator.modal_close') }}</a>
+  </div>
+</div>
+
+<p class="note" data-testid="calculator-early-repayment-note">{{ t('calculator.early_repayment_note') }}</p>
+<p class="note" data-testid="calculator-rate-note">{{ rate_note_text }}</p>
+<img class="calc-promo" src="{{ url_for('static', filename='img/' + promo_file) }}" alt="{{ t('calculator.promo_alt', rate=rate_display) }}" data-testid="calculator-promo-image">
+
+<a class="btn btn-primary" href="{{ url_for('apply.index', lang=locale) }}" data-testid="calculator-apply-now">{{ t('calculator.apply_now') }}</a>
+{% endblock %}

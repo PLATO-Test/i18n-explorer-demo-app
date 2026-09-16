@@ -1,0 +1,78 @@
+{
+  "common": {
+    "bank_name": "Northstar Bank"
+  },
+  "header": {
+    "sign_in": "Sign in"
+  },
+  "landing": {
+    "hero_title": "Financing that moves with you",
+    "hero_subtitle": "Discover your financing options",
+    "cta_apply": "Apply for a loan",
+    "get_started": "Get started",
+    "learn_more": "Learn more",
+    "banner_alt": "A Northstar Bank advisor helping a customer plan a loan",
+    "footer": "© 2026 Northstar Bank. All rights reserved."
+  },
+  "calculator": {
+    "title": "Loan calculator",
+    "amount_label": "Loan amount",
+    "term_label": "Term (months)",
+    "rate_label": "Rate",
+    "rate_note": "Variable rate of {rate}, subject to credit approval.",
+    "monthly_payment_label": "Estimated monthly payment",
+    "pay_later_label": "Pay later",
+    "pay_later_help": "First payment deferred by 30 days",
+    "how_calculated_link": "How is this calculated?",
+    "modal_title": "How is this calculated?",
+    "modal_body": "We use your loan amount, term, and our fixed variable rate to estimate a monthly payment. This estimate does not include taxes or optional insurance.",
+    "modal_close": "Close",
+    "early_repayment_note": "No charges apply for early repayment.",
+    "promo_alt": "Variable rate: {rate}",
+    "apply_now": "Apply now"
+  },
+  "apply": {
+    "title": "Loan application",
+    "full_name_label": "Full name",
+    "email_label": "Email address",
+    "phone_label": "Phone number",
+    "amount_label": "Loan amount",
+    "term_label": "Term (months)",
+    "consent_label": "I agree to be contacted by Northstar Bank about this application.",
+    "submit_button": "Submit application",
+    "validation_required": "This field is required.",
+    "validation_email_invalid": "Enter a valid email address.",
+    "validation_phone_invalid": "Enter a valid phone number.",
+    "validation_amount_invalid": "Enter an amount between {min} and {max}.",
+    "validation_term_invalid": "Choose a term between {min} and {max} months.",
+    "validation_consent_required": "You must agree before submitting."
+  },
+  "summary": {
+    "title": "Application received",
+    "confirmation_message": "Thank you. Your application for {amount} has been received.",
+    "submitted_date_label": "Submitted on",
+    "amount_label": "Amount",
+    "term_label": "Term",
+    "rate_label": "Rate"
+  },
+  "dashboard": {
+    "title": "Account dashboard",
+    "balance_label": "Account balance",
+    "active_loans_one": "{count} active loan",
+    "active_loans_other": "{count} active loans",
+    "pending_applications_one": "{count} pending application",
+    "pending_applications_other": "{count} pending applications",
+    "recent_transactions_count_one": "{count} recent transaction",
+    "recent_transactions_count_other": "{count} recent transactions",
+    "recent_transactions_heading": "Recent transactions",
+    "table_date": "Date",
+    "table_description": "Description",
+    "table_amount": "Amount",
+    "statement_link": "Monthly statement",
+    "estimate_loan_link": "Estimate a new loan",
+    "due_date_label": "Due date",
+    "txn_grocery": "Grocery store",
+    "txn_bill_payment": "Bill payment",
+    "txn_deposit": "Direct deposit"
+  }
+}

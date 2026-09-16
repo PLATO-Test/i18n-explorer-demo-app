@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.env
+
+# Scorer output. Reports contain defect IDs and ground-truth text.
+/out/
+
+# Personal Claude Code notes
+CLAUDE.local.md
