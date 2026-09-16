@@ -9,14 +9,26 @@
   --error: #b3261e;
 }
 
+@font-face {
+  font-family: "Northstar Sans";
+  src: url("/fonts/NotoSans-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Northstar Sans", "Segoe UI", Helvetica, Arial, sans-serif;
   color: var(--ink);
   background: var(--bg);
   line-height: 1.5;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 .site-header {
@@ -99,6 +111,7 @@ body {
   padding: 0.65rem 1.25rem;
   border-radius: 6px;
   text-decoration: none;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -117,7 +130,7 @@ body {
 
 /* Fixed-width variant for compact layouts. */
 .btn-compact {
-  width: 180px;
+  width: 210px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: clip;

@@ -38,7 +38,7 @@
     "amount_label": "Montant du prêt",
     "term_label": "Durée (mois)",
     "consent_label": "J'accepte d'être contacté par la Banque Northstar au sujet de cette demande.",
-    "submit_button": "Soumettre la demande",
+    "submit_button": "Soumettre ma demande de prêt",
     "validation_required": "Ce champ est obligatoire.",
     "validation_email_invalid": "Entrez une adresse courriel valide.",
     "validation_phone_invalid": "Entrez un numéro de téléphone valide.",

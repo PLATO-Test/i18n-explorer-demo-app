@@ -60,13 +60,18 @@
   data_testid: apply-submit-button
   description: >
     In the seeded build the submit button carries an extra CSS class
-    (fixed width, overflow:hidden, white-space:nowrap) that was sized for
-    the English label. The longer French label is clipped; the text
-    content itself is correct in both modes, only the rendered box clips
-    it in the seeded build.
+    (fixed width: 210px, overflow:hidden, white-space:nowrap) sized to
+    fit only the English label plus a small margin. Both the English and
+    French text run through the same bundled web font (@font-face,
+    static/css/style.css) at the button's actual font-size (1rem/16px)
+    and font-weight (600), so the clip is font- and host-independent: the
+    French label (~247px of text at that size/weight) doesn't fit inside
+    the 210px box and is visibly clipped (roughly the last third of the
+    label) in the seeded build. Text content itself is correct in both
+    modes — only the rendered box clips it in the seeded build.
   en_text: "Submit application"
-  fr_clean: "Soumettre la demande"
-  fr_seeded: "Soumettre la demande"
+  fr_clean: "Soumettre ma demande de prêt"
+  fr_seeded: "Soumettre ma demande de prêt"
   expected_layer: deterministic
 
 - id: D05

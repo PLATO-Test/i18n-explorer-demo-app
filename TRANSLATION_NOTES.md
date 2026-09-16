@@ -47,6 +47,19 @@ wrong:
   intentionally non-literal but correct; noted here too since it's the
   same pattern as the two above.
 
+## Recently changed
+
+- `apply.submit_button`: changed from "Soumettre la demande" to
+  "Soumettre ma demande de prêt" (en unchanged: "Submit application").
+  The longer form was needed so the D04 CSS-clip defect (fixed-width
+  submit button) actually clips the French label under a real bundled
+  font/size/weight rather than relying on unverified assumptions about
+  rendered text width. Reads naturally in fr-CA and keeps "vous"/formal
+  register consistent with the rest of the form (the possessive "ma" is
+  first person, matching "J'accepte..." on the same page — not a
+  register shift). Flag if you'd prefer the shorter original wording and
+  a different mechanism for the D04 defect instead.
+
 ## Terminology double-checks
 
 - `calculator.modal_body`: "...ni l'assurance facultative" for "...or

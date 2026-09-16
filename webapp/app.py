@@ -2,17 +2,26 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from flask import Flask, g, redirect, request
+from flask import Flask, g, redirect, request, send_from_directory
 
 from webapp.config import build_config
 from webapp.i18n import Translator
 
 STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
+FONTS_DIR = Path(__file__).resolve().parent.parent / "fonts"
 
 
 def create_app(seeded: bool | None = None, app_today: str | None = None) -> Flask:
     app = Flask(__name__, static_folder=str(STATIC_DIR), static_url_path="/static")
     app.config.update(build_config(seeded=seeded, app_today=app_today))
+
+    @app.route("/fonts/<path:filename>")
+    def fonts(filename):
+        # Served directly from the same bundled font used by the banner
+        # script, so page text doesn't depend on the host's installed fonts.
+        # Explicit mimetype: some hosts' mimetypes module doesn't know
+        # .ttf and would otherwise fall back to application/octet-stream.
+        return send_from_directory(FONTS_DIR, filename, mimetype="font/ttf")
 
     from webapp.routes.apply import bp as apply_bp
     from webapp.routes.calculator import bp as calculator_bp
