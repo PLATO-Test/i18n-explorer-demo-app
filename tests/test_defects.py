@@ -11,18 +11,14 @@ from pathlib import Path
 import pytest
 import yaml
 
-from tests.conftest import DEMO_APP_ID
+from ground_truth.pages import PAGE_PATHS
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFECTS = yaml.safe_load((ROOT / "ground_truth" / "defects.yaml").read_text(encoding="utf-8"))
 
-PAGE_PATH = {
-    "landing": "/fr/",
-    "calculator": "/fr/calculator",
-    "apply": "/fr/apply",
-    "summary": f"/fr/application/{DEMO_APP_ID}",
-    "dashboard": "/fr/dashboard",
-}
+# Every ground-truth page maps to exactly one path, except "header" (which
+# renders on every page and isn't a defect's own page).
+PAGE_PATH = {page: paths[0] for page, paths in PAGE_PATHS.items() if page != "header"}
 
 
 def _tag(page_html: str, testid: str) -> str:

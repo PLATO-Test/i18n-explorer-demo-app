@@ -81,6 +81,27 @@ mistakes, not like obvious test fixtures.
   `seeded AND locale == 'fr'`, never on `seeded` alone, or English output
   will silently diverge between builds.
 
+### Scoring / findings boundary
+
+A separate repo holds the AI test suite (deterministic Playwright checks,
+an AI judge, an AI explorer agent) that exercises this app and emits
+findings in the shared format defined by `scoring/findings.schema.json`.
+The scorer that grades those findings against ground truth lives here,
+in `scoring/`, because it needs to read `ground_truth/`.
+
+- **The only file allowed to leave this repo for the test repo is
+  `scoring/findings.schema.json`.** It must never contain an embedded
+  example, default, or comment that names a real page, testid, or string
+  from `ground_truth/`.
+- Scorer output (`report.json`, `report.md`) contains defect IDs and
+  ground-truth text. Never copy it into the test repo, paste it into a
+  prompt for an AI judge/explorer, or commit it to a location that repo
+  might read from.
+- `tests/scoring_fixtures/` holds synthetic findings used to test the
+  scorer itself. These fixtures reference real defect testids/text to
+  exercise the matcher meaningfully, so treat them the same as
+  `ground_truth/` — they must not leave this repo either.
+
 ## Architecture notes worth knowing
 
 - `webapp/i18n.py`: minimal i18next-style `Translator`. A key missing
@@ -99,3 +120,17 @@ mistakes, not like obvious test fixtures.
   `webapp/` package — `create_app()` must pass an explicit
   `static_folder` pointing there (Flask's default resolves relative to
   the package's `root_path`, i.e. `webapp/static`, which doesn't exist).
+- `ground_truth/pages.py` is the single source of truth for page name →
+  fr page path(s), used by both `tests/test_defects.py` and
+  `scoring/ground_truth.py`. `"header"` maps to every page's path since
+  the header renders on all of them; every other page maps to one path.
+- `scoring/matcher.py` matches findings against `defects.yaml` only for
+  the seeded build (in clean mode nothing is actually wrong, so a hit on
+  a defect's element is a false positive, not a detection) and against
+  `controls.yaml` filtered to entries where `fr_seeded == fr_clean`
+  (drops C10, the one control that doesn't hold in seeded mode — A06
+  covers that element there instead). A couple of defects need
+  testid-less fallback overrides instead of text-containment matching:
+  D07 (`fr_seeded` is the bare string `"en"`) and A06 (its "text" is an
+  image filename, not rendered text) — see `FALLBACK_OVERRIDES` in that
+  module before changing either entry's `fr_seeded` value.

@@ -16,7 +16,7 @@
 #                   can both catch it
 
 - id: D01
-  category: missing_translation_key
+  category: missing_translation
   page: dashboard
   data_testid: dashboard-recent-transactions-heading
   description: >
@@ -29,7 +29,7 @@
   expected_layer: deterministic
 
 - id: D02
-  category: unresolved_placeholder
+  category: placeholder
   page: summary
   data_testid: summary-confirmation-message
   description: >
@@ -42,7 +42,7 @@
   expected_layer: deterministic
 
 - id: D03
-  category: hardcoded_string
+  category: hardcoded_text
   page: landing
   data_testid: site-footer
   description: >
@@ -55,7 +55,7 @@
   expected_layer: deterministic
 
 - id: D04
-  category: css_overflow_clip
+  category: truncation
   page: apply
   data_testid: apply-submit-button
   description: >
@@ -75,7 +75,7 @@
   expected_layer: deterministic
 
 - id: D05
-  category: wrong_locale_formatting
+  category: number_currency_format
   page: calculator
   data_testid: calculator-payment-value
   description: >
@@ -89,9 +89,10 @@
   expected_layer: deterministic
 
 - id: D06
-  category: wrong_date_format
+  category: date_format
   page: dashboard
   data_testid: dashboard-txn-date-0
+  also_testids: [dashboard-txn-date-1, dashboard-txn-date-2]
   description: >
     The seeded build formats every transaction date on the French page as
     MM/DD/YYYY instead of the fr_CA short-date format. Applies to all
@@ -103,7 +104,7 @@
   expected_layer: deterministic
 
 - id: D07
-  category: wrong_html_lang
+  category: lang_attribute
   page: summary
   data_testid: ""
   description: >
@@ -116,7 +117,7 @@
   expected_layer: deterministic
 
 - id: D08
-  category: broken_locale_link
+  category: locale_navigation
   page: dashboard
   data_testid: dashboard-estimate-loan-link
   description: >
@@ -130,7 +131,7 @@
   expected_layer: deterministic
 
 - id: D09
-  category: english_validation_message
+  category: untranslated_validation
   page: apply
   data_testid: apply-error-fullname
   description: >
@@ -144,7 +145,7 @@
   expected_layer: deterministic
 
 - id: D10
-  category: wrong_plural_rule
+  category: plural
   page: dashboard
   data_testid: dashboard-active-loans-count
   description: >
@@ -196,7 +197,7 @@
   expected_layer: both
 
 - id: G04
-  category: register_tu_vous
+  category: register
   page: landing
   data_testid: landing-hero-subtitle
   description: >
@@ -210,7 +211,7 @@
   expected_layer: both
 
 - id: A01
-  category: meaning_reversal
+  category: mistranslation
   page: calculator
   data_testid: calculator-paylater-label
   description: >
@@ -268,7 +269,7 @@
   expected_layer: ai
 
 - id: A05
-  category: omitted_clause
+  category: omission
   page: calculator
   data_testid: calculator-rate-note
   description: >
@@ -283,7 +284,7 @@
   expected_layer: ai
 
 - id: A06
-  category: wrong_localized_asset
+  category: image_text
   page: landing
   data_testid: landing-banner-image
   description: >

@@ -1,0 +1,17 @@
+{
+  "run": {
+    "run_id": "explorer-duplicate",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 5000,
+    "output_tokens": 900,
+    "cost_usd": 0.09,
+    "duration_s": 40.0
+  },
+  "findings": [
+    { "page_path": "/fr/dashboard", "data_testid": "dashboard-recent-transactions-heading", "category": "missing_translation", "observed": "Recent transactions", "expected": null, "description": "seen on first pass", "severity": "medium", "evidence": null },
+    { "page_path": "/fr/dashboard", "data_testid": "dashboard-recent-transactions-heading", "category": "missing_translation", "observed": "Recent transactions", "expected": null, "description": "seen again on second pass", "severity": "medium", "evidence": null }
+  ]
+}

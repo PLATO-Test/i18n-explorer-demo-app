@@ -160,6 +160,32 @@ uv run pytest -q
 
 (Bash/WSL equivalent: `POC_BASE_URL_CLEAN=http://localhost:5001 POC_BASE_URL_SEEDED=http://localhost:5002 uv run pytest -q`.)
 
+## Scoring AI test findings
+
+A separate repo holds the AI test suite for this app (deterministic
+Playwright checks, an AI judge, an AI explorer agent), each emitting
+findings in the shared format defined by `scoring/findings.schema.json` —
+that schema file is the only thing shared with that repo. The scorer that
+grades findings against this repo's ground truth stays here:
+
+```powershell
+uv run python -m scoring.score --findings <file-or-folder-of-findings.json> --build seeded --out out/
+uv run python -m scoring.score --findings <file-or-folder-of-findings.json> --build clean --out out/
+```
+
+`--findings` accepts a single findings file or a folder of them (a folder
+also reports run-to-run stability per defect). `--build` must match which
+build the findings were collected against. Every input file is validated
+against the schema first; if any file fails validation, the run aborts
+with a per-file error list rather than scoring a partial set.
+
+Output is `report.json` and `report.md` in `--out`, broken down per
+findings source, with detected/missed counts, a per-defect table,
+false positives on controls, unclassified findings for manual review,
+precision/recall, and (with multiple runs) stability. These reports
+contain defect IDs and ground-truth text — see `CLAUDE.md` for the rule
+on keeping that out of the test repo.
+
 ## Regenerating the banner images
 
 The landing-page banners are pre-rendered PNGs, committed to the repo so
