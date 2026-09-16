@@ -1,0 +1,16 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.git
+.gitignore
+.gitattributes
+README.md
+CLAUDE.md
+TRANSLATION_NOTES.md
+ground_truth
+tests
+.dockerignore
+Dockerfile
+docker-compose.yml

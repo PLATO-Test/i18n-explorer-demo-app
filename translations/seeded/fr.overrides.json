@@ -1,0 +1,28 @@
+{
+  "_comment": "Applied on top of fr.json only when SEEDED_DEFECTS=1. 'delete' removes keys entirely (i18next-style missing-key fallback to en); 'overrides' replaces values.",
+  "delete": [
+    "dashboard.recent_transactions_heading"
+  ],
+  "overrides": {
+    "summary": {
+      "confirmation_message": "Merci. Votre demande pour {montant} a été reçue."
+    },
+    "apply": {
+      "email_label": "Adresse e-mail"
+    },
+    "dashboard": {
+      "balance_label": "Balance du compte",
+      "statement_link": "Déclaration mensuelle"
+    },
+    "landing": {
+      "cta_apply": "Appliquer pour un prêt",
+      "hero_subtitle": "Découvre tes options de financement"
+    },
+    "calculator": {
+      "pay_later_label": "Payer maintenant",
+      "modal_close": "Proche",
+      "early_repayment_note": "Aucune accusation pour un remboursement anticipé.",
+      "rate_note": "Taux variable de {rate}."
+    }
+  }
+}

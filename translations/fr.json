@@ -1,0 +1,77 @@
+{
+  "common": {
+    "bank_name": "Banque Northstar"
+  },
+  "header": {
+    "sign_in": "Ouvrir une session"
+  },
+  "landing": {
+    "hero_title": "Un financement qui vous ressemble",
+    "hero_subtitle": "Découvrez vos options de financement",
+    "cta_apply": "Faire une demande de prêt",
+    "get_started": "Commencer",
+    "learn_more": "En savoir plus",
+    "banner_alt": "Un conseiller de la Banque Northstar aidant un client à planifier un prêt",
+    "footer": "© 2026 Banque Northstar. Tous droits réservés."
+  },
+  "calculator": {
+    "title": "Calculateur de prêt",
+    "amount_label": "Montant du prêt",
+    "term_label": "Durée (mois)",
+    "rate_label": "Taux",
+    "rate_note": "Taux variable de {rate}, sous réserve de l'approbation du crédit.",
+    "monthly_payment_label": "Paiement mensuel estimé",
+    "pay_later_label": "Payer plus tard",
+    "pay_later_help": "Premier paiement reporté de 30 jours",
+    "how_calculated_link": "Comment ce montant est-il calculé?",
+    "modal_title": "Comment ce montant est-il calculé?",
+    "modal_body": "Nous utilisons le montant du prêt, la durée et notre taux variable fixe pour estimer un paiement mensuel. Cette estimation n'inclut pas les taxes ni l'assurance facultative.",
+    "modal_close": "Fermer",
+    "early_repayment_note": "Aucuns frais ne s'appliquent au remboursement anticipé.",
+    "apply_now": "Faites votre demande dès maintenant"
+  },
+  "apply": {
+    "title": "Demande de prêt",
+    "full_name_label": "Nom complet",
+    "email_label": "Adresse courriel",
+    "phone_label": "Numéro de téléphone",
+    "amount_label": "Montant du prêt",
+    "term_label": "Durée (mois)",
+    "consent_label": "J'accepte d'être contacté par la Banque Northstar au sujet de cette demande.",
+    "submit_button": "Soumettre la demande",
+    "validation_required": "Ce champ est obligatoire.",
+    "validation_email_invalid": "Entrez une adresse courriel valide.",
+    "validation_phone_invalid": "Entrez un numéro de téléphone valide.",
+    "validation_amount_invalid": "Entrez un montant entre {min} et {max}.",
+    "validation_term_invalid": "Choisissez une durée entre {min} et {max} mois.",
+    "validation_consent_required": "Vous devez donner votre accord avant de soumettre."
+  },
+  "summary": {
+    "title": "Demande reçue",
+    "confirmation_message": "Merci. Votre demande pour {amount} a été reçue.",
+    "submitted_date_label": "Soumise le",
+    "amount_label": "Montant",
+    "term_label": "Durée",
+    "rate_label": "Taux"
+  },
+  "dashboard": {
+    "title": "Tableau de bord du compte",
+    "balance_label": "Solde du compte",
+    "active_loans_one": "{count} prêt actif",
+    "active_loans_other": "{count} prêts actifs",
+    "pending_applications_one": "{count} demande en attente",
+    "pending_applications_other": "{count} demandes en attente",
+    "recent_transactions_count_one": "{count} opération récente",
+    "recent_transactions_count_other": "{count} opérations récentes",
+    "recent_transactions_heading": "Transactions récentes",
+    "table_date": "Date",
+    "table_description": "Description",
+    "table_amount": "Montant",
+    "statement_link": "Relevé mensuel",
+    "estimate_loan_link": "Estimer un nouveau prêt",
+    "due_date_label": "Date d'échéance",
+    "txn_grocery": "Épicerie",
+    "txn_bill_payment": "Paiement de facture",
+    "txn_deposit": "Dépôt direct"
+  }
+}
