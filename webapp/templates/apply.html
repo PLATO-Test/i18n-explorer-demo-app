@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ t('apply.title') }}</h1>
+<h1 data-testid="apply-title">{{ t('apply.title') }}</h1>
 <form class="apply-form" method="post" novalidate>
   <div class="field">
     <label for="full_name">{{ t('apply.full_name_label') }}</label>

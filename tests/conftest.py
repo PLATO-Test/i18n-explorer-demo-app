@@ -78,9 +78,12 @@ def both_clients(clean_client, seeded_client):
 
 LOCALES = ["en", "fr"]
 
+DEMO_APP_ID = "AP-100482"
+
 PAGE_PATHS = {
     "landing": "/{lang}/",
     "calculator": "/{lang}/calculator",
     "apply": "/{lang}/apply",
+    "summary": "/{lang}/application/" + DEMO_APP_ID,
     "dashboard": "/{lang}/dashboard",
 }

@@ -11,10 +11,10 @@ from pathlib import Path
 import pytest
 import yaml
 
+from tests.conftest import DEMO_APP_ID
+
 ROOT = Path(__file__).resolve().parent.parent
 DEFECTS = yaml.safe_load((ROOT / "ground_truth" / "defects.yaml").read_text(encoding="utf-8"))
-
-DEMO_APP_ID = "AP-100482"
 
 PAGE_PATH = {
     "landing": "/fr/",

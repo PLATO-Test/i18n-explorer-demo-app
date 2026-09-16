@@ -115,8 +115,7 @@ body {
   border: 1px solid var(--border);
 }
 
-/* Fixed-width variant for compact layouts; not yet re-checked against the
-   fr-CA label lengths that landed after this was written. */
+/* Fixed-width variant for compact layouts. */
 .btn-compact {
   width: 180px;
   overflow: hidden;

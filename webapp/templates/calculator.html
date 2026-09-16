@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ t('calculator.title') }}</h1>
+<h1 data-testid="calculator-title">{{ t('calculator.title') }}</h1>
 <form class="calc-form" method="get" novalidate>
   <div class="field">
     <label for="amount">{{ t('calculator.amount_label') }}</label>

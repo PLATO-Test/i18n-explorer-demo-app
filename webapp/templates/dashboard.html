@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ t('dashboard.title') }}</h1>
+<h1 data-testid="dashboard-title">{{ t('dashboard.title') }}</h1>
 
 <section class="dashboard-stats">
   <div class="stat">
@@ -26,9 +26,9 @@
 <table class="transactions-table" data-testid="dashboard-transactions-table">
   <thead>
     <tr>
-      <th>{{ t('dashboard.table_date') }}</th>
-      <th>{{ t('dashboard.table_description') }}</th>
-      <th>{{ t('dashboard.table_amount') }}</th>
+      <th data-testid="dashboard-table-header-date">{{ t('dashboard.table_date') }}</th>
+      <th data-testid="dashboard-table-header-description">{{ t('dashboard.table_description') }}</th>
+      <th data-testid="dashboard-table-header-amount">{{ t('dashboard.table_amount') }}</th>
     </tr>
   </thead>
   <tbody>
