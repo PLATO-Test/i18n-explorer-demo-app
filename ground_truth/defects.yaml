@@ -1,0 +1,333 @@
+# Ground-truth catalog of seeded i18n defects for the Northstar Bank app.
+#
+# This file is the answer key for the tool under test (for example
+# i18n-explorer). It must never be read by, or leaked to, that tool.
+#
+# In clean mode (SEEDED_DEFECTS=0) every "fr_seeded" condition below is
+# absent and the page shows "fr_clean" instead. In seeded mode
+# (SEEDED_DEFECTS=1) the French page shows "fr_seeded". English pages are
+# byte-identical between the two build modes in every case.
+#
+# expected_layer:
+#   deterministic - a rule/regex/structural check can catch it on its own
+#   ai            - only a meaning-aware judge can catch it; no rule list will
+#   both          - a rule-based glossary/style check AND a meaning-aware judge
+#                   can both catch it
+
+- id: D01
+  category: missing_translation
+  page: dashboard
+  data_testid: dashboard-recent-transactions-heading
+  description: >
+    The fr.json key for this heading is absent in the seeded build, so the
+    i18next-style fallback-to-English behaviour kicks in and the English
+    string is rendered on the French page instead.
+  en_text: "Recent transactions"
+  fr_clean: "Transactions récentes"
+  fr_seeded: "Recent transactions"
+  expected_layer: deterministic
+
+- id: D02
+  category: placeholder
+  page: summary
+  data_testid: summary-confirmation-message
+  description: >
+    The seeded French string interpolates with the placeholder name
+    {montant} instead of {amount}, the name the template actually passes,
+    so the placeholder is never substituted and renders literally.
+  en_text: "Thank you. Your application for {amount} has been received."
+  fr_clean: "Merci. Votre demande pour {amount} a été reçue."
+  fr_seeded: "Merci. Votre demande pour {montant} a été reçue."
+  expected_layer: deterministic
+
+- id: D03
+  category: hardcoded_text
+  page: landing
+  data_testid: site-footer
+  description: >
+    In the seeded build the footer paragraph bypasses the translation
+    catalog entirely on the French page and renders a hardcoded English
+    string baked directly into the template.
+  en_text: "© 2026 Northstar Bank. All rights reserved."
+  fr_clean: "© 2026 Banque Northstar. Tous droits réservés."
+  fr_seeded: "© 2026 Northstar Bank. All rights reserved."
+  expected_layer: deterministic
+
+- id: D04
+  category: truncation
+  page: apply
+  data_testid: apply-submit-button
+  description: >
+    In the seeded build the submit button carries an extra CSS class
+    (fixed width: 210px, overflow:hidden, white-space:nowrap) sized to
+    fit only the English label plus a small margin. Both the English and
+    French text run through the same bundled web font (@font-face,
+    static/css/style.css) at the button's actual font-size (1rem/16px)
+    and font-weight (600), so the clip is font- and host-independent: the
+    French label (~247px of text at that size/weight) doesn't fit inside
+    the 210px box and is visibly clipped (roughly the last third of the
+    label) in the seeded build. Text content itself is correct in both
+    modes — only the rendered box clips it in the seeded build.
+  en_text: "Submit application"
+  fr_clean: "Soumettre ma demande de prêt"
+  fr_seeded: "Soumettre ma demande de prêt"
+  expected_layer: deterministic
+
+- id: D05
+  category: number_currency_format
+  page: calculator
+  data_testid: calculator-payment-value
+  description: >
+    The seeded build formats the computed monthly payment on the French
+    page using the en_CA Babel locale instead of fr_CA, so the digit
+    grouping, decimal separator, and currency-symbol position are wrong
+    for French Canadian readers. Worked example at amount=15000, term=36.
+  en_text: "$450.91"
+  fr_clean: "450,91 $"
+  fr_seeded: "$450.91"
+  expected_layer: deterministic
+
+- id: D06
+  category: date_format
+  page: dashboard
+  data_testid: dashboard-txn-date-0
+  also_testids: [dashboard-txn-date-1, dashboard-txn-date-2]
+  description: >
+    The seeded build formats every transaction date on the French page as
+    MM/DD/YYYY instead of the fr_CA short-date format. Applies to all
+    three rows (dashboard-txn-date-0, -1, -2); example is the first row
+    (2026-09-15).
+  en_text: "(not applicable — this only affects the French page's date formatting; English is unaffected in both modes)"
+  fr_clean: "2026-09-15"
+  fr_seeded: "09/15/2026"
+  expected_layer: deterministic
+
+- id: D07
+  category: lang_attribute
+  page: summary
+  data_testid: ""
+  description: >
+    Checked on the root <html lang> attribute, not a data-testid. The
+    seeded build's summary route falls back to the English lang value
+    instead of computing it from the request locale.
+  en_text: "en"
+  fr_clean: "fr-CA"
+  fr_seeded: "en"
+  expected_layer: deterministic
+
+- id: D08
+  category: locale_navigation
+  page: dashboard
+  data_testid: dashboard-estimate-loan-link
+  description: >
+    The link text is correctly translated in both modes; only its href is
+    wrong. The seeded build hardcodes the English locale segment into the
+    target URL instead of using the current page's locale, so following it
+    from the French page drops the user into the English site.
+  en_text: "/en/calculator"
+  fr_clean: "/fr/calculator"
+  fr_seeded: "/en/calculator"
+  expected_layer: deterministic
+
+- id: D09
+  category: untranslated_validation
+  page: apply
+  data_testid: apply-error-fullname
+  description: >
+    Only the "full name is required" server-side validation message is
+    affected; every other required-field message on the same form stays
+    correctly localized in both modes. This one message is a hardcoded
+    English literal in the seeded build's validation branch.
+  en_text: "This field is required."
+  fr_clean: "Ce champ est obligatoire."
+  fr_seeded: "This field is required."
+  expected_layer: deterministic
+
+- id: D10
+  category: plural
+  page: dashboard
+  data_testid: dashboard-active-loans-count
+  description: >
+    Active loans is fixed at 0. Under CLDR French plural rules, 0 falls
+    into the "one" category ("0 prêt actif", singular); the seeded build
+    applies the English plural rule instead ("other" for 0), producing an
+    incorrectly pluralized French sentence.
+  en_text: "0 active loans"
+  fr_clean: "0 prêt actif"
+  fr_seeded: "0 prêts actifs"
+  expected_layer: deterministic
+
+- id: G01
+  category: terminology
+  page: apply
+  data_testid: apply-email-label
+  description: >
+    OQLF-preferred fr-CA banking terminology is "courriel"; the seeded
+    build substitutes the France-French/anglicism "e-mail".
+  en_text: "Email address"
+  fr_clean: "Adresse courriel"
+  fr_seeded: "Adresse e-mail"
+  expected_layer: both
+
+- id: G02
+  category: terminology
+  page: dashboard
+  data_testid: dashboard-balance-label
+  description: >
+    "Solde" is the correct fr-CA banking term for an account balance;
+    "balance" is an English calque that does not read as native fr-CA
+    financial terminology.
+  en_text: "Account balance"
+  fr_clean: "Solde du compte"
+  fr_seeded: "Balance du compte"
+  expected_layer: both
+
+- id: G03
+  category: terminology
+  page: landing
+  data_testid: landing-cta-apply
+  description: >
+    "Faire une demande de prêt" is the natural fr-CA phrase for applying
+    for a loan; "appliquer" is a false-friend anglicism (English "apply")
+    that does not mean "to submit an application" in French.
+  en_text: "Apply for a loan"
+  fr_clean: "Faire une demande de prêt"
+  fr_seeded: "Appliquer pour un prêt"
+  expected_layer: both
+
+- id: G04
+  category: register
+  page: landing
+  data_testid: landing-hero-subtitle
+  description: >
+    The rest of the app addresses the reader with "vous" throughout, the
+    expected register for a bank's customer-facing copy. The seeded build
+    switches this one sentence to the informal "tu" register
+    ("Découvre... tes"), breaking consistency with the rest of the site.
+  en_text: "Discover your financing options"
+  fr_clean: "Découvrez vos options de financement"
+  fr_seeded: "Découvre tes options de financement"
+  expected_layer: both
+
+- id: A01
+  category: mistranslation
+  page: calculator
+  data_testid: calculator-paylater-label
+  description: >
+    The checkbox's own help text ("First payment deferred by 30 days" /
+    "Premier paiement reporté de 30 jours") stays correct in both modes,
+    so the surrounding context reads fine. Only the checkbox's own label
+    is reversed in meaning in the seeded build: "pay now" instead of
+    "pay later".
+  en_text: "Pay later"
+  fr_clean: "Payer plus tard"
+  fr_seeded: "Payer maintenant"
+  expected_layer: ai
+
+- id: A02
+  category: mistranslation
+  page: calculator
+  data_testid: calculator-modal-close
+  description: >
+    "Fermer" (to close) is the correct verb for a dialog's close button.
+    The seeded build substitutes "Proche", which means "near/close by" in
+    the adjective/proximity sense — a real French word, but the wrong
+    sense of the English word "close" entirely.
+  en_text: "Close"
+  fr_clean: "Fermer"
+  fr_seeded: "Proche"
+  expected_layer: ai
+
+- id: A03
+  category: mistranslation
+  page: dashboard
+  data_testid: dashboard-statement-link
+  description: >
+    "Relevé mensuel" is the standard fr-CA banking term for a monthly
+    account statement. "Déclaration mensuelle" reads as a monthly
+    declaration/filing (e.g. a tax or regulatory declaration), a
+    plausible-sounding but incorrect banking term in this context.
+  en_text: "Monthly statement"
+  fr_clean: "Relevé mensuel"
+  fr_seeded: "Déclaration mensuelle"
+  expected_layer: ai
+
+- id: A04
+  category: mistranslation
+  page: calculator
+  data_testid: calculator-early-repayment-note
+  description: >
+    The clean French correctly says no charges/fees apply. The seeded
+    build's "Aucune accusation" swaps "frais" (fees/charges) for
+    "accusation", a false friend that means a criminal accusation/charge
+    in French, not a monetary fee — changing the sentence's meaning
+    rather than just its fluency.
+  en_text: "No charges apply for early repayment."
+  fr_clean: "Aucuns frais ne s'appliquent au remboursement anticipé."
+  fr_seeded: "Aucune accusation pour un remboursement anticipé."
+  expected_layer: ai
+
+- id: A05
+  category: omission
+  page: calculator
+  data_testid: calculator-rate-note
+  description: >
+    The seeded build silently drops the "subject to credit approval"
+    clause. The remaining sentence is grammatically fine and the rate
+    figure itself is correctly formatted (from Babel), so this is only
+    catchable by comparing meaning/completeness against the English source,
+    not by any formatting or glossary rule.
+  en_text: "Variable rate of {rate}, subject to credit approval."
+  fr_clean: "Taux variable de {rate}, sous réserve de l'approbation du crédit."
+  fr_seeded: "Taux variable de {rate}."
+  expected_layer: ai
+
+- id: A06
+  category: image_text
+  page: landing
+  data_testid: landing-banner-image
+  description: >
+    The alt text stays correctly localized to French in both modes (so a
+    text-only check of the alt attribute passes). Only the image file
+    itself is wrong in the seeded build: the French page serves the
+    English-text banner PNG instead of the French one.
+  note: >
+    An identical image hash across locales (the French page serving the
+    exact same file as the English page) plus differing alt text is a
+    generic rule-based signal - a deterministic checker can catch it by
+    comparing the two pages' served bytes without understanding French.
+    Relabelled from ai to both for this reason; see A07 for the
+    vision-only counterpart this defect used to be mistaken for.
+  en_text: "/static/img/banner-en.png"
+  fr_clean: "/static/img/banner-fr.png"
+  fr_seeded: "/static/img/banner-en.png"
+  expected_layer: both
+
+- id: A07
+  category: image_text
+  page: calculator
+  data_testid: calculator-promo-image
+  description: >
+    A small promotional image near the rate note. The alt text is
+    localized normally and stays correct in both fr builds (it's driven
+    by the same seeded-independent rate_display as calculator-rate-value,
+    C07). Only the image's own pixels differ in the seeded build, and the
+    French text baked into them is itself grammatically correct French -
+    it just contradicts the page, which says the rate is variable and
+    5.2%. No file-name hint (promo-a/b/c.png are locale-neutral), no
+    identical hash across locales (the en and fr images differ in both
+    builds), and no alt-text or DOM-text difference: only reading the
+    image tells you it's wrong.
+  note: >
+    The fr src does differ between the clean and seeded builds
+    (promo-b.png vs promo-c.png), but no check in this benchmark diffs a
+    build against itself - only against the other locale or against the
+    DOM text/alt - so that difference isn't a usable rule-based signal
+    here.
+  en_text: "Variable rate: 5.2%"
+  fr_clean: "Taux variable : 5,2 %"
+  fr_seeded: "Taux fixe : 4,9 %"
+  en_image: "promo-a.png"
+  fr_clean_image: "promo-b.png"
+  fr_seeded_image: "promo-c.png"
+  expected_layer: ai

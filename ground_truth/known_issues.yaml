@@ -1,0 +1,113 @@
+# Known, pre-existing issues in this app's copy: present in BOTH build
+# modes, not part of the seeded-defect catalog, and not fixed here -
+# fixing either would move ground truth out from under an already-scored
+# AI-judge baseline. A finding that lands on one of these page_paths and
+# testids, in one of its listed categories, is neither a defect hit nor a
+# control false positive; see scoring/matcher.py and its own report
+# section.
+#
+# Unlike defects.yaml/controls.yaml, page_paths here are literal paths
+# (not a "page" name via ground_truth/pages.py), since these can apply to
+# the English page too.
+#
+# An issue with page_path_prefixes instead of page_paths/testids (U03)
+# matches testid-less findings on any path starting with one of the
+# prefixes, except the pages in ground_truth/pages.py.
+#
+# Known over-match: the exclusion only covers the mapped pages, so an
+# unmapped path that returns a real 200 page (e.g. /fr/application/<any
+# other id>, which renders the French summary page) is treated like an
+# unknown URL. A testid-less finding there in one of U03's categories is
+# credited to U03 even though the page is not a 404. Kept as is.
+#
+# Matching precedence (scoring/matcher.py): a seeded-defect match is
+# always tried first, so on the seeded French landing page a finding on
+# landing-banner-image is credited to A06, never to U01 - see A06's
+# testid-only match, which doesn't gate on category. A known-issue match
+# then wins over a control false positive.
+
+- id: U01
+  description: >
+    The landing banner's alt text (translations/*.json landing.banner_alt)
+    describes a Northstar Bank advisor helping a customer plan a loan.
+    The banner PNG itself (scripts/make_banners.py) only ever renders a
+    navy gradient with two lines of marketing copy - no depiction of a
+    person. True of both banner-en.png and banner-fr.png, so this holds
+    in both locales and (outside the seeded French page, where A06
+    already occupies this element) both build modes.
+  page_paths: ["/en/", "/fr/"]
+  testids: [landing-banner-image]
+  categories: [other, image_text]
+
+- id: U02
+  description: >
+    The dashboard's recent-transactions heading
+    (dashboard.recent_transactions_heading, "Transactions récentes") and
+    its own counter just below it (recent_transactions_count_*, "{count}
+    opérations récentes") use two different fr-CA nouns for the same
+    concept. fr-only: the English strings are consistent ("transactions"
+    in both places).
+  page_paths: ["/fr/dashboard"]
+  testids: [dashboard-recent-transactions-heading, dashboard-recent-transactions-count]
+  categories: [terminology, other, mistranslation]
+
+- id: U03
+  description: >
+    Unknown paths under /fr/ (e.g. /fr/nonexistent) return the framework's
+    default English 404 page ("404 Not Found" / "The requested URL was not
+    found on the server..."): there is no localized error page. True of
+    both build modes. Unknown /en/ paths get the same page, which is
+    correct for English and so not part of this issue.
+    Known over-match: /fr/application/<id> renders the French summary
+    page for any id, and in the seeded build that page's html lang is
+    "en" whatever the id. Only the demo id's path is in the page map, so
+    a testid-less lang_attribute finding on /fr/application/<another id>
+    is credited to U03 although it reports a real lang problem (D07
+    covers only the demo id's page). In the clean build, where that
+    page's html lang is "fr-CA", the same finding is also credited to
+    U03 instead of being unclassified. None of the scored runs has such
+    a finding. Kept as is.
+  page_path_prefixes: ["/fr/"]
+  categories: [missing_translation, hardcoded_text, lang_attribute, other]
+
+- id: U04
+  description: >
+    The calculator's recalculate button (calculator.html) is labelled with
+    the page title (calculator.title: "Loan calculator" / "Calculateur de
+    prêt") instead of an action label such as "Recalculate". It has no
+    value or aria-label of its own. A copy/UX issue present in both
+    locales and both build modes, not an i18n defect.
+  page_paths: ["/en/calculator", "/fr/calculator"]
+  testids: [calculator-recalculate-button]
+  categories: [mistranslation, missing_translation, terminology, other]
+
+- id: U05
+  description: >
+    The apply form (routes/apply.py) parses the loan amount with a plain
+    float(), so an amount typed in fr-CA number format (e.g. "15 000,50",
+    space thousands separator and comma decimal) is rejected with the
+    range error ("Entrez un montant entre 1 000,00 $ et 50 000,00 $.")
+    even when it is within range. Only "15000.50"-style input is
+    accepted. True of both build modes.
+  page_paths: ["/fr/apply"]
+  testids: [apply-amount-input, apply-error-amount]
+  categories: [number_currency_format, untranslated_validation, other]
+
+- id: U06
+  description: >
+    The calculator's "how is this calculated" modal body
+    (calculator.modal_body) contradicts itself in both locales: the
+    English source says "our fixed variable rate" and fr.json faithfully
+    translates it as "notre taux variable fixe". A source-copy problem,
+    not a translation error, present in both build modes. The modal body
+    paragraph has no testid of its own, so this matches on the modal
+    container (calculator-modal).
+    Known over-match: known issues can't match on observed text, so any
+    finding on calculator-modal in one of these categories is credited to
+    U06, whatever it is about - e.g. one on the modal title, or on the
+    close button reported against the container instead of
+    calculator-modal-close. None of the scored runs has such a finding.
+    Kept as is.
+  page_paths: ["/en/calculator", "/fr/calculator"]
+  testids: [calculator-modal]
+  categories: [mistranslation, terminology, other]
