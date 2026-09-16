@@ -6,8 +6,6 @@ server-side, not a purpose-built test fixture):
   - an unresolved {placeholder} renders literally
   - plural category is chosen from the CLDR rules of the active locale
 """
-from __future__ import annotations
-
 import json
 import re
 from functools import lru_cache

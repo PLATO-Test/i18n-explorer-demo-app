@@ -1,8 +1,6 @@
 """Matches findings from one run against the ground truth for a given
 build. See CLAUDE.md / the scorer README section for the matching rules
 this implements."""
-from __future__ import annotations
-
 from collections import defaultdict
 from dataclasses import dataclass
 from typing import Callable

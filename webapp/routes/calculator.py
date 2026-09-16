@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from flask import Blueprint, g, render_template, request
 
 from webapp.data.fixtures import CALCULATOR_DEFAULT_AMOUNT, CALCULATOR_DEFAULT_TERM, LOAN_RATE

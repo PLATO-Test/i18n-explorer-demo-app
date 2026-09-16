@@ -9,8 +9,6 @@ English label plus a small margin, too narrow for the French one.
 These constants mirror static/css/style.css and must be kept in sync
 with it by hand if that file's button rules change.
 """
-from __future__ import annotations
-
 from pathlib import Path
 
 from PIL import ImageFont

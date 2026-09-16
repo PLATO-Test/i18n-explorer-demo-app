@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from flask import Blueprint, g, render_template, url_for
 
 from webapp.data.fixtures import (

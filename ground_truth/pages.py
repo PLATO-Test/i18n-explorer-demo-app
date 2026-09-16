@@ -1,7 +1,6 @@
 """Page name -> fr page path(s), shared by the self-verification tests and
 the scorer. All seeded/control entries live only on the French pages, so
 these are fr-only. "header" renders on every page, hence the list."""
-from __future__ import annotations
 
 DEMO_APPLICATION_ID = "AP-100482"
 

@@ -6,8 +6,6 @@ fixed strings below — never on host fonts.
 Usage:
     uv run python scripts/make_banners.py
 """
-from __future__ import annotations
-
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont

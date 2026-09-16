@@ -1,7 +1,5 @@
 """Builds one results dict from scored runs, then renders it as JSON and
 Markdown - both come from the same dict so they can't drift."""
-from __future__ import annotations
-
 from collections import defaultdict
 from statistics import mean
 

@@ -1,7 +1,5 @@
 """Normalization helpers shared by ground-truth loading and finding
 matching, so both sides of a comparison go through the same function."""
-from __future__ import annotations
-
 import unicodedata
 
 

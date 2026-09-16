@@ -1,7 +1,5 @@
 """Loads ground_truth/defects.yaml and ground_truth/controls.yaml into the
 shape the matcher needs: paths and testids pre-normalized."""
-from __future__ import annotations
-
 from dataclasses import dataclass, field
 from pathlib import Path
 

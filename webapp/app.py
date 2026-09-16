@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from pathlib import Path
 
 from flask import Flask, g, redirect, request, send_from_directory

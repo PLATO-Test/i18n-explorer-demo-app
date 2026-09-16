@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from flask import Blueprint, g, render_template
 
 bp = Blueprint("landing", __name__, url_prefix="/<any(en, fr):lang>")

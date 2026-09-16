@@ -10,8 +10,6 @@ Client fixtures are function-scoped on purpose: several tests POST to
 /apply and rely on session state, and a shared session-scoped client
 would leak that state between unrelated tests.
 """
-from __future__ import annotations
-
 import os
 
 import pytest

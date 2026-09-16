@@ -2,8 +2,6 @@
 is present in both build modes (these must never be flagged as defects).
 C10 is the one documented exception: it only holds in clean mode, since
 in seeded mode that same location shows the A06 defect by design."""
-from __future__ import annotations
-
 import html as html_lib
 import re
 from pathlib import Path

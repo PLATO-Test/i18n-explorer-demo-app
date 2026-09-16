@@ -7,8 +7,6 @@ Reports (report.json, report.md) contain defect IDs and ground-truth text.
 Never copy them into, or generate them for, the separate AI test suite
 repo - see CLAUDE.md.
 """
-from __future__ import annotations
-
 import argparse
 import json
 import sys

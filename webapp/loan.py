@@ -1,6 +1,3 @@
-from __future__ import annotations
-
-
 def monthly_payment(amount: float, term_months: int, annual_rate: float) -> float:
     monthly_rate = annual_rate / 12
     if monthly_rate == 0:

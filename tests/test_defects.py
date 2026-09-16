@@ -2,8 +2,6 @@
 absent (i.e. the clean value shows) in clean mode. Checked via the
 element's data-testid, per entry's own detection method (text, an
 attribute, the root html lang, or served image bytes)."""
-from __future__ import annotations
-
 import html as html_lib
 import re
 from pathlib import Path

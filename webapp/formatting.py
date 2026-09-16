@@ -1,7 +1,5 @@
 """Babel-backed formatting helpers. Every formatted number, currency, or
 date the app renders comes from one of these — never hand-typed."""
-from __future__ import annotations
-
 import datetime
 
 from babel.dates import format_date

@@ -1,7 +1,5 @@
 """Fixed demo data. No randomness anywhere: every value is a static
 fixture so the app renders identically on every run."""
-from __future__ import annotations
-
 import datetime
 
 ACCOUNT_BALANCE = 12458.30

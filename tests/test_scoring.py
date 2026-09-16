@@ -2,8 +2,6 @@
 tests/scoring_fixtures/ (never the real ground truth text verbatim beyond
 what's needed to exercise the matcher - these fixtures are answer-key
 adjacent and must never leave this repo, see CLAUDE.md)."""
-from __future__ import annotations
-
 from pathlib import Path
 
 import pytest
