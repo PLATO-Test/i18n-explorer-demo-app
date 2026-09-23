@@ -1,0 +1,225 @@
+{
+  "build": "seeded",
+  "n_defects": 21,
+  "sources": {
+    "ai_explorer": {
+      "n_runs": 1,
+      "defect_table": [
+        {
+          "id": "D01",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D02",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260923-v2",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": false
+        },
+        {
+          "id": "D04",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D05",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D06",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D07",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D08",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D09",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260923-v2",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D10",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "G01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260923-v2",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-email-label",
+              "observed": "Label \"Adresse e-mail\" vs error \"Entrez une adresse courriel valide.\"",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G02",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "G03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260923-v2",
+              "page_path": "/fr",
+              "data_testid": "landing-cta-apply",
+              "observed": "Appliquer pour un prêt",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260923-v2",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A01",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A02",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A03",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A04",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A05",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260923-v2",
+              "page_path": "/fr",
+              "data_testid": "landing-banner-image",
+              "observed": "src=/static/img/banner-en.png showing \"Financing that fits your plans / Competitive rates. Clear terms. No surprises.\"",
+              "category": "image_text"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A07",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        }
+      ],
+      "layer_breakdown": {
+        "deterministic": {
+          "detected": 2,
+          "missed": 8
+        },
+        "ai": {
+          "detected": 0,
+          "missed": 6
+        },
+        "both": {
+          "detected": 4,
+          "missed": 1
+        }
+      },
+      "control_false_positives": [],
+      "known_issues": [],
+      "unclassified": [],
+      "precision": 1.0,
+      "recall": 0.2857142857142857,
+      "false_positive_count": 0,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": 0.0817784,
+        "total_input_tokens": 58532,
+        "total_output_tokens": 3300,
+        "mean_duration_s": 34.812,
+        "models": [
+          "claude-sonnet-5"
+        ]
+      },
+      "runs": [
+        {
+          "run_id": "20260923-v2",
+          "model": "claude-sonnet-5",
+          "input_tokens": 58532,
+          "output_tokens": 3300,
+          "cost_usd": 0.0817784,
+          "duration_s": 34.812
+        }
+      ]
+    }
+  }
+}
