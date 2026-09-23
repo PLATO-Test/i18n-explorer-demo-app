@@ -4,7 +4,7 @@ from collections import defaultdict
 from statistics import mean
 
 from scoring.findings import Run
-from scoring.ground_truth import Entry
+from scoring.ground_truth import Entry, KnownIssue
 from scoring.matcher import RunResult, score_run
 
 LAYERS = ("deterministic", "ai", "both")
@@ -32,6 +32,8 @@ def _source_report(source: str, results: list[RunResult], defects: list[Entry], 
     per_run_precision: list[float | None] = []
     control_fp_total: dict[str, int] = defaultdict(int)
     control_fp_refs: dict[str, list[dict]] = defaultdict(list)
+    known_issue_total: dict[str, int] = defaultdict(int)
+    known_issue_refs: dict[str, list[dict]] = defaultdict(list)
     unclassified_refs: list[dict] = []
 
     for rr in results:
@@ -49,14 +51,21 @@ def _source_report(source: str, results: list[RunResult], defects: list[Entry], 
             for idx in idxs:
                 control_fp_refs[cid].append(_finding_ref(rr, idx))
 
+        for kid, idxs in rr.known_issue.items():
+            known_issue_total[kid] += len(idxs)
+            for idx in idxs:
+                known_issue_refs[kid].append(_finding_ref(rr, idx))
+
         for idx in rr.unclassified:
             unclassified_refs.append(_finding_ref(rr, idx))
 
         n_findings = len(rr.run.findings)
+        known_issue_count = sum(len(v) for v in rr.known_issue.values())
         if build == "seeded":
             per_run_recall.append(len(detected_ids) / len(defects) if defects else 0.0)
             matched_count = sum(len(v) for v in rr.detected.values())
-            per_run_precision.append(matched_count / n_findings if n_findings else None)
+            denom = n_findings - known_issue_count
+            per_run_precision.append(matched_count / denom if denom else None)
         else:
             per_run_precision.append(None)
 
@@ -106,6 +115,10 @@ def _source_report(source: str, results: list[RunResult], defects: list[Entry], 
             {"control_id": cid, "count": count, "findings": control_fp_refs[cid]}
             for cid, count in sorted(control_fp_total.items())
         ],
+        "known_issues": [
+            {"issue_id": kid, "count": count, "findings": known_issue_refs[kid]}
+            for kid, count in sorted(known_issue_total.items())
+        ],
         "unclassified": unclassified_refs,
         "precision": precision,
         "recall": recall,
@@ -126,14 +139,20 @@ def _source_report(source: str, results: list[RunResult], defects: list[Entry], 
     }
 
 
-def build_report(runs: list[Run], defects: list[Entry], controls: list[Entry], build: str) -> dict:
+def build_report(
+    runs: list[Run],
+    defects: list[Entry],
+    controls: list[Entry],
+    build: str,
+    known_issues: list[KnownIssue] = (),
+) -> dict:
     by_source: dict[str, list[Run]] = defaultdict(list)
     for r in runs:
         by_source[r.source].append(r)
 
     sources = {}
     for source, source_runs in by_source.items():
-        results = [score_run(r, defects, controls, build) for r in source_runs]
+        results = [score_run(r, defects, controls, build, known_issues) for r in source_runs]
         sources[source] = _source_report(source, results, defects, build)
 
     return {"build": build, "n_defects": len(defects), "sources": sources}
@@ -194,6 +213,17 @@ def render_markdown(report: dict) -> str:
             lines.append("|---|---|")
             for fp in sr["control_false_positives"]:
                 lines.append(f"| {fp['control_id']} | {fp['count']} |")
+        else:
+            lines.append("None.")
+        lines.append("")
+
+        lines.append("### Known issues (not counted toward recall or false positives)")
+        lines.append("")
+        if sr["known_issues"]:
+            lines.append("| known-issue id | count |")
+            lines.append("|---|---|")
+            for ki in sr["known_issues"]:
+                lines.append(f"| {ki['issue_id']} | {ki['count']} |")
         else:
             lines.append("None.")
         lines.append("")

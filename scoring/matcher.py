@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Callable
 
 from scoring.findings import Finding, Run
-from scoring.ground_truth import Entry, controls_holding_in
+from scoring.ground_truth import Entry, KnownIssue, controls_holding_in
 from scoring.normalize import normalize_text
 
 # Entries whose fr_seeded text can't be used for the testid-less text
@@ -40,21 +40,42 @@ def _match_one(finding: Finding, entries: list[Entry], text_field: str) -> Entry
     return None
 
 
+def _match_known_issue(finding: Finding, issues: list[KnownIssue]) -> KnownIssue | None:
+    if finding.data_testid is None:
+        return None
+    for issue in issues:
+        if (
+            finding.page_path in issue.page_paths
+            and finding.data_testid in issue.testids
+            and finding.category in issue.categories
+        ):
+            return issue
+    return None
+
+
 @dataclass
 class RunResult:
     run: Run
     build: str
     detected: dict[str, list[int]]  # defect id -> matching finding indices
+    known_issue: dict[str, list[int]]  # known-issue id -> matching finding indices
     control_fp: dict[str, list[int]]  # control id -> matching finding indices
     unclassified: list[int]  # finding indices
 
 
-def score_run(run: Run, defects: list[Entry], controls: list[Entry], build: str) -> RunResult:
+def score_run(
+    run: Run,
+    defects: list[Entry],
+    controls: list[Entry],
+    build: str,
+    known_issues: list[KnownIssue] = (),
+) -> RunResult:
     active_defects = defects if build == "seeded" else []
     active_controls = controls_holding_in(controls, build)
     text_field = "fr_clean" if build == "clean" else "fr_seeded"
 
     detected: dict[str, list[int]] = defaultdict(list)
+    known_issue_hits: dict[str, list[int]] = defaultdict(list)
     control_fp: dict[str, list[int]] = defaultdict(list)
     unclassified: list[int] = []
 
@@ -62,6 +83,10 @@ def score_run(run: Run, defects: list[Entry], controls: list[Entry], build: str)
         entry = _match_one(finding, active_defects, text_field)
         if entry is not None:
             detected[entry.id].append(i)
+            continue
+        issue = _match_known_issue(finding, known_issues)
+        if issue is not None:
+            known_issue_hits[issue.id].append(i)
             continue
         entry = _match_one(finding, active_controls, text_field)
         if entry is not None:
@@ -73,6 +98,7 @@ def score_run(run: Run, defects: list[Entry], controls: list[Entry], build: str)
         run=run,
         build=build,
         detected=dict(detected),
+        known_issue=dict(known_issue_hits),
         control_fp=dict(control_fp),
         unclassified=unclassified,
     )

@@ -2,6 +2,7 @@
 absent (i.e. the clean value shows) in clean mode. Checked via the
 element's data-testid, per entry's own detection method (text, an
 attribute, the root html lang, or served image bytes)."""
+import hashlib
 import html as html_lib
 import re
 from pathlib import Path
@@ -98,6 +99,15 @@ def _check_image(entry, client, page_html, expected_path):
     assert served == on_disk, f"{entry['id']}: served image bytes differ from {expected_path}"
 
 
+def _check_a07(entry, client, page_html, image_filename):
+    expected_src = f"/static/img/{image_filename}"
+    src = _attr(page_html, entry["data_testid"], "src")
+    assert src == expected_src, f"{entry['id']}: expected src {expected_src!r}, got {src!r}"
+    served = client.get(src).get_data()
+    on_disk = (ROOT / "static" / "img" / image_filename).read_bytes()
+    assert served == on_disk, f"{entry['id']}: served image bytes differ from {expected_src}"
+
+
 EMPTY_APPLY_FORM = {
     "full_name": "",
     "email": "",
@@ -143,6 +153,43 @@ def test_defect_present_in_seeded_absent_in_clean(entry, clean_client, seeded_cl
     elif defect_id == "A06":
         _check_image(entry, clean_client, clean_html, entry["fr_clean"])
         _check_image(entry, seeded_client, seeded_html, entry["fr_seeded"])
+    elif defect_id == "A07":
+        _check_a07(entry, clean_client, clean_html, entry["fr_clean_image"])
+        _check_a07(entry, seeded_client, seeded_html, entry["fr_seeded_image"])
     else:
         _check_text_defect(entry, clean_html, entry["fr_clean"])
         _check_text_defect(entry, seeded_html, entry["fr_seeded"])
+
+
+A07_ENTRY = next(e for e in DEFECTS if e["id"] == "A07")
+PROMO_FILES = [A07_ENTRY["en_image"], A07_ENTRY["fr_clean_image"], A07_ENTRY["fr_seeded_image"]]
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def test_a07_promo_images_no_locale_or_build_hint_in_filename():
+    hints = ("en", "fr", "clean", "seeded")
+    for filename in PROMO_FILES:
+        stem = filename.rsplit(".", 1)[0].lower()
+        for hint in hints:
+            assert hint not in stem, f"{filename!r} leaks a locale/build hint ({hint!r})"
+
+
+def test_a07_en_and_fr_promo_images_differ_in_both_builds():
+    en_hash = _sha256(ROOT / "static" / "img" / A07_ENTRY["en_image"])
+    clean_fr_hash = _sha256(ROOT / "static" / "img" / A07_ENTRY["fr_clean_image"])
+    seeded_fr_hash = _sha256(ROOT / "static" / "img" / A07_ENTRY["fr_seeded_image"])
+    assert en_hash != clean_fr_hash, "en and clean-fr promo images have the same content"
+    assert en_hash != seeded_fr_hash, "en and seeded-fr promo images have the same content"
+    assert clean_fr_hash != seeded_fr_hash, "clean-fr and seeded-fr promo images have the same content"
+
+
+def test_a07_alt_text_identical_between_clean_and_seeded_fr(clean_client, seeded_client):
+    path = PAGE_PATH["calculator"]
+    clean_html = clean_client.get(path).get_data(as_text=True)
+    seeded_html = seeded_client.get(path).get_data(as_text=True)
+    clean_alt = _attr(clean_html, A07_ENTRY["data_testid"], "alt")
+    seeded_alt = _attr(seeded_html, A07_ENTRY["data_testid"], "alt")
+    assert clean_alt == seeded_alt, (clean_alt, seeded_alt)

@@ -32,6 +32,7 @@
     { "page_path": "/fr/dashboard", "data_testid": "dashboard-statement-link", "category": "mistranslation", "observed": "x", "expected": null, "description": "a3", "severity": "high", "evidence": null },
     { "page_path": "/fr/calculator", "data_testid": "calculator-early-repayment-note", "category": "mistranslation", "observed": "x", "expected": null, "description": "a4", "severity": "high", "evidence": null },
     { "page_path": "/fr/calculator", "data_testid": "calculator-rate-note", "category": "omission", "observed": "x", "expected": null, "description": "a5", "severity": "high", "evidence": null },
-    { "page_path": "/fr/", "data_testid": "landing-banner-image", "category": "image_text", "observed": "x", "expected": null, "description": "a6", "severity": "high", "evidence": null }
+    { "page_path": "/fr/", "data_testid": "landing-banner-image", "category": "image_text", "observed": "x", "expected": null, "description": "a6", "severity": "high", "evidence": null },
+    { "page_path": "/fr/calculator", "data_testid": "calculator-promo-image", "category": "image_text", "observed": "x", "expected": null, "description": "a7", "severity": "high", "evidence": null }
   ]
 }

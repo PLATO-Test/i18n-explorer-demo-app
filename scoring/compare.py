@@ -23,7 +23,7 @@ from pathlib import Path
 from statistics import mean
 
 from scoring.findings import FindingsValidationError, Run, load_runs
-from scoring.ground_truth import Entry, load_controls, load_defects
+from scoring.ground_truth import Entry, KnownIssue, load_controls, load_defects, load_known_issues
 from scoring.report import LAYERS, build_report
 
 NUMBER_WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine"}
@@ -48,11 +48,13 @@ def _read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _score(path: Path, build: str, defects: list[Entry], controls: list[Entry]) -> tuple[dict, list[Run]]:
+def _score(
+    path: Path, build: str, defects: list[Entry], controls: list[Entry], known_issues: list[KnownIssue]
+) -> tuple[dict, list[Run]]:
     runs = load_runs(path)
     if not runs:
         raise SystemExit(f"No findings files found at {path}")
-    report = build_report(runs, defects, controls, build)
+    report = build_report(runs, defects, controls, build, known_issues)
     if len(report["sources"]) != 1:
         raise SystemExit(f"{path}: expected one findings source, got {sorted(report['sources'])}")
     return next(iter(report["sources"].values())), runs
@@ -116,12 +118,13 @@ class Manifest:
 def build_comparison(args: argparse.Namespace) -> str:
     defects = load_defects()
     controls = load_controls()
+    known_issues = load_known_issues()
 
-    det_seeded, det_seeded_runs = _score(args.det_seeded, "seeded", defects, controls)
-    det_clean, det_clean_runs = _score(args.det_clean, "clean", defects, controls)
-    ai_seeded, ai_seeded_runs = _score(args.ai_seeded, "seeded", defects, controls)
-    ai_clean, ai_clean_runs = _score(args.ai_clean, "clean", defects, controls)
-    ai_stab, ai_stab_runs = _score(args.ai_stability, "seeded", defects, controls)
+    det_seeded, det_seeded_runs = _score(args.det_seeded, "seeded", defects, controls, known_issues)
+    det_clean, det_clean_runs = _score(args.det_clean, "clean", defects, controls, known_issues)
+    ai_seeded, ai_seeded_runs = _score(args.ai_seeded, "seeded", defects, controls, known_issues)
+    ai_clean, ai_clean_runs = _score(args.ai_clean, "clean", defects, controls, known_issues)
+    ai_stab, ai_stab_runs = _score(args.ai_stability, "seeded", defects, controls, known_issues)
     if len(ai_stab_runs) < 2:
         raise SystemExit(f"--ai-stability needs at least 2 runs, found {len(ai_stab_runs)} in {args.ai_stability}")
     n_rep = len(ai_stab_runs)
@@ -211,6 +214,9 @@ def build_comparison(args: argparse.Namespace) -> str:
         for fp in sr["control_false_positives"]:
             for ref in fp["findings"]:
                 rows.append((f"control FP ({fp['control_id']})", find_raw(ref)))
+        for ki in sr["known_issues"]:
+            for ref in ki["findings"]:
+                rows.append((f"known issue ({ki['issue_id']})", find_raw(ref)))
         for ref in sr["unclassified"]:
             rows.append(("unclassified", find_raw(ref)))
         return rows
@@ -239,16 +245,20 @@ def build_comparison(args: argparse.Namespace) -> str:
         "",
         "On the seeded build a finding is a false positive only if it lands on a control (a correct element).",
         "Findings that match neither a defect nor a control are \"unclassified\" and need manual review.",
-        "On the clean build nothing is wrong, so every finding is a false positive.",
+        "On the clean build nothing is wrong, so every finding is a false positive - except a finding that lands",
+        "on a known, pre-existing issue (ground_truth/known_issues.yaml), which counts toward neither.",
         "",
-        "| approach | seeded: control FPs | seeded: unclassified | seeded: total findings | clean: findings (all FP) |",
-        "|---|---|---|---|---|",
+        "| approach | seeded: control FPs | seeded: unclassified | seeded: total findings | "
+        "clean: total findings | clean: known issues | clean: false positives |",
+        "|---|---|---|---|---|---|---|",
     ]
-    for name, _, s_sr, s_runs, _, c_runs in approaches:
+    for name, _, s_sr, s_runs, c_sr, c_runs in approaches:
         ctrl = sum(fp["count"] for fp in s_sr["control_false_positives"])
+        clean_total = sum(len(r.findings) for r in c_runs)
+        clean_known = sum(ki["count"] for ki in c_sr["known_issues"])
         L.append(
             f"| {name} | {ctrl} | {len(s_sr['unclassified'])} | {sum(len(r.findings) for r in s_runs)} | "
-            f"{sum(len(r.findings) for r in c_runs)} |"
+            f"{clean_total} | {clean_known} | {clean_total - clean_known} |"
         )
     L.append("")
     for _, heading, s_sr, s_runs, c_sr, c_runs in approaches:
@@ -280,7 +290,10 @@ def build_comparison(args: argparse.Namespace) -> str:
         s = ai_stab["stability"][d.id]
         L.append(f"| {d.id} | {d.expected_layer} | {s['detected_runs']}/{s['total_runs']} | {_yn(ai[d.id])} |")
     per_run = [
-        sum(row["detected"] for row in build_report([r], defects, controls, "seeded")["sources"]["ai_judge"]["defect_table"])
+        sum(
+            row["detected"]
+            for row in build_report([r], defects, controls, "seeded", known_issues)["sources"]["ai_judge"]["defect_table"]
+        )
         for r in ai_stab_runs
     ]
     L += [

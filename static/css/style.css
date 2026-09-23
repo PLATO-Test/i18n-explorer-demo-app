@@ -86,6 +86,13 @@ button, input, select, textarea {
   border-radius: 8px;
 }
 
+.calc-promo {
+  display: block;
+  margin: 1rem 0 1.5rem;
+  max-width: 320px;
+  border-radius: 6px;
+}
+
 .landing-links {
   display: flex;
   justify-content: center;

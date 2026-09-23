@@ -126,11 +126,17 @@ in `scoring/`, because it needs to read `ground_truth/`.
   the header renders on all of them; every other page maps to one path.
 - `scoring/matcher.py` matches findings against `defects.yaml` only for
   the seeded build (in clean mode nothing is actually wrong, so a hit on
-  a defect's element is a false positive, not a detection) and against
-  `controls.yaml` filtered to entries where `fr_seeded == fr_clean`
-  (drops C10, the one control that doesn't hold in seeded mode — A06
-  covers that element there instead). A couple of defects need
-  testid-less fallback overrides instead of text-containment matching:
-  D07 (`fr_seeded` is the bare string `"en"`) and A06 (its "text" is an
-  image filename, not rendered text) — see `FALLBACK_OVERRIDES` in that
-  module before changing either entry's `fr_seeded` value.
+  a defect's element is a false positive, not a detection), then against
+  `ground_truth/known_issues.yaml` (pre-existing, unseeded issues; a
+  match there counts toward neither recall nor false positives — see its
+  own report section), then against `controls.yaml` filtered to entries
+  where `fr_seeded == fr_clean` (drops C10 and C11, the two controls that
+  don't hold in seeded mode — A06/A07 cover those elements there
+  instead). A defect match always wins over a known-issue match at the
+  same testid, e.g. on the seeded French landing page a finding on
+  `landing-banner-image` is always credited to A06, never U01. A couple
+  of defects need testid-less fallback overrides instead of
+  text-containment matching: D07 (`fr_seeded` is the bare string `"en"`)
+  and A06 (its "text" is an image filename, not rendered text) — see
+  `FALLBACK_OVERRIDES` in that module before changing either entry's
+  `fr_seeded` value.

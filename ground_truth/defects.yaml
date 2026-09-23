@@ -292,7 +292,43 @@
     text-only check of the alt attribute passes). Only the image file
     itself is wrong in the seeded build: the French page serves the
     English-text banner PNG instead of the French one.
+  note: >
+    An identical image hash across locales (the French page serving the
+    exact same file as the English page) plus differing alt text is a
+    generic rule-based signal - a deterministic checker can catch it by
+    comparing the two pages' served bytes without understanding French.
+    Relabelled from ai to both for this reason; see A07 for the
+    vision-only counterpart this defect used to be mistaken for.
   en_text: "/static/img/banner-en.png"
   fr_clean: "/static/img/banner-fr.png"
   fr_seeded: "/static/img/banner-en.png"
+  expected_layer: both
+
+- id: A07
+  category: image_text
+  page: calculator
+  data_testid: calculator-promo-image
+  description: >
+    A small promotional image near the rate note. The alt text is
+    localized normally and stays correct in both fr builds (it's driven
+    by the same seeded-independent rate_display as calculator-rate-value,
+    C07). Only the image's own pixels differ in the seeded build, and the
+    French text baked into them is itself grammatically correct French -
+    it just contradicts the page, which says the rate is variable and
+    5.2%. No file-name hint (promo-a/b/c.png are locale-neutral), no
+    identical hash across locales (the en and fr images differ in both
+    builds), and no alt-text or DOM-text difference: only reading the
+    image tells you it's wrong.
+  note: >
+    The fr src does differ between the clean and seeded builds
+    (promo-b.png vs promo-c.png), but no check in this benchmark diffs a
+    build against itself - only against the other locale or against the
+    DOM text/alt - so that difference isn't a usable rule-based signal
+    here.
+  en_text: "Variable rate: 5.2%"
+  fr_clean: "Taux variable : 5,2 %"
+  fr_seeded: "Taux fixe : 4,9 %"
+  en_image: "promo-a.png"
+  fr_clean_image: "promo-b.png"
+  fr_seeded_image: "promo-c.png"
   expected_layer: ai

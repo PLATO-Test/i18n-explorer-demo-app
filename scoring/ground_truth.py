@@ -1,5 +1,6 @@
-"""Loads ground_truth/defects.yaml and ground_truth/controls.yaml into the
-shape the matcher needs: paths and testids pre-normalized."""
+"""Loads ground_truth/defects.yaml, ground_truth/controls.yaml, and
+ground_truth/known_issues.yaml into the shape the matcher needs: paths
+and testids pre-normalized."""
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -21,6 +22,14 @@ class Entry:
     fr_clean: str
     fr_seeded: str
     expected_layer: str | None  # None for controls
+
+
+@dataclass(frozen=True)
+class KnownIssue:
+    id: str
+    page_paths: tuple[str, ...]
+    testids: tuple[str, ...]
+    categories: tuple[str, ...]
 
 
 def _load_entries(filename: str, require_layer: bool) -> list[Entry]:
@@ -53,10 +62,27 @@ def load_controls() -> list[Entry]:
     return _load_entries("controls.yaml", require_layer=False)
 
 
+def load_known_issues() -> list[KnownIssue]:
+    raw = yaml.safe_load((GROUND_TRUTH_DIR / "known_issues.yaml").read_text(encoding="utf-8")) or []
+    issues = []
+    for e in raw:
+        page_paths = tuple(normalize_path(p) for p in e["page_paths"])
+        testids = tuple(t for t in (normalize_testid(t) for t in e["testids"]) if t is not None)
+        issues.append(
+            KnownIssue(
+                id=e["id"],
+                page_paths=page_paths,
+                testids=testids,
+                categories=tuple(e["categories"]),
+            )
+        )
+    return issues
+
+
 def controls_holding_in(controls: list[Entry], build: str) -> list[Entry]:
     """Controls whose value actually is the same in this build. Excludes
-    e.g. C10, which only holds in the clean build (A06 occupies the same
-    element in the seeded build)."""
+    e.g. C10 and C11, which only hold in the clean build (A06/A07 occupy
+    the same elements in the seeded build)."""
     if build == "clean":
         return controls
     return [c for c in controls if c.fr_seeded == c.fr_clean]

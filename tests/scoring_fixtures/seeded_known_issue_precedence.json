@@ -1,0 +1,16 @@
+{
+  "run": {
+    "run_id": "ai-judge-known-issue-precedence",
+    "source": "ai_judge",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 100,
+    "output_tokens": 20,
+    "cost_usd": 0.01,
+    "duration_s": 2.0
+  },
+  "findings": [
+    { "page_path": "/fr/", "data_testid": "landing-banner-image", "category": "other", "observed": "shows an advisor with a customer, but it's the English banner", "expected": null, "description": "a06-not-u01", "severity": "high", "evidence": null }
+  ]
+}

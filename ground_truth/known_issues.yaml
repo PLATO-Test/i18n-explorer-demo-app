@@ -1,0 +1,42 @@
+# Known, pre-existing issues in this app's copy: present in BOTH build
+# modes, not part of the seeded-defect catalog, and not fixed here -
+# fixing either would move ground truth out from under an already-scored
+# AI-judge baseline. A finding that lands on one of these page_paths and
+# testids, in one of its listed categories, is neither a defect hit nor a
+# control false positive; see scoring/matcher.py and its own report
+# section.
+#
+# Unlike defects.yaml/controls.yaml, page_paths here are literal paths
+# (not a "page" name via ground_truth/pages.py), since these can apply to
+# the English page too.
+#
+# Matching precedence (scoring/matcher.py): a seeded-defect match is
+# always tried first, so on the seeded French landing page a finding on
+# landing-banner-image is credited to A06, never to U01 - see A06's
+# testid-only match, which doesn't gate on category. A known-issue match
+# then wins over a control false positive.
+
+- id: U01
+  description: >
+    The landing banner's alt text (translations/*.json landing.banner_alt)
+    describes a Northstar Bank advisor helping a customer plan a loan.
+    The banner PNG itself (scripts/make_banners.py) only ever renders a
+    navy gradient with two lines of marketing copy - no depiction of a
+    person. True of both banner-en.png and banner-fr.png, so this holds
+    in both locales and (outside the seeded French page, where A06
+    already occupies this element) both build modes.
+  page_paths: ["/en/", "/fr/"]
+  testids: [landing-banner-image]
+  categories: [other, image_text]
+
+- id: U02
+  description: >
+    The dashboard's recent-transactions heading
+    (dashboard.recent_transactions_heading, "Transactions récentes") and
+    its own counter just below it (recent_transactions_count_*, "{count}
+    opérations récentes") use two different fr-CA nouns for the same
+    concept. fr-only: the English strings are consistent ("transactions"
+    in both places).
+  page_paths: ["/fr/dashboard"]
+  testids: [dashboard-recent-transactions-heading, dashboard-recent-transactions-count]
+  categories: [terminology, other, mistranslation]

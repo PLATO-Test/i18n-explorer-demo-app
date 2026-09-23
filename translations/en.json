@@ -28,6 +28,7 @@
     "modal_body": "We use your loan amount, term, and our fixed variable rate to estimate a monthly payment. This estimate does not include taxes or optional insurance.",
     "modal_close": "Close",
     "early_repayment_note": "No charges apply for early repayment.",
+    "promo_alt": "Variable rate: {rate}",
     "apply_now": "Apply now"
   },
   "apply": {

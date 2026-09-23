@@ -1,7 +1,8 @@
 """For each entry in ground_truth/controls.yaml, the expected fr-CA text
 is present in both build modes (these must never be flagged as defects).
-C10 is the one documented exception: it only holds in clean mode, since
-in seeded mode that same location shows the A06 defect by design."""
+C10 and C11 are the documented exceptions: they only hold in clean mode,
+since in seeded mode those same locations show the A06/A07 defects by
+design."""
 import html as html_lib
 import re
 from pathlib import Path
@@ -44,17 +45,26 @@ def _attr(html: str, testid: str, attr: str) -> str:
     return html_lib.unescape(m.group(1))
 
 
+IMAGE_CONTROLS = ("C10", "C11")
+
+
 @pytest.mark.parametrize("entry", CONTROLS, ids=[e["id"] for e in CONTROLS])
 def test_control_present_in_clean(entry, clean_client):
     html = clean_client.get(PAGE_PATH[entry["page"]]).get_data(as_text=True)
-    if entry["id"] == "C10":
+    if entry["id"] in IMAGE_CONTROLS:
         actual = _attr(html, entry["data_testid"], "src")
+        expected = entry["fr_clean"] if entry["id"] == "C10" else f"/static/img/{entry['fr_clean_image']}"
     else:
         actual = _text(html, entry["data_testid"])
-    assert actual == entry["fr_clean"], f"{entry['id']}: expected {entry['fr_clean']!r}, got {actual!r}"
+        expected = entry["fr_clean"]
+    assert actual == expected, f"{entry['id']}: expected {expected!r}, got {actual!r}"
 
 
-@pytest.mark.parametrize("entry", [e for e in CONTROLS if e["id"] != "C10"], ids=[e["id"] for e in CONTROLS if e["id"] != "C10"])
+@pytest.mark.parametrize(
+    "entry",
+    [e for e in CONTROLS if e["id"] not in IMAGE_CONTROLS],
+    ids=[e["id"] for e in CONTROLS if e["id"] not in IMAGE_CONTROLS],
+)
 def test_control_present_in_seeded(entry, seeded_client):
     html = seeded_client.get(PAGE_PATH[entry["page"]]).get_data(as_text=True)
     actual = _text(html, entry["data_testid"])

@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 from scoring.findings import FindingsValidationError, load_runs
-from scoring.ground_truth import load_controls, load_defects
+from scoring.ground_truth import load_controls, load_defects, load_known_issues
 from scoring.report import build_report, render_markdown
 
 
@@ -36,7 +36,8 @@ def main(argv: list[str] | None = None) -> int:
 
     defects = load_defects()
     controls = load_controls()
-    report = build_report(runs, defects, controls, args.build)
+    known_issues = load_known_issues()
+    report = build_report(runs, defects, controls, args.build, known_issues)
 
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")

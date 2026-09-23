@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from scoring.findings import FindingsValidationError, load_runs
-from scoring.ground_truth import load_controls, load_defects
+from scoring.ground_truth import load_controls, load_defects, load_known_issues
 from scoring.matcher import score_run
 from scoring.report import build_report
 
@@ -24,9 +24,14 @@ def controls():
     return load_controls()
 
 
-def _score(filename: str, build: str, defects, controls):
+@pytest.fixture(scope="module")
+def known_issues():
+    return load_known_issues()
+
+
+def _score(filename: str, build: str, defects, controls, known_issues=()):
     [run] = load_runs(FIXTURES / filename)
-    return score_run(run, defects, controls, build)
+    return score_run(run, defects, controls, build, known_issues)
 
 
 def test_all_defects_detected_gives_recall_one(defects, controls):
@@ -111,3 +116,36 @@ def test_stability_computed_across_three_runs(defects, controls):
     assert stability["D02"] == {"detected_runs": 2, "total_runs": 3}
     assert stability["D03"] == {"detected_runs": 1, "total_runs": 3}
     assert stability["D04"] == {"detected_runs": 0, "total_runs": 3}
+
+
+def test_a07_matches_regardless_of_category(defects, controls):
+    rr = _score("seeded_a07_category_variants.json", "seeded", defects, controls)
+    assert rr.detected == {"A07": [0, 1]}
+    assert rr.control_fp == {}
+    assert rr.unclassified == []
+
+
+def test_c11_control_fp_regardless_of_category(defects, controls):
+    rr = _score("clean_c11_category_variants.json", "clean", defects, controls)
+    assert rr.detected == {}
+    assert rr.control_fp == {"C11": [0, 1]}
+    assert rr.unclassified == []
+
+
+def test_known_issue_matches_only_for_listed_category(defects, controls, known_issues):
+    rr = _score("clean_known_issues.json", "clean", defects, controls, known_issues)
+    assert rr.known_issue == {"U01": [0], "U02": [1]}
+    assert rr.control_fp == {"C08b": [2]}  # wrong category (plural) falls through to the control
+    assert rr.unclassified == []
+
+    runs = load_runs(FIXTURES / "clean_known_issues.json")
+    report = build_report(runs, defects, controls, "clean", known_issues)
+    source = report["sources"]["ai_judge"]
+    assert {ki["issue_id"]: ki["count"] for ki in source["known_issues"]} == {"U01": 1, "U02": 1}
+    assert source["false_positive_count"] == 1  # only the C08b hit; known-issue hits don't count
+
+
+def test_seeded_defect_wins_over_known_issue_at_same_testid(defects, controls, known_issues):
+    rr = _score("seeded_known_issue_precedence.json", "seeded", defects, controls, known_issues)
+    assert rr.detected == {"A06": [0]}
+    assert rr.known_issue == {}

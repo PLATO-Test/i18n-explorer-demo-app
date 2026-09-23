@@ -38,6 +38,7 @@
 
 <p class="note" data-testid="calculator-early-repayment-note">{{ t('calculator.early_repayment_note') }}</p>
 <p class="note" data-testid="calculator-rate-note">{{ rate_note_text }}</p>
+<img class="calc-promo" src="{{ url_for('static', filename='img/' + promo_file) }}" alt="{{ t('calculator.promo_alt', rate=rate_display) }}" data-testid="calculator-promo-image">
 
 <a class="btn btn-primary" href="{{ url_for('apply.index', lang=locale) }}" data-testid="calculator-apply-now">{{ t('calculator.apply_now') }}</a>
 {% endblock %}

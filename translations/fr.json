@@ -28,6 +28,7 @@
     "modal_body": "Nous utilisons le montant du prêt, la durée et notre taux variable fixe pour estimer un paiement mensuel. Cette estimation n'inclut pas les taxes ni l'assurance facultative.",
     "modal_close": "Fermer",
     "early_repayment_note": "Aucuns frais ne s'appliquent au remboursement anticipé.",
+    "promo_alt": "Taux variable : {rate}",
     "apply_now": "Faites votre demande dès maintenant"
   },
   "apply": {

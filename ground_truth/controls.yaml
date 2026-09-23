@@ -1,8 +1,9 @@
 # Control cases: correct fr-CA in BOTH clean and seeded builds. A test
 # suite or judge that flags any of these as a defect is producing a false
-# positive. fr_clean == fr_seeded for every entry here EXCEPT C10, which
-# is the clean-mode-only counterpart of defect A06 at the same
-# data-testid — see its entry below for why it is the one exception.
+# positive. fr_clean == fr_seeded for every entry here EXCEPT C10 and
+# C11, which are the clean-mode-only counterparts of defects A06 and A07
+# at the same data-testids — see their entries below for why they're the
+# exceptions.
 
 - id: C01
   category: non_literal_but_correct
@@ -119,4 +120,23 @@
   en_text: "/static/img/banner-en.png"
   fr_clean: "/static/img/banner-fr.png"
   fr_seeded: "/static/img/banner-en.png"
+  expected_layer: ai
+
+- id: C11
+  category: correct_localized_asset
+  page: calculator
+  data_testid: calculator-promo-image
+  description: >
+    Clean-mode counterpart of A07, at the same data-testid. In clean mode
+    the French page correctly shows a promo image whose text agrees with
+    the page (variable rate, 5.2%). This is the one other control in this
+    file that does NOT hold in seeded mode: in the seeded build this
+    exact location shows the A07 defect (contradictory fixed-rate promo
+    text) instead, by design — self-verification tests must check C11
+    only against the clean build, not the seeded one.
+  en_text: "Variable rate: 5.2%"
+  fr_clean: "Taux variable : 5,2 %"
+  fr_seeded: "Taux fixe : 4,9 %"
+  en_image: "promo-a.png"
+  fr_clean_image: "promo-b.png"
   expected_layer: ai
