@@ -46,6 +46,8 @@ def _write_findings(path: Path, source: str, findings: list[dict], **run) -> Non
 def _explorer_manifest(index: int, status: str) -> dict:
     return {
         "status": status,
+        "interrupted": status == "completed",
+        "finish_called": status == "completed",
         "model_pinned": "claude-sonnet-5",
         "cost_usd": 0.05,
         "cost_basis": "list price, notional on a subscription",
@@ -174,6 +176,7 @@ def test_three_approach_output_with_explorer_inputs(run_dir, tmp_path):
     assert "| seeded run 3 (excluded from stability) | rate_limited | 13 | 53 | 3 | 904 | 700 | 200 | 4 | 100 |" in text
     assert "| seeded run 1 (single run) | completed | 11 | 51 | 1 | 904 | 700 | 200 | 4 | 100 |" in text
     assert "| seeded run 1 (single run) | 4/5 | 5/5 | 6/10 | 8/10 |" in text
+    assert "Note: 3 of 3 runs above report `interrupted: true` together with `finish_called: true`." in text
 
 
 def test_partial_explorer_arguments_rejected(run_dir, tmp_path):

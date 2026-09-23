@@ -14,6 +14,12 @@
 # matches testid-less findings on any path starting with one of the
 # prefixes, except the pages in ground_truth/pages.py.
 #
+# Known over-match: the exclusion only covers the mapped pages, so an
+# unmapped path that returns a real 200 page (e.g. /fr/application/<any
+# other id>, which renders the French summary page) is treated like an
+# unknown URL. A testid-less finding there in one of U03's categories is
+# credited to U03 even though the page is not a 404. Kept as is.
+#
 # Matching precedence (scoring/matcher.py): a seeded-defect match is
 # always tried first, so on the seeded French landing page a finding on
 # landing-banner-image is credited to A06, never to U01 - see A06's
@@ -54,3 +60,14 @@
     correct for English and so not part of this issue.
   page_path_prefixes: ["/fr/"]
   categories: [missing_translation, hardcoded_text, other]
+
+- id: U04
+  description: >
+    The calculator's recalculate button (calculator.html) is labelled with
+    the page title (calculator.title: "Loan calculator" / "Calculateur de
+    prêt") instead of an action label such as "Recalculate". It has no
+    value or aria-label of its own. A copy/UX issue present in both
+    locales and both build modes, not an i18n defect.
+  page_paths: ["/en/calculator", "/fr/calculator"]
+  testids: [calculator-recalculate-button]
+  categories: [mistranslation, missing_translation, terminology, other]

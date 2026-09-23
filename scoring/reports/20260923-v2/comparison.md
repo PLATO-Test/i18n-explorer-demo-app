@@ -68,18 +68,18 @@ on a known, pre-existing issue (ground_truth/known_issues.yaml), which counts to
 |---|---|---|---|---|---|---|---|
 | deterministic | 0 | 0 | 0 | 21 | 0 | 0 | 0 |
 | AI judge (run 1) | 0 | 0 | 0 | 17 | 2 | 1 | 1 |
-| AI explorer (run 1) | 0 | 1 | 0 | 20 | 2 | 1 | 1 |
+| AI explorer (run 1) | 0 | 1 | 0 | 20 | 2 | 2 | 0 |
 
 Known-issue hits by id (single runs):
 
-| approach | build | U01 | U02 | U03 |
-|---|---|---|---|---|
-| deterministic | seeded | 0 | 0 | 0 |
-| deterministic | clean | 0 | 0 | 0 |
-| AI judge (run 1) | seeded | 0 | 0 | 0 |
-| AI judge (run 1) | clean | 0 | 1 | 0 |
-| AI explorer (run 1) | seeded | 0 | 0 | 1 |
-| AI explorer (run 1) | clean | 0 | 0 | 1 |
+| approach | build | U01 | U02 | U03 | U04 |
+|---|---|---|---|---|---|
+| deterministic | seeded | 0 | 0 | 0 | 0 |
+| deterministic | clean | 0 | 0 | 0 | 0 |
+| AI judge (run 1) | seeded | 0 | 0 | 0 | 0 |
+| AI judge (run 1) | clean | 0 | 1 | 0 | 0 |
+| AI explorer (run 1) | seeded | 0 | 0 | 1 | 0 |
+| AI explorer (run 1) | clean | 0 | 0 | 1 | 1 |
 
 ### Deterministic - seeded build
 
@@ -111,7 +111,7 @@ None.
 | scorer class | page | testid | category | observed | expected | description |
 |---|---|---|---|---|---|---|
 | known issue (U03) | /fr/nonexistent | - | missing_translation | Title "404 Not Found"; heading "Not Found"; "The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again." | Localized French 404 page, e.g. "Page introuvable" with a French explanation | Unknown URLs under /fr/ show the default English server 404 page, without site header, and with no French translation. |
-| unclassified | /fr/calculator | calculator-recalculate-button | mistranslation | Button label "Calculateur de prêt" (same as the page title) | "Recalculer" or "Calculer le paiement" | The form submit button carries the page-title text instead of an action verb (the test id suggests "recalculate"). The English also reuses "Loan calculator", but the French button reads as a noun rather than an action. |
+| known issue (U04) | /fr/calculator | calculator-recalculate-button | mistranslation | Button label "Calculateur de prêt" (same as the page title) | "Recalculer" or "Calculer le paiement" | The form submit button carries the page-title text instead of an action verb (the test id suggests "recalculate"). The English also reuses "Loan calculator", but the French button reads as a noun rather than an action. |
 
 The three seeded stability repeats add 0 control FPs and 3 unclassified findings.
 No clean-build repeats were run, so the clean FP rate of the AI judge rests on one run.
@@ -198,6 +198,8 @@ Model turns are assistant turns (one model call each). Tool calls are the browse
 | seeded run 3 (excluded from stability) | rate_limited | 7 | 32 | 1 | 58,532 | 48,017 | 9,572 | 943 | 3,300 | $0.0818 | 34.8 |
 
 Cost basis reported by the harness: `list price, notional on a subscription`.
+
+Note: 4 of 4 runs above report `interrupted: true` together with `finish_called: true` (and `result_subtype: error_during_execution`). This is expected harness behaviour: the wind-down stops the session after the agent calls `finish`. It is not a failed run.
 
 Note: for seeded run 2 (stability), the manifest's per-turn token totals (325,070 input tokens) exceed its `model_usage` for the pinned model (291,083). The table uses `model_usage`, the source of the `run` block and of the reported cost, so nothing here confirms it. If the per-turn totals are the right ones, this run's input tokens are 33,987 higher and its cost is understated too.
 

@@ -11,18 +11,17 @@ None.
 | known-issue id | count |
 |---|---|
 | U03 | 1 |
+| U04 | 1 |
 
 ### Unclassified findings (manual review)
 
-| run | page | testid | observed |
-|---|---|---|---|
-| 20260923-v2 | /fr/calculator | calculator-recalculate-button | Button label "Calculateur de prêt" (same as the page title) |
+None.
 
 ### Precision / recall
 
 - precision: n/a
 - recall: n/a
-- false positive count: 1
+- false positive count: 0
 
 ### Cost / tokens / duration
 

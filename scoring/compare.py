@@ -213,6 +213,20 @@ def _explorer_cost_section(
             )
     basis = {meta["manifest"]["cost_basis"] for _, _, meta in rows}
     L += ["", f"Cost basis reported by the harness: {', '.join(f'`{b}`' for b in sorted(basis))}."]
+    finished = [m for m in (meta["manifest"] for _, _, meta in rows) if m["interrupted"] and m["finish_called"]]
+    if finished:
+        L += [
+            "",
+            f"Note: {len(finished)} of {len(rows)} runs above report `interrupted: true` together with "
+            "`finish_called: true`"
+            + (
+                " (and `result_subtype: error_during_execution`)"
+                if all(m.get("result_subtype") == "error_during_execution" for m in finished)
+                else ""
+            )
+            + ". This is expected harness behaviour: the wind-down stops the session after the agent calls "
+            "`finish`. It is not a failed run.",
+        ]
     mismatched = []
     for label, _, meta in rows:
         m = meta["manifest"]

@@ -159,3 +159,19 @@ def test_known_issue_path_prefix_matches_unmapped_fr_paths(defects, controls, kn
     assert rr.control_fp == {}
     # wrong category, /en/ path, mapped fr page, and "/frost" (prefix is "/fr/") all fall through
     assert rr.unclassified == [3, 4, 5, 6]
+
+
+@pytest.mark.parametrize("build", ["seeded", "clean"])
+def test_known_issue_u04_matches_both_locales_and_builds(defects, controls, known_issues, build):
+    rr = _score("known_issue_calculator_button.json", build, defects, controls, known_issues)
+    assert rr.known_issue == {"U04": [0, 1]}
+    assert rr.detected == {}
+    assert rr.control_fp == {}
+    assert rr.unclassified == [2, 3]  # wrong category, wrong page
+
+
+def test_known_issue_u03_also_claims_unmapped_200_pages(defects, controls, known_issues):
+    # Documented over-match (see known_issues.yaml): /fr/application/<other id>
+    # renders a real page but is not in the page map.
+    rr = _score("known_issue_unmapped_200_page.json", "clean", defects, controls, known_issues)
+    assert rr.known_issue == {"U03": [0]}
