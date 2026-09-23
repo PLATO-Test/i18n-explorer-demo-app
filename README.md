@@ -186,6 +186,37 @@ precision/recall, and (with multiple runs) stability. These reports
 contain defect IDs and ground-truth text — see `CLAUDE.md` for the rule
 on keeping that out of the test repo.
 
+### Comparing deterministic and AI judge findings
+
+`scoring.compare` puts the deterministic checks and the AI judge side by
+side for one test run and writes a single Markdown file:
+
+```powershell
+uv run python -m scoring.compare `
+  --det-seeded <run>/seeded/findings.json `
+  --det-clean <run>/clean/findings.json `
+  --ai-seeded <run>/seeded/findings-ai-judge-1.json `
+  --ai-clean <run>/clean/findings-ai-judge-1.json `
+  --ai-stability <folder-of-seeded-ai-judge-repeats> `
+  --out scoring/reports/comparison.md
+```
+
+`<run>` is a run folder under the test repo's `artifacts/`. The
+`--ai-stability` folder must contain only the seeded AI judge repeat
+files — copy them into a separate folder so the deterministic
+`findings.json` and the single run are not picked up. Keep the original
+file names, because they are looked up in `judge-manifest.json`.
+
+The report covers per-defect detection for the deterministic checks, the
+AI judge, and their union; recall per expected layer; false positives on
+controls and on the clean build, with the text of each finding; run-to-run
+stability across the repeats; and calls, tokens, notional cost, and
+duration. Call counts and the full cost of runs that were resumed from
+cache come from `judge-manifest.json` and the `calls.json` files it
+references, which must sit next to the `--ai-seeded` and `--ai-clean`
+files. Like the scorer's reports, the output contains defect IDs and
+ground-truth text.
+
 ## Regenerating the banner images
 
 The landing-page banners are pre-rendered PNGs, committed to the repo so

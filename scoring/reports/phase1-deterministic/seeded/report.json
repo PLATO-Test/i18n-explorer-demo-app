@@ -1,0 +1,330 @@
+{
+  "build": "seeded",
+  "n_defects": 20,
+  "sources": {
+    "deterministic": {
+      "n_runs": 1,
+      "defect_table": [
+        {
+          "id": "D01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-heading",
+              "observed": "Recent transactions",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": "summary-confirmation-message",
+              "observed": "{montant}",
+              "category": "placeholder"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "hardcoded_text"
+            },
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-submit-button",
+              "observed": "Soumettre ma demande de prêt",
+              "category": "truncation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$450.91",
+              "category": "number_currency_format"
+            },
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$751.52",
+              "category": "number_currency_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-0",
+              "observed": "09/15/2026",
+              "category": "date_format"
+            },
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-1",
+              "observed": "09/12/2026",
+              "category": "date_format"
+            },
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-2",
+              "observed": "09/08/2026",
+              "category": "date_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D07",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": null,
+              "observed": "en",
+              "category": "lang_attribute"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D08",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-estimate-loan-link",
+              "observed": "Estimer un nouveau prêt -> /en/calculator",
+              "category": "locale_navigation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D09",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "hardcoded_text"
+            },
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "missing_translation"
+            },
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D10",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-active-loans-count",
+              "observed": "0 prêts actifs",
+              "category": "plural"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-email-label",
+              "observed": "Adresse e-mail",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-balance-label",
+              "observed": "Balance du compte",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr",
+              "data_testid": "landing-cta-apply",
+              "observed": "Appliquer pour un prêt",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A01",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A02",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A03",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A04",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A05",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260922-final",
+              "page_path": "/fr",
+              "data_testid": "landing-banner-image",
+              "observed": "/static/img/banner-en.png (sha256 8b91e513d8d4), alt: Un conseiller de la Banque Northstar aidant un client à planifier un prêt",
+              "category": "image_text"
+            }
+          ],
+          "category_correct": true
+        }
+      ],
+      "layer_breakdown": {
+        "deterministic": {
+          "detected": 10,
+          "missed": 0
+        },
+        "ai": {
+          "detected": 1,
+          "missed": 5
+        },
+        "both": {
+          "detected": 4,
+          "missed": 0
+        }
+      },
+      "control_false_positives": [],
+      "unclassified": [],
+      "precision": 1.0,
+      "recall": 0.75,
+      "false_positive_count": 0,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": null,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "mean_duration_s": 0.156,
+        "models": []
+      },
+      "runs": [
+        {
+          "run_id": "20260922-final",
+          "model": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 0.156
+        }
+      ]
+    }
+  }
+}

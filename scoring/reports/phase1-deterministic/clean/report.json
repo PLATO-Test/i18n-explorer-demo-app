@@ -1,0 +1,34 @@
+{
+  "build": "clean",
+  "n_defects": 20,
+  "sources": {
+    "deterministic": {
+      "n_runs": 1,
+      "defect_table": null,
+      "layer_breakdown": null,
+      "control_false_positives": [],
+      "unclassified": [],
+      "precision": null,
+      "recall": null,
+      "false_positive_count": 0,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": null,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "mean_duration_s": 0.141,
+        "models": []
+      },
+      "runs": [
+        {
+          "run_id": "20260922-final",
+          "model": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 0.141
+        }
+      ]
+    }
+  }
+}

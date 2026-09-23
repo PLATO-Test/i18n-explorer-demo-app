@@ -6,5 +6,7 @@ __pycache__/
 *.egg-info/
 .env
 
-# Scorer reports contain defect IDs and ground-truth text - never commit.
+# Scratch scorer output. Reports contain defect IDs and ground-truth text:
+# committing them here is fine (ground_truth/ is committed too), but never
+# copy them into the test repo.
 /out/
