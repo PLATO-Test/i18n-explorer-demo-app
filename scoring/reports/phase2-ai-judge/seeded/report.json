@@ -1,6 +1,6 @@
 {
   "build": "seeded",
-  "n_defects": 20,
+  "n_defects": 21,
   "sources": {
     "ai_judge": {
       "n_runs": 1,
@@ -236,6 +236,12 @@
             }
           ],
           "category_correct": true
+        },
+        {
+          "id": "A07",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
         }
       ],
       "layer_breakdown": {
@@ -244,18 +250,19 @@
           "missed": 6
         },
         "ai": {
-          "detected": 6,
-          "missed": 0
+          "detected": 5,
+          "missed": 1
         },
         "both": {
-          "detected": 4,
+          "detected": 5,
           "missed": 0
         }
       },
       "control_false_positives": [],
+      "known_issues": [],
       "unclassified": [],
       "precision": 1.0,
-      "recall": 0.7,
+      "recall": 0.6666666666666666,
       "false_positive_count": 0,
       "stability": null,
       "cost": {

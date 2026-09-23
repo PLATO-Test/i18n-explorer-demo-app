@@ -7,8 +7,8 @@
 | layer | detected | missed |
 |---|---|---|
 | deterministic | 5 | 5 |
-| ai | 6 | 0 |
-| both | 4 | 0 |
+| ai | 5 | 1 |
+| both | 5 | 0 |
 
 ### Per-defect
 
@@ -34,6 +34,7 @@
 | A04 | yes | yes | 20260922-final:/fr/calculator#calculator-early-repayment-note; 20260922-final:/fr/calculator#calculator-early-repayment-note; 20260922-final:/fr/calculator#calculator-early-repayment-note; 20260922-final:/fr/calculator#calculator-early-repayment-note |
 | A05 | yes | yes | 20260922-final:/fr/calculator#calculator-rate-note; 20260922-final:/fr/calculator#calculator-rate-note; 20260922-final:/fr/calculator#calculator-rate-note |
 | A06 | yes | yes | 20260922-final:/fr#landing-banner-image; 20260922-final:/fr#landing-banner-image; 20260922-final:/fr#landing-banner-image |
+| A07 | no | n/a | - |
 
 ### Stability
 
@@ -45,6 +46,7 @@
 | A04 | 3 | 3 |
 | A05 | 3 | 3 |
 | A06 | 3 | 3 |
+| A07 | 0 | 3 |
 | D01 | 3 | 3 |
 | D02 | 3 | 3 |
 | D03 | 3 | 3 |
@@ -64,6 +66,10 @@
 
 None.
 
+### Known issues (not counted toward recall or false positives)
+
+None.
+
 ### Unclassified findings (manual review)
 
 None.
@@ -71,7 +77,7 @@ None.
 ### Precision / recall
 
 - precision: 1.000
-- recall: 0.717
+- recall: 0.683
 - false positive count: 0
 
 ### Cost / tokens / duration

@@ -32,27 +32,29 @@ The "AI judge" columns in sections 1-3 are single run 1. Repeats appear only in 
 | A03 | mistranslation | ai | no | yes | yes |
 | A04 | mistranslation | ai | no | yes | yes |
 | A05 | omission | ai | no | yes | yes |
-| A06 | image_text | ai | yes | yes | yes |
-| **total** | | | **15/20** | **14/20** | **20/20** |
+| A06 | image_text | both | yes | yes | yes |
+| A07 | image_text | ai | no | no | no |
+| **total** | | | **15/21** | **14/21** | **20/21** |
 
 ## 2. Recall per expected_layer (seeded build)
 
 | approach | deterministic | ai | both | overall |
 |---|---|---|---|---|
-| deterministic | 10/10 (100%) | 1/6 (17%) | 4/4 (100%) | 15/20 (75%) |
-| AI judge | 4/10 (40%) | 6/6 (100%) | 4/4 (100%) | 14/20 (70%) |
-| union | 10/10 (100%) | 6/6 (100%) | 4/4 (100%) | 20/20 (100%) |
+| deterministic | 10/10 (100%) | 0/6 (0%) | 5/5 (100%) | 15/21 (71%) |
+| AI judge | 4/10 (40%) | 5/6 (83%) | 5/5 (100%) | 14/21 (67%) |
+| union | 10/10 (100%) | 5/6 (83%) | 5/5 (100%) | 20/21 (95%) |
 
 ## 3. False positives
 
 On the seeded build a finding is a false positive only if it lands on a control (a correct element).
 Findings that match neither a defect nor a control are "unclassified" and need manual review.
-On the clean build nothing is wrong, so every finding is a false positive.
+On the clean build nothing is wrong, so every finding is a false positive - except a finding that lands
+on a known, pre-existing issue (ground_truth/known_issues.yaml), which counts toward neither.
 
-| approach | seeded: control FPs | seeded: unclassified | seeded: total findings | clean: findings (all FP) |
-|---|---|---|---|---|
-| deterministic | 0 | 0 | 21 | 0 |
-| AI judge (run 1) | 0 | 0 | 14 | 2 |
+| approach | seeded: control FPs | seeded: unclassified | seeded: total findings | clean: total findings | clean: known issues | clean: false positives |
+|---|---|---|---|---|---|---|
+| deterministic | 0 | 0 | 21 | 0 | 0 | 0 |
+| AI judge (run 1) | 0 | 0 | 14 | 2 | 1 | 1 |
 
 ### Deterministic - seeded build
 
@@ -70,7 +72,7 @@ None.
 
 | scorer class | page | testid | category | observed | expected | description |
 |---|---|---|---|---|---|---|
-| control FP (C08b) | /fr/dashboard | dashboard-recent-transactions-count | terminology | 3 opérations récentes | 3 transactions récentes | Inconsistent terminology: the heading uses 'Transactions récentes' but this element uses 'opérations' for the same English word 'transactions'. |
+| known issue (U02) | /fr/dashboard | dashboard-recent-transactions-count | terminology | 3 opérations récentes | 3 transactions récentes | Inconsistent terminology: the heading uses 'Transactions récentes' but this element uses 'opérations' for the same English word 'transactions'. |
 | unclassified | /fr/calculator | calculator-early-repayment-note | other | Aucuns frais ne s'appliquent au remboursement anticipé. | Aucun frais ne s'applique au remboursement anticipé. | Grammatical error: 'aucun' should remain singular before 'frais', and the verb should agree in the singular ('s'applique'), not plural. |
 
 The three seeded stability repeats add 0 control FPs and 0 unclassified findings.
@@ -102,9 +104,10 @@ Deterministic is a single run of a deterministic check, so no repeat stability i
 | A03 | ai | 3/3 | yes |
 | A04 | ai | 3/3 | yes |
 | A05 | ai | 3/3 | yes |
-| A06 | ai | 3/3 | yes |
+| A06 | both | 3/3 | yes |
+| A07 | ai | 0/3 | no |
 
-Defects detected per repeat: 14/20, 14/20, 15/20; mean recall 0.717.
+Defects detected per repeat: 14/21, 14/21, 15/21; mean recall 0.683.
 
 ## 5. Calls, tokens, notional cost, duration
 

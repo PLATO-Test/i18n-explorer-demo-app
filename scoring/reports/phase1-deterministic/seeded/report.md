@@ -7,8 +7,8 @@
 | layer | detected | missed |
 |---|---|---|
 | deterministic | 10 | 0 |
-| ai | 1 | 5 |
-| both | 4 | 0 |
+| ai | 0 | 6 |
+| both | 5 | 0 |
 
 ### Per-defect
 
@@ -34,8 +34,13 @@
 | A04 | no | n/a | - |
 | A05 | no | n/a | - |
 | A06 | yes | yes | 20260922-final:/fr#landing-banner-image |
+| A07 | no | n/a | - |
 
 ### False positives on controls
+
+None.
+
+### Known issues (not counted toward recall or false positives)
 
 None.
 
@@ -46,7 +51,7 @@ None.
 ### Precision / recall
 
 - precision: 1.000
-- recall: 0.750
+- recall: 0.714
 - false positive count: 0
 
 ### Cost / tokens / duration

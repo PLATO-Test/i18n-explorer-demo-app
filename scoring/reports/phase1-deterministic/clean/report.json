@@ -1,12 +1,13 @@
 {
   "build": "clean",
-  "n_defects": 20,
+  "n_defects": 21,
   "sources": {
     "deterministic": {
       "n_runs": 1,
       "defect_table": null,
       "layer_breakdown": null,
       "control_false_positives": [],
+      "known_issues": [],
       "unclassified": [],
       "precision": null,
       "recall": null,

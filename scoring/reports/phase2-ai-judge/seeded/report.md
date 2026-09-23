@@ -7,8 +7,8 @@
 | layer | detected | missed |
 |---|---|---|
 | deterministic | 4 | 6 |
-| ai | 6 | 0 |
-| both | 4 | 0 |
+| ai | 5 | 1 |
+| both | 5 | 0 |
 
 ### Per-defect
 
@@ -34,8 +34,13 @@
 | A04 | yes | yes | 20260922-final:/fr/calculator#calculator-early-repayment-note |
 | A05 | yes | yes | 20260922-final:/fr/calculator#calculator-rate-note |
 | A06 | yes | yes | 20260922-final:/fr#landing-banner-image |
+| A07 | no | n/a | - |
 
 ### False positives on controls
+
+None.
+
+### Known issues (not counted toward recall or false positives)
 
 None.
 
@@ -46,7 +51,7 @@ None.
 ### Precision / recall
 
 - precision: 1.000
-- recall: 0.700
+- recall: 0.667
 - false positive count: 0
 
 ### Cost / tokens / duration

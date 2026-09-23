@@ -1,14 +1,15 @@
 {
   "build": "clean",
-  "n_defects": 20,
+  "n_defects": 21,
   "sources": {
     "ai_judge": {
       "n_runs": 1,
       "defect_table": null,
       "layer_breakdown": null,
-      "control_false_positives": [
+      "control_false_positives": [],
+      "known_issues": [
         {
-          "control_id": "C08b",
+          "issue_id": "U02",
           "count": 1,
           "findings": [
             {
@@ -32,7 +33,7 @@
       ],
       "precision": null,
       "recall": null,
-      "false_positive_count": 2,
+      "false_positive_count": 1,
       "stability": null,
       "cost": {
         "total_cost_usd": 0.022798,

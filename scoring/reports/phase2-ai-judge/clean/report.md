@@ -4,9 +4,13 @@
 
 ### False positives on controls
 
-| control id | count |
+None.
+
+### Known issues (not counted toward recall or false positives)
+
+| known-issue id | count |
 |---|---|
-| C08b | 1 |
+| U02 | 1 |
 
 ### Unclassified findings (manual review)
 
@@ -18,7 +22,7 @@
 
 - precision: n/a
 - recall: n/a
-- false positive count: 2
+- false positive count: 1
 
 ### Cost / tokens / duration
 
