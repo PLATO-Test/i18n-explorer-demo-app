@@ -1,0 +1,22 @@
+{
+  "run": {
+    "run_id": "ai-explorer-known-issue-prefix",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 100,
+    "output_tokens": 20,
+    "cost_usd": 0.01,
+    "duration_s": 2.0
+  },
+  "findings": [
+    { "page_path": "/fr/nonexistent", "data_testid": null, "category": "missing_translation", "observed": "404 Not Found", "expected": null, "description": "u03-hit", "severity": "low", "evidence": null },
+    { "page_path": "/fr/foo/bar/", "data_testid": null, "category": "other", "observed": "404 Not Found", "expected": null, "description": "u03-hit-nested-trailing-slash", "severity": "low", "evidence": null },
+    { "page_path": "/fr/nonexistent", "data_testid": "", "category": "hardcoded_text", "observed": "Not Found", "expected": null, "description": "u03-hit-empty-testid", "severity": "low", "evidence": null },
+    { "page_path": "/fr/nonexistent", "data_testid": null, "category": "plural", "observed": "404 Not Found", "expected": null, "description": "not-u03-wrong-category", "severity": "low", "evidence": null },
+    { "page_path": "/en/nonexistent", "data_testid": null, "category": "missing_translation", "observed": "404 Not Found", "expected": null, "description": "not-u03-english-path", "severity": "low", "evidence": null },
+    { "page_path": "/fr/calculator", "data_testid": null, "category": "missing_translation", "observed": "something else", "expected": null, "description": "not-u03-mapped-page", "severity": "low", "evidence": null },
+    { "page_path": "/frost", "data_testid": null, "category": "missing_translation", "observed": "404 Not Found", "expected": null, "description": "not-u03-prefix-needs-slash", "severity": "low", "evidence": null }
+  ]
+}

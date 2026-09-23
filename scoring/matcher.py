@@ -41,13 +41,20 @@ def _match_one(finding: Finding, entries: list[Entry], text_field: str) -> Entry
 
 
 def _match_known_issue(finding: Finding, issues: list[KnownIssue]) -> KnownIssue | None:
-    if finding.data_testid is None:
-        return None
     for issue in issues:
-        if (
-            finding.page_path in issue.page_paths
+        if finding.category not in issue.categories:
+            continue
+        if issue.page_path_prefixes:
+            if (
+                finding.data_testid is None
+                and finding.page_path.startswith(issue.page_path_prefixes)
+                and finding.page_path not in issue.excluded_page_paths
+            ):
+                return issue
+        elif (
+            finding.data_testid is not None
+            and finding.page_path in issue.page_paths
             and finding.data_testid in issue.testids
-            and finding.category in issue.categories
         ):
             return issue
     return None

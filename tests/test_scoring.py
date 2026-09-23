@@ -149,3 +149,13 @@ def test_seeded_defect_wins_over_known_issue_at_same_testid(defects, controls, k
     rr = _score("seeded_known_issue_precedence.json", "seeded", defects, controls, known_issues)
     assert rr.detected == {"A06": [0]}
     assert rr.known_issue == {}
+
+
+@pytest.mark.parametrize("build", ["seeded", "clean"])
+def test_known_issue_path_prefix_matches_unmapped_fr_paths(defects, controls, known_issues, build):
+    rr = _score("known_issue_path_prefix.json", build, defects, controls, known_issues)
+    assert rr.known_issue == {"U03": [0, 1, 2]}
+    assert rr.detected == {}
+    assert rr.control_fp == {}
+    # wrong category, /en/ path, mapped fr page, and "/frost" (prefix is "/fr/") all fall through
+    assert rr.unclassified == [3, 4, 5, 6]

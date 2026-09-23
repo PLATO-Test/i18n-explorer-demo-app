@@ -10,6 +10,10 @@
 # (not a "page" name via ground_truth/pages.py), since these can apply to
 # the English page too.
 #
+# An issue with page_path_prefixes instead of page_paths/testids (U03)
+# matches testid-less findings on any path starting with one of the
+# prefixes, except the pages in ground_truth/pages.py.
+#
 # Matching precedence (scoring/matcher.py): a seeded-defect match is
 # always tried first, so on the seeded French landing page a finding on
 # landing-banner-image is credited to A06, never to U01 - see A06's
@@ -40,3 +44,13 @@
   page_paths: ["/fr/dashboard"]
   testids: [dashboard-recent-transactions-heading, dashboard-recent-transactions-count]
   categories: [terminology, other, mistranslation]
+
+- id: U03
+  description: >
+    Unknown paths under /fr/ (e.g. /fr/nonexistent) return the framework's
+    default English 404 page ("404 Not Found" / "The requested URL was not
+    found on the server..."): there is no localized error page. True of
+    both build modes. Unknown /en/ paths get the same page, which is
+    correct for English and so not part of this issue.
+  page_path_prefixes: ["/fr/"]
+  categories: [missing_translation, hardcoded_text, other]
