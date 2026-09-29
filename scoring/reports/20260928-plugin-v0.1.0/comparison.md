@@ -13,7 +13,7 @@ The source files were not modified; their SHA-256 checksums matched before and a
 Both plugin runs use the same 16 category names as the scorer, so every category mapped 1:1 and none was unknown.
 POC runs were scored one at a time with `scoring.matcher.score_run` against the same ground truth.
 
-Both products are single runs of an agent with `claude-sonnet-5` configured. The plugin has one seeded run. The POC has three.
+Both used an agent with `claude-sonnet-5` configured. The plugin has one seeded run. The POC has three.
 
 ## 1. Per-defect detection (seeded build)
 
