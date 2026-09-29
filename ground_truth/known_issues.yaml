@@ -10,9 +10,6 @@
 # (not a "page" name via ground_truth/pages.py), since these can apply to
 # the English page too.
 #
-# An issue with page_paths but no testids (U05) matches any finding on
-# those pages in one of its categories, with or without a testid.
-#
 # An issue with page_path_prefixes instead of page_paths/testids (U03)
 # matches testid-less findings on any path starting with one of the
 # prefixes, except the pages in ground_truth/pages.py.
@@ -82,13 +79,7 @@
     space thousands separator and comma decimal) is rejected with the
     range error ("Entrez un montant entre 1 000,00 $ et 50 000,00 $.")
     even when it is within range. Only "15000.50"-style input is
-    accepted. True of both build modes. Page-level: no testids, so any
-    finding on /fr/apply in one of the categories below matches,
-    whether it names the input or the error message.
-    Known over-match: this also claims unrelated findings on /fr/apply in
-    these categories. Against the 20260923-v2 inputs it reclassifies
-    three "other" findings on the consent checkbox / consent error (AI
-    judge seeded runs 2 and 3, AI judge clean run 1) from unclassified to
-    U05. Those committed reports were not regenerated.
+    accepted. True of both build modes.
   page_paths: ["/fr/apply"]
+  testids: [apply-amount-input, apply-error-amount]
   categories: [number_currency_format, untranslated_validation, other]

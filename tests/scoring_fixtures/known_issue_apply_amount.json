@@ -12,10 +12,10 @@
   },
   "findings": [
     { "page_path": "/fr/apply", "data_testid": "apply-amount-input", "category": "number_currency_format", "observed": "15 000,50", "expected": null, "description": "u05-hit-input", "severity": "high", "evidence": null },
-    { "page_path": "/fr/apply", "data_testid": null, "category": "untranslated_validation", "observed": "Entrez un montant entre 1 000,00 $ et 50 000,00 $.", "expected": null, "description": "u05-hit-no-testid", "severity": "medium", "evidence": null },
-    { "page_path": "/fr/apply", "data_testid": "apply-error-amount", "category": "other", "observed": "x", "expected": null, "description": "u05-hit-other", "severity": "low", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": "apply-error-amount", "category": "untranslated_validation", "observed": "Entrez un montant entre 1 000,00 $ et 50 000,00 $.", "expected": null, "description": "u05-hit-error", "severity": "medium", "evidence": null },
     { "page_path": "/fr/apply", "data_testid": "apply-amount-input", "category": "terminology", "observed": "x", "expected": null, "description": "not-u05-wrong-category", "severity": "low", "evidence": null },
     { "page_path": "/en/apply", "data_testid": "apply-amount-input", "category": "number_currency_format", "observed": "x", "expected": null, "description": "not-u05-wrong-page", "severity": "low", "evidence": null },
-    { "page_path": "/fr/apply", "data_testid": "apply-error-fullname", "category": "untranslated_validation", "observed": "This field is required.", "expected": null, "description": "seeded-defect-wins", "severity": "medium", "evidence": null }
+    { "page_path": "/fr/apply", "data_testid": "apply-error-consent", "category": "other", "observed": "x", "expected": null, "description": "not-u05-other-element", "severity": "low", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": null, "category": "number_currency_format", "observed": "x", "expected": null, "description": "not-u05-no-testid", "severity": "low", "evidence": null }
   ]
 }

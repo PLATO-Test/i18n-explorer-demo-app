@@ -164,12 +164,10 @@ def test_known_issue_path_prefix_matches_unmapped_fr_paths(defects, controls, kn
 @pytest.mark.parametrize("build", ["seeded", "clean"])
 def test_known_issue_u04_matches_both_locales_and_builds(defects, controls, known_issues, build):
     rr = _score("known_issue_calculator_button.json", build, defects, controls, known_issues)
-    # The wrong-page finding (index 3) is on /fr/apply with category
-    # "other", so page-level U05 claims it instead.
-    assert rr.known_issue == {"U04": [0, 1], "U05": [3]}
+    assert rr.known_issue == {"U04": [0, 1]}
     assert rr.detected == {}
     assert rr.control_fp == {}
-    assert rr.unclassified == [2]  # wrong category
+    assert rr.unclassified == [2, 3]  # wrong category, wrong page
 
 
 def test_known_issue_u03_also_claims_unmapped_200_pages(defects, controls, known_issues):
@@ -179,15 +177,10 @@ def test_known_issue_u03_also_claims_unmapped_200_pages(defects, controls, known
     assert rr.known_issue == {"U03": [0]}
 
 
-def test_known_issue_u05_page_level_match_clean(defects, controls, known_issues):
-    # No testids on U05: any finding on /fr/apply in a listed category,
-    # with or without a testid, is the known issue.
-    rr = _score("known_issue_apply_amount.json", "clean", defects, controls, known_issues)
-    assert rr.known_issue == {"U05": [0, 1, 2, 5]}
-    assert rr.unclassified == [3, 4]  # wrong category, /en/ page
-
-
-def test_known_issue_u05_seeded_defect_still_wins(defects, controls, known_issues):
-    rr = _score("known_issue_apply_amount.json", "seeded", defects, controls, known_issues)
-    assert rr.detected == {"D09": [5]}
-    assert rr.known_issue == {"U05": [0, 1, 2]}
+@pytest.mark.parametrize("build", ["seeded", "clean"])
+def test_known_issue_u05_matches_amount_field_only(defects, controls, known_issues, build):
+    rr = _score("known_issue_apply_amount.json", build, defects, controls, known_issues)
+    assert rr.known_issue == {"U05": [0, 1]}
+    assert rr.detected == {}
+    assert rr.control_fp == {}
+    assert rr.unclassified == [2, 3, 4, 5]  # wrong category, /en/ page, other element, no testid

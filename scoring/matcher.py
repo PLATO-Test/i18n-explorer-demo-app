@@ -51,10 +51,6 @@ def _match_known_issue(finding: Finding, issues: list[KnownIssue]) -> KnownIssue
                 and finding.page_path not in issue.excluded_page_paths
             ):
                 return issue
-        elif not issue.testids:
-            # Page-level issue (no single element): any finding on the page.
-            if finding.page_path in issue.page_paths:
-                return issue
         elif (
             finding.data_testid is not None
             and finding.page_path in issue.page_paths

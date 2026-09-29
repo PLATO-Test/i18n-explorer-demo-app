@@ -100,7 +100,7 @@ In the seeded run, the same plugin read the actual plural error "0 prêts actifs
 
 **Amount input (U05).** `webapp/routes/apply.py:67` parses the amount with a plain `float()` in every locale and in both builds, so the French form rejects "15 000,50".
 This is a real, pre-existing behaviour, not seeded, and is now known issue U05 in `ground_truth/known_issues.yaml`.
-U05 is page-level: any finding on `/fr/apply` in `number_currency_format`, `untranslated_validation` or `other` matches it.
+U05 matches findings on `/fr/apply` whose testid is `apply-amount-input` or `apply-error-amount`, in `number_currency_format`, `untranslated_validation` or `other`.
 Only the plugin reported this issue. No POC explorer run did, and neither did phase 1 or phase 2.
 
 Clean-build false positives:
