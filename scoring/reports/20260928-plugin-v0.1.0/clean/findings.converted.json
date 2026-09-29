@@ -1,0 +1,45 @@
+{
+  "run": {
+    "run_id": "20260928-161934-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-28T16:19:34.346039-04:00",
+    "model": "claude-sonnet-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 284.7
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-active-loans-count",
+      "category": "plural",
+      "observed": "0 prêt actif",
+      "expected": "0 prêt actifs",
+      "description": "In French, the number zero takes plural agreement (as in English), so \"0 prêt actif\" should be plural \"0 prêts actifs\" instead of singular.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=39"
+    },
+    {
+      "page_path": "/fr/nonexistent-page",
+      "data_testid": null,
+      "category": "missing_translation",
+      "observed": "Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Serve a localized 404 page under /fr/ with French text and lang=\"fr-CA\", matching the site's design.",
+      "description": "Visiting a non-existent page under the /fr/ path returns the generic Flask 404 error page entirely in English, with html lang=\"en\" and no hreflang alternates, breaking the French experience.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=65"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-amount-input",
+      "category": "number_currency_format",
+      "observed": "Entrez un montant entre 1 000,00 $ et 50 000,00 $. (shown when amount=\"15 000,50\")",
+      "expected": "Accept French-Canadian number formatting (space as thousands separator, comma as decimal separator) in the loan amount field on the French site, since that is the format shown elsewhere in the app (e.g. \"15 000,00 $\").",
+      "description": "On the French apply form, entering the loan amount using French-Canadian number formatting (\"15 000,50\", a valid amount within the stated 1 000,00 $-50 000,00 $ range) is rejected with the range-error message, while the same value typed in English format (\"15000.50\") is accepted. The form only parses English-style numbers even on the French locale, so a French user typing amounts the way the app itself displays them cannot submit the form.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=77"
+    }
+  ]
+}
