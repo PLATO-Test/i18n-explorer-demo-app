@@ -111,6 +111,23 @@ def test_element_becomes_testid_only_when_it_looks_like_one(element, expected):
     assert looks_like_testid(element) is (expected is not None)
 
 
+@pytest.mark.parametrize(
+    "element, expected",
+    [
+        ("[testid=some-widget]", "some-widget"),
+        ("img [testid=some-widget]", "some-widget"),
+        ("[testid=a] / [testid=b]", None),
+        ("a / b", None),
+        ("[testid=]", None),
+        ('button "Envoyer" [testid=some-widget]', None),
+    ],
+)
+def test_bracketed_testid_is_unwrapped_only_when_it_is_the_only_one(element, expected):
+    [out] = convert(_doc(_finding(element=element)))["findings"]
+    assert out["data_testid"] == expected
+    assert not looks_like_testid(element)
+
+
 def test_evidence_takes_first_entry_or_null():
     [a, b] = convert(
         _doc(
