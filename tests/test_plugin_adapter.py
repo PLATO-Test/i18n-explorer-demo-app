@@ -116,7 +116,12 @@ def test_element_becomes_testid_only_when_it_looks_like_one(element, expected):
     [
         ("[testid=some-widget]", "some-widget"),
         ("img [testid=some-widget]", "some-widget"),
+        ("testid=some-widget", "some-widget"),
+        ("img testid=some-widget", "some-widget"),
         ("[testid=a] / [testid=b]", None),
+        ("testid=a / testid=b", None),
+        ("[testid=some-widget", None),
+        ("testid=some-widget]", None),
         ("a / b", None),
         ("[testid=]", None),
         ('button "Envoyer" [testid=some-widget]', None),

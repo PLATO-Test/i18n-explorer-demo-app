@@ -11,11 +11,12 @@ Mapping rules, per finding:
   normalize_path.
 - data_testid: `element` when it looks like a data-testid - a non-empty
   string with no whitespace, quote characters, brackets or "=". Some runs
-  instead copy the plugin's own read_page notation, `[testid=X]`,
-  optionally after a role (`img [testid=X]`); X is taken from that when
-  it is the only testid in `element`. The plugin's other form, a role
-  plus accessible name (`button "Envoyer"`), and any element naming
-  several testids (`a / b`, `[testid=a] / [testid=b]`) become null.
+  instead copy the plugin's own read_page notation, `[testid=X]`, or
+  write it without brackets, `testid=X`, either optionally after a role
+  (`img [testid=X]`); X is taken from that when it is the only testid in
+  `element`. The plugin's other form, a role plus accessible name
+  (`button "Envoyer"`), and any element naming several testids (`a / b`,
+  `[testid=a] / [testid=b]`) become null.
 - observed: fr_text or en_text, by locale. Missing or empty is an error:
   the scorer requires a non-empty observed value.
 - expected: suggested_fix.
@@ -43,7 +44,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 SCORER_SCHEMA_PATH = ROOT / "scoring" / "findings.schema.json"
 
 _TESTID_RE = re.compile(r"""^[^\s"'‘’“”\[\]=]+$""")
-_BRACKETED_TESTID_RE = re.compile(r"""^(?:[a-z]+\s+)?\[testid=([^\s"'‘’“”\[\]=]+)\]$""")
+_BRACKETED_TESTID_RE = re.compile(r"""^(?:[a-z]+\s+)?(?:\[testid=([^\s"'‘’“”\[\]=]+)\]|testid=([^\s"'‘’“”\[\]=]+))$""")
 
 
 class UnknownCategoryError(ValueError):
@@ -69,7 +70,7 @@ def element_testid(element: str | None) -> str | None:
     if looks_like_testid(element):
         return element
     m = _BRACKETED_TESTID_RE.match(element or "")
-    return m.group(1) if m else None
+    return (m.group(1) or m.group(2)) if m else None
 
 
 def _convert_finding(f: dict) -> dict:
