@@ -1,0 +1,14 @@
+{
+  "run": {
+    "run_id": "det-no-findings",
+    "source": "deterministic",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 1.0
+  },
+  "findings": []
+}

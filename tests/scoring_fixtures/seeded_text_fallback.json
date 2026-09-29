@@ -1,0 +1,25 @@
+{
+  "run": {
+    "run_id": "judge-text-fallback",
+    "source": "ai_judge",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 1200,
+    "output_tokens": 300,
+    "cost_usd": 0.02,
+    "duration_s": 8.5
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": null,
+      "category": "missing_translation",
+      "observed": "The heading reads 'Recent transactions' instead of the expected French text.",
+      "expected": "Transactions récentes",
+      "description": "Recent transactions heading is untranslated on the French dashboard.",
+      "severity": "medium",
+      "evidence": null
+    }
+  ]
+}

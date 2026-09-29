@@ -1,0 +1,16 @@
+{
+  "run": {
+    "run_id": "ai-explorer-known-issue-overmatch",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 100,
+    "output_tokens": 20,
+    "cost_usd": 0.01,
+    "duration_s": 2.0
+  },
+  "findings": [
+    { "page_path": "/fr/application/XYZ", "data_testid": null, "category": "missing_translation", "observed": "x", "expected": null, "description": "unmapped-but-real-200-page", "severity": "low", "evidence": null }
+  ]
+}

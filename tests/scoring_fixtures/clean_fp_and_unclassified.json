@@ -1,0 +1,45 @@
+{
+  "run": {
+    "run_id": "det-clean-run",
+    "source": "deterministic",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 5.0
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-balance-amount",
+      "category": "number_currency_format",
+      "observed": "12 458,30 $",
+      "expected": null,
+      "description": "Flagged, but this is correct fr-CA Babel currency output.",
+      "severity": "low",
+      "evidence": null
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-made-up-field",
+      "category": "other",
+      "observed": "something unexpected",
+      "expected": null,
+      "description": "No corresponding ground-truth element.",
+      "severity": "low",
+      "evidence": null
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "observed": "Transactions récentes",
+      "expected": null,
+      "description": "Element correctly translated in the clean build; a hallucinated finding.",
+      "severity": "low",
+      "evidence": null
+    }
+  ]
+}

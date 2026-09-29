@@ -1,0 +1,18 @@
+{
+  "run": {
+    "run_id": "ai-judge-known-issues",
+    "source": "ai_judge",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 100,
+    "output_tokens": 20,
+    "cost_usd": 0.01,
+    "duration_s": 2.0
+  },
+  "findings": [
+    { "page_path": "/fr/", "data_testid": "landing-banner-image", "category": "other", "observed": "shows an advisor with a customer", "expected": null, "description": "u01-hit", "severity": "low", "evidence": null },
+    { "page_path": "/fr/dashboard", "data_testid": "dashboard-recent-transactions-count", "category": "terminology", "observed": "opérations vs transactions", "expected": null, "description": "u02-hit", "severity": "low", "evidence": null },
+    { "page_path": "/fr/dashboard", "data_testid": "dashboard-recent-transactions-count", "category": "plural", "observed": "x", "expected": null, "description": "not-u02-wrong-category", "severity": "low", "evidence": null }
+  ]
+}
