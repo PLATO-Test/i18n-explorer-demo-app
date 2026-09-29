@@ -11,19 +11,19 @@ None.
 | known-issue id | count |
 |---|---|
 | U03 | 1 |
+| U05 | 1 |
 
 ### Unclassified findings (manual review)
 
 | run | page | testid | observed |
 |---|---|---|---|
 | 20260928-161934-localhost-5001 | /fr/dashboard | dashboard-active-loans-count | 0 prêt actif |
-| 20260928-161934-localhost-5001 | /fr/apply | apply-amount-input | Entrez un montant entre 1 000,00 $ et 50 000,00 $. (shown when amount="15 000,50") |
 
 ### Precision / recall
 
 - precision: n/a
 - recall: n/a
-- false positive count: 2
+- false positive count: 1
 
 ### Cost / tokens / duration
 

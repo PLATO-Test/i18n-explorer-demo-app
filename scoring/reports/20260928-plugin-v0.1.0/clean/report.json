@@ -20,6 +20,19 @@
               "category": "missing_translation"
             }
           ]
+        },
+        {
+          "issue_id": "U05",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20260928-161934-localhost-5001",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-amount-input",
+              "observed": "Entrez un montant entre 1 000,00 $ et 50 000,00 $. (shown when amount=\"15 000,50\")",
+              "category": "number_currency_format"
+            }
+          ]
         }
       ],
       "unclassified": [
@@ -29,18 +42,11 @@
           "data_testid": "dashboard-active-loans-count",
           "observed": "0 prêt actif",
           "category": "plural"
-        },
-        {
-          "run_id": "20260928-161934-localhost-5001",
-          "page_path": "/fr/apply",
-          "data_testid": "apply-amount-input",
-          "observed": "Entrez un montant entre 1 000,00 $ et 50 000,00 $. (shown when amount=\"15 000,50\")",
-          "category": "number_currency_format"
         }
       ],
       "precision": null,
       "recall": null,
-      "false_positive_count": 2,
+      "false_positive_count": 1,
       "stability": null,
       "cost": {
         "total_cost_usd": null,

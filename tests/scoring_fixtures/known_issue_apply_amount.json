@@ -1,0 +1,21 @@
+{
+  "run": {
+    "run_id": "ai-explorer-known-issue-u05",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 100,
+    "output_tokens": 20,
+    "cost_usd": 0.01,
+    "duration_s": 2.0
+  },
+  "findings": [
+    { "page_path": "/fr/apply", "data_testid": "apply-amount-input", "category": "number_currency_format", "observed": "15 000,50", "expected": null, "description": "u05-hit-input", "severity": "high", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": null, "category": "untranslated_validation", "observed": "Entrez un montant entre 1 000,00 $ et 50 000,00 $.", "expected": null, "description": "u05-hit-no-testid", "severity": "medium", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": "apply-error-amount", "category": "other", "observed": "x", "expected": null, "description": "u05-hit-other", "severity": "low", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": "apply-amount-input", "category": "terminology", "observed": "x", "expected": null, "description": "not-u05-wrong-category", "severity": "low", "evidence": null },
+    { "page_path": "/en/apply", "data_testid": "apply-amount-input", "category": "number_currency_format", "observed": "x", "expected": null, "description": "not-u05-wrong-page", "severity": "low", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": "apply-error-fullname", "category": "untranslated_validation", "observed": "This field is required.", "expected": null, "description": "seeded-defect-wins", "severity": "medium", "evidence": null }
+  ]
+}

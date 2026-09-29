@@ -92,20 +92,21 @@ Clean build: 3 findings.
 |---|---|---|---|---|---|---|
 | known issue (U03) | /fr/nonexistent-page | - | missing_translation | Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again. | Serve a localized 404 page under /fr/ with French text and lang="fr-CA", matching the site's design. | known issue U03 |
 | unclassified | /fr/dashboard | dashboard-active-loans-count | plural | 0 prêt actif | 0 prêt actifs | false positive |
-| unclassified | /fr/apply | apply-amount-input | number_currency_format | Entrez un montant entre 1 000,00 $ et 50 000,00 $. (shown when amount="15 000,50") | Accept French-Canadian number formatting (space as thousands separator, comma as decimal separator) in the loan amount field on the French site… | unclassified: a real behaviour, not in ground truth |
+| known issue (U05) | /fr/apply | apply-amount-input | number_currency_format | Entrez un montant entre 1 000,00 $ et 50 000,00 $. (shown when amount="15 000,50") | Accept French-Canadian number formatting (space as thousands separator, comma as decimal separator) in the loan amount field on the French site… | known issue U05 |
 
 **Plural finding (false positive).** In French, zero takes the singular. Babel gives `Locale.parse('fr_CA').plural_form(0) == 'one'`, so "0 prêt actif" is correct.
 The plugin's own `expected` value ("0 prêt actifs") contradicts its description ("0 prêts actifs").
 In the seeded run, the same plugin read the actual plural error "0 prêts actifs" at seq 43 and did not report it (D10 above).
 
-**Amount input.** `webapp/routes/apply.py:67` parses the amount with a plain `float()` in every locale and in both builds, so the French form rejects "15 000,50".
-This is a real, pre-existing behaviour, and it is not seeded.
-It matches none of U01–U04, so it stays unclassified until someone decides whether it should become a known issue.
+**Amount input (U05).** `webapp/routes/apply.py:67` parses the amount with a plain `float()` in every locale and in both builds, so the French form rejects "15 000,50".
+This is a real, pre-existing behaviour, not seeded, and is now known issue U05 in `ground_truth/known_issues.yaml`.
+U05 is page-level: any finding on `/fr/apply` in `number_currency_format`, `untranslated_validation` or `other` matches it.
+Only the plugin reported this issue. No POC explorer run did, and neither did phase 1 or phase 2.
 
 Clean-build false positives:
 
-- **Scorer convention** (every clean finding that is not a known issue): plugin 2, POC run 1 0 (its 2 findings were U03 and U04).
-- **By manual review:** plugin 1 false positive plus 1 genuine unseeded issue.
+- **Scorer convention** (every clean finding that is not a known issue): plugin 1 (the plural finding), POC run 1 0 (its 2 findings were U03 and U04).
+- **By manual review:** the same; the plural finding is a false positive.
 - There is only one clean run of each, so neither FP rate is based on repeats.
 
 ## 4. Per-run activity
