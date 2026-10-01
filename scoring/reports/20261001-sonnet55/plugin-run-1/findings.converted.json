@@ -1,0 +1,175 @@
+{
+  "run": {
+    "run_id": "20261001-125644-localhost-5002",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-01T12:56:44.509178-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 75.7
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "missing_translation",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "Footer is in English on the French page.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "Uses tu while the rest of the site uses vous.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-cta-apply",
+      "category": "terminology",
+      "observed": "Appliquer pour un prêt",
+      "expected": "Demander un prêt",
+      "description": "Anglicism \"appliquer pour\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "Full name error is in English; the others are French.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=9"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande pour 12 500,00 $ a été reçue.",
+      "description": "Unsubstituted placeholder {montant} shown.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=24"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "Amount uses English format on the French page.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "Says the opposite of the English and contradicts the help text about deferring payment.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "\"Close\" translated as the adjective \"near\".",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "mistranslation",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais pour un remboursement anticipé.",
+      "description": "\"charges\" rendered as \"accusation\" (legal accusation).",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve de l'approbation du crédit.",
+      "description": "The credit approval condition is dropped.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-banner-image",
+      "category": "image_text",
+      "observed": "/static/img/banner-en.png",
+      "expected": "Use a French banner image.",
+      "description": "Banner image shows English text \"Financing that fits your plans\" on the French page.",
+      "severity": "medium",
+      "evidence": "screenshots/042.png"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "Heading left in English.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=45"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "observed": "/en/calculator",
+      "expected": "/fr/calculator",
+      "description": "Link \"Estimer un nouveau prêt\" leads to the English calculator.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=45"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15 (or 15 septembre 2026)",
+      "description": "Transaction dates use US MM/DD/YYYY; the due date uses ISO 2026-10-01, inconsistent with each other and with fr-CA.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=45"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-active-loans-count",
+      "category": "plural",
+      "observed": "0 prêts actifs",
+      "expected": "0 prêt actif",
+      "description": "In French, zero takes the singular.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=45"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-balance-label",
+      "category": "terminology",
+      "observed": "Balance du compte",
+      "expected": "Solde du compte",
+      "description": "Anglicism \"balance\"; also \"Déclaration mensuelle\" should be \"Relevé mensuel\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=45"
+    }
+  ]
+}

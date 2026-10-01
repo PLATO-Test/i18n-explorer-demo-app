@@ -1,0 +1,195 @@
+{
+  "run": {
+    "run_id": "20261001-125955-localhost-5002",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-01T12:59:55.152037-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 81.0
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "Uses tu while the rest of the site uses vous.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-cta-apply",
+      "category": "terminology",
+      "observed": "Appliquer pour un prêt",
+      "expected": "Demander un prêt",
+      "description": "Anglicism \"appliquer pour\"; Quebec French uses \"faire une demande de prêt\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "missing_translation",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "Footer left in English on French page.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-banner-image",
+      "category": "image_text",
+      "observed": "/static/img/banner-en.png",
+      "expected": "Use a French banner image (banner-fr.png) if it contains text",
+      "description": "French page uses the English-named banner image, which may contain English text.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "Empty full name error shown in English on the French form.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=19"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande pour 12 000,00 $ a été reçue.",
+      "description": "Placeholder {montant} shown unsubstituted in confirmation message.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=27"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-balance-label",
+      "category": "terminology",
+      "observed": "Balance du compte",
+      "expected": "Solde du compte",
+      "description": "\"Balance\" is an anglicism for a bank account balance; use \"Solde\".",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=32"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-active-loans-count",
+      "category": "plural",
+      "observed": "0 prêts actifs",
+      "expected": "0 prêt actif",
+      "description": "In French, zero takes the singular.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=32"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "Heading left in English.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=32"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15 or 15 septembre 2026",
+      "description": "Transaction dates use US MM/DD/YYYY; fr-CA uses YYYY-MM-DD or day-first. Due date is ISO, so formats are inconsistent too.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=32"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "observed": "/en/calculator",
+      "expected": "/fr/calculator",
+      "description": "\"Estimer un nouveau prêt\" link on French page points to the English calculator.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=32"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-statement-link",
+      "category": "mistranslation",
+      "observed": "Déclaration mensuelle",
+      "expected": "Relevé mensuel",
+      "description": "\"Statement\" is a bank statement (relevé), not a declaration.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=32"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "Opposite meaning; also contradicts the help text about a deferred first payment.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve de l'approbation du crédit.",
+      "description": "French drops the \"subject to credit approval\" condition.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "terminology",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais pour un remboursement anticipé.",
+      "description": "\"Accusation\" (legal accusation) is a false-friend mistranslation of \"charges\" (fees).",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "Payment amount uses English format on French page.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "\"Close\" translated as the adjective \"near\".",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=51"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-promo-image",
+      "category": "image_text",
+      "observed": "promo-c.png shows \"Taux fixe : 4,9 %\"; alt \"Taux variable : 5,2 %\"",
+      "expected": "Use a French promo image showing \"Taux variable : 5,2 %\"",
+      "description": "French promo image states a fixed rate of 4.9%, contradicting the alt text and the page's variable rate of 5.2%.",
+      "severity": "high",
+      "evidence": "screenshots/056.png"
+    }
+  ]
+}
