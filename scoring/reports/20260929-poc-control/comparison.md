@@ -12,7 +12,7 @@ Inputs (all status `completed`, checked in each `manifest.json`):
 | control A | 1–3 together | same three files | `A-stability/` |
 | control B | 1, 2, 3 | `../i18n-qa/artifacts/20260929-control-B/seeded/findings-ai-explorer-{1,2,3}.json` | `B-run-1/`, `B-run-2/`, `B-run-3/` |
 | control B | 1–3 together | same three files | `B-stability/` |
-| POC 23 Sep | 1, 2, 4 | `../i18n-qa/artifacts/20260923-v2/seeded/findings-ai-explorer-{1,2,4}.json` | scored with `scoring.report.build_report`, as in `../20260929-plugin-v0.1.0-isolated/comparison.md` |
+| POC 23 Sep | 1, 2, 4 | `../i18n-qa/artifacts/20260923-v2/seeded/findings-ai-explorer-{1,2,4}.json` | scored in memory with `scoring.report.build_report`; the result matches the POC columns of `../20260929-plugin-v0.1.0-isolated/comparison.md` |
 | plugin default | 1, 2, 3 | | `../20260928-plugin-v0.1.0/seeded/`, `seeded-run-2/`, `seeded-run-3/` |
 | plugin isolated | 1, 2, 3 | | `../20260929-plugin-v0.1.0-isolated/run-1/`, `run-2/`, `run-3/` |
 
@@ -50,7 +50,7 @@ Inputs (all status `completed`, checked in each `manifest.json`):
 
 "POC" is the 23 Sep runs, "A" and "B" are the control runs, "def" is plugin default and "iso" is plugin isolated.
 
-The D04, D07 and A06 hits that are new to the POC explorer were checked against the findings:
+The D04 and D07 hits that are new to the POC explorer were checked against the findings:
 - **D04 (A1, B1):** each finding is on `apply-submit-button` and quotes `scrollWidth 290` / `clientWidth 210`.
 - **D07 (B2):** the finding reports `html lang="en"` on `/fr/application/AP-100482`, expected `fr-CA`.
 
@@ -145,23 +145,23 @@ The correct French text is "0 prêt actif" (CLDR/Babel: `Locale.parse('fr_CA').p
 
 ## 3. Behaviour per run
 
-| group | run | model turns | tool calls | tool calls per turn | thinking tokens | output tokens | duration, harness session (s) | duration, first tool call → `finish` (s) |
-|---|---|---|---|---|---|---|---|---|
-| POC 23 Sep | 1 | 22 | 79 | 3.76 | 1,344 | 10,275 | 106.4 | 101.8 |
-| POC 23 Sep | 2 | 18 | 74 | 4.11 | 801 | 8,629 | 90.5 | 86.8 |
-| POC 23 Sep | 4 | 20 | 76 | 4.00 | 984 | 9,671 | 126.0 | 101.6 |
-| control A | 1 | 66 | 98 | 1.51 | 7,363 | 19,153 | 230.9 | 217.6 |
-| control A | 2 | 66 | 90 | 1.38 | 5,659 | 16,101 | 187.9 | 184.7 |
-| control A | 3 | 46 | 103 | 2.24 | 5,219 | 16,092 | 237.0 | 226.7 |
-| control B | 1 | 46 | 94 | 2.09 | 6,432 | 17,725 | 228.3 | 223.6 |
-| control B | 2 | 61 | 108 | 1.80 | 3,672 | 15,968 | 181.9 | 178.6 |
-| control B | 3 | 57 | 101 | 1.77 | 5,289 | 15,669 | 213.5 | 210.1 |
-| plugin default | 1 | 64 | 86 | 1.38 | 4,051 | 17,542 | – | 209.4 (`start_run` → `finish`) |
-| plugin default | 2 | 44 | 84 | 1.98 | 4,294 | 17,757 | – | 244.0 |
-| plugin default | 3 | 76 | 99 | 1.33 | 5,871 | 21,683 | – | 274.7 |
-| plugin isolated | 1 | 54 | 97 | 1.85 | 6,001 | 21,616 | – | 223.8 |
-| plugin isolated | 2 | 79 | 109 | 1.41 | 6,447 | 23,784 | – | 259.2 |
-| plugin isolated | 3 | 41 | 94 | 2.38 | 4,364 | 19,147 | – | 246.6 |
+| group | run | model turns | budget turns | tool calls | tool calls per turn | thinking tokens | output tokens | duration, harness session (s) | duration, first tool call → `finish` (s) |
+|---|---|---|---|---|---|---|---|---|---|
+| POC 23 Sep | 1 | 22 | 21 | 79 | 3.76 | 1,344 | 10,275 | 106.4 | 101.8 |
+| POC 23 Sep | 2 | 18 | 18 | 74 | 4.11 | 801 | 8,629 | 90.5 | 86.8 |
+| POC 23 Sep | 4 | 20 | 19 | 76 | 4.00 | 984 | 9,671 | 126.0 | 101.6 |
+| control A | 1 | 66 | 65 | 98 | 1.51 | 7,363 | 19,153 | 230.9 | 217.6 |
+| control A | 2 | 66 | 65 | 90 | 1.38 | 5,659 | 16,101 | 187.9 | 184.7 |
+| control A | 3 | 46 | 46 | 103 | 2.24 | 5,219 | 16,092 | 237.0 | 226.7 |
+| control B | 1 | 46 | 45 | 94 | 2.09 | 6,432 | 17,725 | 228.3 | 223.6 |
+| control B | 2 | 61 | 60 | 108 | 1.80 | 3,672 | 15,968 | 181.9 | 178.6 |
+| control B | 3 | 57 | 57 | 101 | 1.77 | 5,289 | 15,669 | 213.5 | 210.1 |
+| plugin default | 1 | 64 | – | 86 | 1.38 | 4,051 | 17,542 | – | 209.4 (`start_run` → `finish`) |
+| plugin default | 2 | 44 | – | 84 | 1.98 | 4,294 | 17,757 | – | 244.0 |
+| plugin default | 3 | 76 | – | 99 | 1.33 | 5,871 | 21,683 | – | 274.7 |
+| plugin isolated | 1 | 54 | – | 97 | 1.85 | 6,001 | 21,616 | – | 223.8 |
+| plugin isolated | 2 | 79 | – | 109 | 1.41 | 6,447 | 23,784 | – | 259.2 |
+| plugin isolated | 3 | 41 | – | 94 | 2.38 | 4,364 | 19,147 | – | 246.6 |
 
 | group | model turns | tool calls per turn | thinking tokens | output tokens |
 |---|---|---|---|---|
@@ -172,7 +172,8 @@ The correct French text is "0 prêt actif" (CLDR/Babel: `Locale.parse('fr_CA').p
 | plugin isolated | 41–79 | 1.41–2.38 | 4,364–6,447 | 19,147–23,784 |
 
 Definitions (the same as `project/05.4-runtime-diff.md` § 3 and § Experiment A, whose plugin and 23 Sep figures are reused here):
-- **Model turns:** API calls. For the POC, CLI `status: requesting` events in `transcript.jsonl`; for the plugin, distinct `message.id`.
+- **Model turns:** API calls.
+- **Budget turns:** the manifest's `budget_used.turns`, the explorer's own count (one per streamed `message_start`). The plugin has no such counter. For the POC, CLI `status: requesting` events in `transcript.jsonl`; for the plugin, distinct `message.id`.
 - **Tool calls:** the budget counter (`budget_used.tool_calls`; plugin: the trajectory's budget count, without `start_run`).
 - **Tool calls per turn:** copied from 05.4's convention so the 23 Sep and plugin figures are unchanged:
   - for the POC (23 Sep and control), tool calls ÷ the manifest's `budget_used.turns`, which is one less than the API calls in most runs;
