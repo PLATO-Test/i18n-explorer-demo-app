@@ -93,6 +93,12 @@
     not a translation error, present in both build modes. The modal body
     paragraph has no testid of its own, so this matches on the modal
     container (calculator-modal).
+    Known over-match: known issues can't match on observed text, so any
+    finding on calculator-modal in one of these categories is credited to
+    U06, whatever it is about - e.g. one on the modal title, or on the
+    close button reported against the container instead of
+    calculator-modal-close. None of the scored runs has such a finding.
+    Kept as is.
   page_paths: ["/en/calculator", "/fr/calculator"]
   testids: [calculator-modal]
   categories: [mistranslation, terminology, other]
