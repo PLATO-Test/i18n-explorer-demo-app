@@ -1,0 +1,297 @@
+{
+  "build": "seeded",
+  "n_defects": 21,
+  "sources": {
+    "ai_explorer": {
+      "n_runs": 1,
+      "defect_table": [
+        {
+          "id": "D01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-heading",
+              "observed": "Recent transactions",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": "summary-confirmation-message",
+              "observed": "Merci. Votre demande pour {montant} a été reçue.",
+              "category": "placeholder"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": false
+        },
+        {
+          "id": "D04",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$450.91",
+              "category": "number_currency_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-0",
+              "observed": "09/15/2026",
+              "category": "date_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D07",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D08",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-estimate-loan-link",
+              "observed": "Link \"Estimer un nouveau prêt\" points to /en/calculator",
+              "category": "locale_navigation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D09",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D10",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "G01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-email-label",
+              "observed": "Label: \"Adresse e-mail\" but validation message: \"Entrez une adresse courriel valide.\"",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-balance-label",
+              "observed": "Balance du compte",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G03",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "G04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-paylater-label",
+              "observed": "Payer maintenant",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-modal-close",
+              "observed": "Proche",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A03",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-early-repayment-note",
+              "observed": "Aucune accusation pour un remboursement anticipé.",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": false
+        },
+        {
+          "id": "A05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-rate-note",
+              "observed": "Taux variable de 5,2 %.",
+              "category": "omission"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A06",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "A07",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20260929-control-B",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-promo-image",
+              "observed": "Image text reads \"Taux fixe : 4,9 %\" (src=/static/img/promo-c.png), while its alt text says \"Taux variable : 5,2 %\"",
+              "category": "image_text"
+            }
+          ],
+          "category_correct": true
+        }
+      ],
+      "layer_breakdown": {
+        "deterministic": {
+          "detected": 7,
+          "missed": 3
+        },
+        "ai": {
+          "detected": 5,
+          "missed": 1
+        },
+        "both": {
+          "detected": 3,
+          "missed": 2
+        }
+      },
+      "control_false_positives": [],
+      "known_issues": [],
+      "unclassified": [],
+      "precision": 1.0,
+      "recall": 0.7142857142857143,
+      "false_positive_count": 0,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": 0.6145776000000002,
+        "total_input_tokens": 1433043,
+        "total_output_tokens": 15683,
+        "mean_duration_s": 213.531,
+        "models": [
+          "claude-sonnet-5"
+        ]
+      },
+      "runs": [
+        {
+          "run_id": "20260929-control-B",
+          "model": "claude-sonnet-5",
+          "input_tokens": 1433043,
+          "output_tokens": 15683,
+          "cost_usd": 0.6145776000000002,
+          "duration_s": 213.531
+        }
+      ]
+    }
+  }
+}
