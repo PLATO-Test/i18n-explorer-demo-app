@@ -184,3 +184,12 @@ def test_known_issue_u05_matches_amount_field_only(defects, controls, known_issu
     assert rr.detected == {}
     assert rr.control_fp == {}
     assert rr.unclassified == [2, 3, 4, 5]  # wrong category, /en/ page, other element, no testid
+
+
+@pytest.mark.parametrize("build", ["seeded", "clean"])
+def test_known_issue_u06_matches_calculator_modal_both_locales(defects, controls, known_issues, build):
+    rr = _score("known_issue_calculator_modal.json", build, defects, controls, known_issues)
+    assert rr.known_issue == {"U06": [0, 1, 2]}
+    assert rr.detected == {}
+    assert rr.control_fp == {}
+    assert rr.unclassified == [3, 4]  # wrong category, wrong page

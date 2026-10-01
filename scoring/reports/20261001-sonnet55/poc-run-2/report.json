@@ -312,20 +312,25 @@
               "category": "missing_translation"
             }
           ]
-        }
-      ],
-      "unclassified": [
+        },
         {
-          "run_id": "20261001-sonnet55",
-          "page_path": "/fr/calculator",
-          "data_testid": "calculator-modal",
-          "observed": "notre taux variable fixe",
-          "category": "mistranslation"
+          "issue_id": "U06",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261001-sonnet55",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-modal",
+              "observed": "notre taux variable fixe",
+              "category": "mistranslation"
+            }
+          ]
         }
       ],
-      "precision": 0.95,
+      "unclassified": [],
+      "precision": 1.0,
       "recall": 0.9047619047619048,
-      "false_positive_count": 1,
+      "false_positive_count": 0,
       "stability": null,
       "cost": {
         "total_cost_usd": 0.5451455999999999,

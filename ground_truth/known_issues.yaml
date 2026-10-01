@@ -83,3 +83,16 @@
   page_paths: ["/fr/apply"]
   testids: [apply-amount-input, apply-error-amount]
   categories: [number_currency_format, untranslated_validation, other]
+
+- id: U06
+  description: >
+    The calculator's "how is this calculated" modal body
+    (calculator.modal_body) contradicts itself in both locales: the
+    English source says "our fixed variable rate" and fr.json faithfully
+    translates it as "notre taux variable fixe". A source-copy problem,
+    not a translation error, present in both build modes. The modal body
+    paragraph has no testid of its own, so this matches on the modal
+    container (calculator-modal).
+  page_paths: ["/en/calculator", "/fr/calculator"]
+  testids: [calculator-modal]
+  categories: [mistranslation, terminology, other]

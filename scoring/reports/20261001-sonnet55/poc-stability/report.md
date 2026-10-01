@@ -74,18 +74,17 @@
 |---|---|
 | U03 | 3 |
 | U04 | 1 |
+| U06 | 1 |
 
 ### Unclassified findings (manual review)
 
-| run | page | testid | observed |
-|---|---|---|---|
-| 20261001-sonnet55 | /fr/calculator | calculator-modal | notre taux variable fixe |
+None.
 
 ### Precision / recall
 
-- precision: 0.967
+- precision: 0.983
 - recall: 0.905
-- false positive count: 2
+- false positive count: 1
 
 ### Cost / tokens / duration
 

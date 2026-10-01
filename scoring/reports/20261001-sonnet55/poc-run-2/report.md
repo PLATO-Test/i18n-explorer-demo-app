@@ -45,18 +45,17 @@ None.
 | known-issue id | count |
 |---|---|
 | U03 | 1 |
+| U06 | 1 |
 
 ### Unclassified findings (manual review)
 
-| run | page | testid | observed |
-|---|---|---|---|
-| 20261001-sonnet55 | /fr/calculator | calculator-modal | notre taux variable fixe |
+None.
 
 ### Precision / recall
 
-- precision: 0.950
+- precision: 1.000
 - recall: 0.905
-- false positive count: 1
+- false positive count: 0
 
 ### Cost / tokens / duration
 

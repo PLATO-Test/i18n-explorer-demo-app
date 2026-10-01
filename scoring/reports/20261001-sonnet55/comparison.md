@@ -138,14 +138,14 @@ All six runs state the rule and give the correct singular form.
 | run | findings | matched a defect | control false positive | unclassified | known issue | precision |
 |---|---|---|---|---|---|---|
 | P55 1 | 22 | 19 | 1 (C01) | 0 | 2 (U03, U04) | 0.950 |
-| P55 2 | 21 | 19 | 0 | 1 | 1 (U03) | 0.950 |
+| P55 2 | 21 | 19 | 0 | 0 | 2 (U03, U06) | 1.000 |
 | P55 3 | 20 | 19 | 0 | 0 | 1 (U03) | 1.000 |
 | G55 1 | 16 | 16 | 0 | 0 | 0 | 1.000 |
 | G55 2 | 17 | 17 | 0 | 0 | 0 | 1.000 |
 | G55 3 | 18 | 18 | 0 | 0 | 0 | 1.000 |
 
 - Precision is matched ÷ (findings − known-issue findings).
-- The scorer's `false_positive_count` adds control false positives and unclassified findings together, so it is 1 in both P55 1 and P55 2.
+- The scorer's `false_positive_count` adds control false positives and unclassified findings together, so it is 1 in P55 1 and 0 in P55 2.
 - Every matched finding hit a different defect. No run has two findings on one defect.
 - For comparison, all nine earlier runs in this file (POC 23 Sep, control A, plugin default) have precision 1.000. Their only non-defect findings are U03 hits, one in each 23 Sep run.
 
@@ -154,16 +154,16 @@ The findings that match no defect, as written in the findings files:
 | run | matched | page | testid | category / severity | observed | expected | description |
 |---|---|---|---|---|---|---|---|
 | P55 1 | control C01 (false positive) | `/fr/calculator` | `calculator-apply-now` | terminology / low | Faites votre demande dès maintenant | Faites une demande dès maintenant | Minor: awkward; low priority. (Acceptable but longer than the English "Apply now".) |
-| P55 2 | none (unclassified) | `/fr/calculator` | `calculator-modal` | mistranslation / low | notre taux variable fixe | notre taux variable fixe — reformulate e.g. "notre taux variable en vigueur" | Literal translation "taux variable fixe" is self-contradictory in French (variable fixed rate). |
 | P55 1 | known issue U04 | `/fr/calculator` | `calculator-recalculate-button` | other / low | Calculateur de prêt | Calculer / Recalculer | The action button reuses the page title as its label instead of an action verb (same flaw in English, "Loan calculator"). |
+| P55 2 | known issue U06 | `/fr/calculator` | `calculator-modal` | mistranslation / low | notre taux variable fixe | notre taux variable fixe — reformulate e.g. "notre taux variable en vigueur" | Literal translation "taux variable fixe" is self-contradictory in French (variable fixed rate). |
 | P55 1 | known issue U03 | `/fr/nonexistent` | – | missing_translation / low | Not Found / The requested URL was not found on the server. … | Page introuvable (French error page with link back to /fr/) | The 404 page under /fr/ is the default English server page, with no French text or navigation. |
 | P55 2 | known issue U03 | `/fr/nonexistent` | – | missing_translation / low | Not Found — The requested URL was not found on the server. … | Page introuvable — French 404 page | The 404 page under /fr/ is generic English with no French content or navigation. |
 | P55 3 | known issue U03 | `/fr/nonexistent` | – | missing_translation / low | 404 Not Found / "The requested URL was not found on the server. …" | French 404 page within site layout | The 404 page under /fr/ is a generic English server error page. |
 
-The unclassified P55 2 finding:
+The P55 2 finding credited to U06:
 - The text it quotes is in `translations/fr.json` (`calculator.modal_body`: "… notre taux variable fixe …"). The English source in `translations/en.json` reads "our fixed variable rate".
 - `modal_body` has no entry in `translations/seeded/fr.overrides.json`, so the wording is the same in the clean and seeded builds.
-- It is not in `defects.yaml`, `controls.yaml` or `known_issues.yaml`.
+- The English source and the French both contradict themselves, so it is a source-copy problem, not a translation error. It was unclassified when first scored and is now known issue U06 in `known_issues.yaml`, which matches on `calculator-modal` (the modal body paragraph has no testid).
 
 ## 4. Behaviour per run
 
@@ -231,7 +231,7 @@ For the POC, the S5.5 runs and control B share SDK 0.2.158, CLI 2.1.280 and the 
   - **Code:** S5.5 and control B differ only in the model constant.
   - **Behaviour:** model turns 21–23 vs 46–66, tool calls per turn 3.48–3.75 vs 1.38–2.24, thinking tokens 872–1,047 vs 3,672–7,363, output tokens 9,432–10,001 vs 15,669–19,153. A and B are taken together in each comparison, and none of the ranges overlap.
   - **Against 23 Sep:** recall 19 vs 18–19, and the same 19 defects as 23 Sep run 1. Model turns, thinking tokens and output tokens overlap the 23 Sep ranges. Tool calls per turn (3.48–3.75) sits just below 23 Sep's 3.76–4.11.
-  - **Precision:** 0.950, 0.950, 1.000 vs 1.000 in every control A run. There was one control false positive (C01) and one unclassified finding.
+  - **Precision:** 0.950, 1.000, 1.000 vs 1.000 in every control A run. The one non-1.000 run has one control false positive (C01).
 - **Plugin:**
   - **Recall:** S5.5 16–18 (mean 17.0) vs default 15–17 (mean 15.7). The ranges overlap at 16–17.
   - **Per defect:** D10 3/3 vs 0/3, G03 3/3 vs 1/3, G01 1/3 vs 0/3, A03 1/3 vs 2/3, A07 1/3 vs 2/3.
@@ -244,7 +244,7 @@ For the POC, the S5.5 runs and control B share SDK 0.2.158, CLI 2.1.280 and the 
 - **Per defect:** the POC found every defect the plugin found. G01, A03 and A07 were found in 3/3 POC runs and 1/3 plugin runs. All other defects are equal.
   - Both found D10 and G03 in 3/3 runs, and both missed D04 and D07 in 3/3.
   - Each plugin miss of A03 had the text in a `read_page` result.
-- **Precision:** the POC scored 0.950, 0.950 and 1.000, the plugin 1.000 in all three runs.
+- **Precision:** the POC scored 0.950, 1.000 and 1.000, the plugin 1.000 in all three runs.
 - **Behaviour:**
   - Thinking tokens (POC 872–1,047 vs plugin 462–494) do not overlap. Neither do model turns (21–23 vs 16–17).
   - Tool calls per turn (3.48–3.75 vs 3.25–3.73) and output tokens (9,432–10,001 vs 8,844–10,659) overlap.

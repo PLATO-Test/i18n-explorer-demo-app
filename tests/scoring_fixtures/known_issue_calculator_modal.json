@@ -1,0 +1,20 @@
+{
+  "run": {
+    "run_id": "ai-explorer-known-issue-u06",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-09-16T10:00:00Z",
+    "model": "claude-sonnet-5",
+    "input_tokens": 100,
+    "output_tokens": 20,
+    "cost_usd": 0.01,
+    "duration_s": 2.0
+  },
+  "findings": [
+    { "page_path": "/fr/calculator", "data_testid": "calculator-modal", "category": "mistranslation", "observed": "notre taux variable fixe", "expected": null, "description": "u06-hit-fr", "severity": "low", "evidence": null },
+    { "page_path": "/en/calculator", "data_testid": "calculator-modal", "category": "other", "observed": "our fixed variable rate", "expected": null, "description": "u06-hit-en", "severity": "low", "evidence": null },
+    { "page_path": "/fr/calculator", "data_testid": "calculator-modal", "category": "terminology", "observed": "taux variable fixe", "expected": null, "description": "u06-hit-terminology", "severity": "low", "evidence": null },
+    { "page_path": "/fr/calculator", "data_testid": "calculator-modal", "category": "plural", "observed": "x", "expected": null, "description": "not-u06-wrong-category", "severity": "low", "evidence": null },
+    { "page_path": "/fr/apply", "data_testid": "calculator-modal", "category": "other", "observed": "x", "expected": null, "description": "not-u06-wrong-page", "severity": "low", "evidence": null }
+  ]
+}
