@@ -1,0 +1,35 @@
+{
+  "run": {
+    "run_id": "20261001-163741-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-01T16:37:41.734762-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 89.2
+  },
+  "findings": [
+    {
+      "page_path": "/fr/page-inexistante",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Provide a localized 404 page (e.g. \"Page introuvable\") with the site header and a link back to the home page.",
+      "description": "Under /fr/, the 404 page is the default English server error page with no French text, no site chrome and a title \"404 Not Found\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=64"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-count",
+      "category": "terminology",
+      "observed": "3 opérations récentes",
+      "expected": "3 transactions récentes",
+      "description": "The same concept is called \"transactions\" in the section heading (\"Transactions récentes\") but \"opérations\" in the counter, giving inconsistent terminology.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=42"
+    }
+  ]
+}
