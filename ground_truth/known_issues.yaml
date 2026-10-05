@@ -58,6 +58,15 @@
     found on the server..."): there is no localized error page. True of
     both build modes. Unknown /en/ paths get the same page, which is
     correct for English and so not part of this issue.
+    Known over-match: /fr/application/<id> renders the French summary
+    page for any id, and in the seeded build that page's html lang is
+    "en" whatever the id. Only the demo id's path is in the page map, so
+    a testid-less lang_attribute finding on /fr/application/<another id>
+    is credited to U03 although it reports a real lang problem (D07
+    covers only the demo id's page). In the clean build, where that
+    page's html lang is "fr-CA", the same finding is also credited to
+    U03 instead of being unclassified. None of the scored runs has such
+    a finding. Kept as is.
   page_path_prefixes: ["/fr/"]
   categories: [missing_translation, hardcoded_text, lang_attribute, other]
 
