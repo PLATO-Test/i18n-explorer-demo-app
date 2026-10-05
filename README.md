@@ -11,7 +11,7 @@ it must not be shared with, or read by, any test suite exercising it.
 
 ## Stack
 
-- Python 3.12, Flask, Jinja2 templates
+- Python 3.14, Flask, Jinja2 templates
 - Babel for locale-aware currency, date, and percentage formatting, and
   CLDR plural rules
 - A minimal custom i18next-style translation helper (`webapp/i18n.py`)
@@ -24,7 +24,7 @@ it must not be shared with, or read by, any test suite exercising it.
   Windows — it runs inside **WSL2 Ubuntu** and is invoked from Windows
   through `wsl.exe`.
 - Python tooling on Windows is [`uv`](https://docs.astral.sh/uv/) with
-  Python 3.12.
+  Python 3.14.
 - WSL2 distro `Ubuntu` has Docker Engine + the Compose plugin installed
   (not Docker Desktop).
 

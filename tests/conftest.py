@@ -17,8 +17,6 @@ import requests
 
 from webapp.app import create_app
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 class _HttpResponse:
     def __init__(self, r: requests.Response):

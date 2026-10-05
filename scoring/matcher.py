@@ -2,8 +2,8 @@
 build. See CLAUDE.md / the scorer README section for the matching rules
 this implements."""
 from collections import defaultdict
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 from scoring.findings import Finding, Run
 from scoring.ground_truth import Entry, KnownIssue, controls_holding_in

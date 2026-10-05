@@ -31,8 +31,8 @@ mistakes, not like obvious test fixtures.
   current Windows directory to its `/mnt/<drive>/...` equivalent.
 - If Git Bash mangles path arguments to `wsl.exe`, prefix with
   `MSYS_NO_PATHCONV=1` or use relative paths only.
-- Python tooling is `uv` with Python 3.12 (`requires-python =
-  ">=3.12,<3.13"`). Use `uv sync`, `uv run pytest`, `uv run flask ...` —
+- Python tooling is `uv` with Python 3.14 (`requires-python =
+  ">=3.14,<3.15"`). Use `uv sync`, `uv run pytest`, `uv run flask ...` —
   never a bare `pip`/`python` outside `uv run`.
 - Ports 5001 (clean build) and 5002 (seeded build) are published by
   Docker inside WSL2 and must be reachable from Windows at

@@ -26,7 +26,7 @@ PAGE_PATH = {
 
 
 def _tag(html: str, testid: str) -> str:
-    m = re.search(r'<[^>]*data-testid="%s"[^>]*>' % re.escape(testid), html)
+    m = re.search(rf'<[^>]*data-testid="{re.escape(testid)}"[^>]*>', html)
     assert m, f"data-testid={testid!r} not found in page"
     return m.group(0)
 
@@ -40,7 +40,7 @@ def _text(html: str, testid: str) -> str:
 
 def _attr(html: str, testid: str, attr: str) -> str:
     tag = _tag(html, testid)
-    m = re.search(r'%s="([^"]*)"' % re.escape(attr), tag)
+    m = re.search(rf'{re.escape(attr)}="([^"]*)"', tag)
     assert m
     return html_lib.unescape(m.group(1))
 
