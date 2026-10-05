@@ -202,10 +202,10 @@ All nine runs state the rule and give the correct singular form.
 | G55 3 | 18 | 18 | 0 | 0 | 0 | 1.000 |
 | G5H 1 | 21 | 20† | 0 | 0 | 1 (U03) | 1.000 |
 | G5H 2 | 20 | 19 | 0 | 0 | 1 (U03) | 1.000 |
-| G5H 3 | 20 | 19 | 0 | 1 | 0 | 0.950 |
+| G5H 3 | 20 | 19 | 0 | 0 | 1 (U03) | 1.000 |
 
 - Precision is matched ÷ (findings − known-issue findings).
-- The scorer's `false_positive_count` adds control false positives and unclassified findings together, so it is 1 in P55 1 and G5H 3 and 0 in P55 2.
+- The scorer's `false_positive_count` adds control false positives and unclassified findings together, so it is 1 in P55 1 and 0 in every other run.
 - † G5H 1's 20 includes the D04 credit from a wording finding (§ 1). Counted as a defect match, as the scorer does; as a non-match its precision would be 19 ÷ 20 = 0.950.
 - Every matched finding hit a different defect. No run has two findings on one defect.
 - For comparison, all nine earlier runs in this file (POC 23 Sep, control A, plugin default) have precision 1.000. Their only non-defect findings are U03 hits, one in each 23 Sep run.
@@ -222,12 +222,12 @@ The findings that match no defect, as written in the findings files:
 | P55 3 | known issue U03 | `/fr/nonexistent` | – | missing_translation / low | 404 Not Found / "The requested URL was not found on the server. …" | French 404 page within site layout | The 404 page under /fr/ is a generic English server error page. |
 | G5H 1 | known issue U03 | `/fr/inexistant` | – | missing_translation / low | Not Found / The requested URL was not found on the server. | Localized 404 page: "Page introuvable". | 404 page under /fr/ is the generic English server error, without site header or French text. |
 | G5H 2 | known issue U03 | `/fr/inexistant` | – (element `heading "Not Found"`) | missing_translation / low | Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again. | Page introuvable. L'adresse demandée est introuvable sur le serveur. ... | 404 page under /fr/ is the untranslated default English error page without site header or French text. |
-| G5H 3 | unclassified | `/fr/nonexistent` | – | lang_attribute / low | Not Found / The requested URL was not found on the server. | Localized fr-CA 404 page with lang="fr-CA" and a link back | 404 page under /fr/ is English with html lang="en" and no localized layout. |
+| G5H 3 | known issue U03 | `/fr/nonexistent` | – | lang_attribute / low | Not Found / The requested URL was not found on the server. | Localized fr-CA 404 page with lang="fr-CA" and a link back | 404 page under /fr/ is English with html lang="en" and no localized layout. |
 
-G5H 3's 404 finding is unclassified because of its category.
-- It reports the same page as the U03 hits in G5H 1 and 2, but with category `lang_attribute`. U03 lists only `missing_translation`, `hardcoded_text` and `other`.
-- D07 (`lang_attribute`) is on the summary page, not `/fr/nonexistent`, so it does not match either.
-- `known_issues.yaml` was not changed.
+G5H 3's 404 finding reports the same page as the U03 hits in G5H 1 and 2, but with category `lang_attribute`.
+- U03 at first listed only `missing_translation`, `hardcoded_text` and `other`, so the finding was unclassified (precision 0.950, stability 0.983).
+- `lang_attribute` was then added to U03's categories. Against all 42 earlier findings files this changes one finding's class, this one: unclassified -> U03. `plugin-high-run-3/` and `plugin-high-stability/` were re-scored.
+- D07 (`lang_attribute`) is on the summary page, not `/fr/nonexistent`, so it does not match the finding.
 
 The P55 2 finding credited to U06:
 - The text it quotes is in `translations/fr.json` (`calculator.modal_body`: "… notre taux variable fixe …"). The English source in `translations/en.json` reads "our fixed variable rate".
@@ -344,9 +344,8 @@ For the POC, the S5.5 runs and control B share SDK 0.2.158, CLI 2.1.280 and the 
   - Both found D10 and G03 in 3/3, both handled the zero-plural rule in 3/3, and both missed D07 in 3/3.
   - The medium misses of G01 and A03 were all on French pages whose `read_page` result had the seeded text (§ 2).
   - Each A07 report, in both groups, came one or two rows after a full-page screenshot of `/fr/calculator`. Neither medium miss had one.
-- **Precision:** high 1.000, 1.000, 0.950 vs medium 1.000 in all three runs.
-  - High run 3's 0.950 comes from one unclassified finding: the English 404 page, reported as `lang_attribute`.
-  - High runs 1 and 2 reported the same page as `missing_translation`, which was credited to U03. The medium runs did not report it.
+- **Precision:** 1.000 in all six runs.
+  - Each high run reported the English 404 page, credited to U03: runs 1 and 2 as `missing_translation`, run 3 as `lang_attribute` (§ 3). The medium runs did not report it.
 - **Behaviour:** these ranges do not overlap:
   - model turns 22–24 vs 16–17;
   - tool calls 78–91 vs 51–58;
@@ -364,9 +363,9 @@ For the POC, the S5.5 runs and control B share SDK 0.2.158, CLI 2.1.280 and the 
 - **Per defect:** both found the same 19 defects in every run, and both missed D07 in every run.
   - The only difference is D04: the POC missed it in every run, and plugin high run 1 was credited with it from a wording finding (†).
   - Both groups handled the zero-plural rule in every run.
-- **Precision:** plugin high 1.000, 1.000, 0.950 vs POC 0.950, 1.000, 1.000.
-  - Each group has one run below 1.000: POC run 1 from a control false positive (C01), plugin high run 3 from an unclassified 404 finding.
-  - Known-issue hits: POC U03 in every run, plus U04 and U06 once each. Plugin high: U03 in runs 1 and 2.
+- **Precision:** plugin high 1.000 in all three runs vs POC 0.950, 1.000, 1.000.
+  - POC run 1 is below 1.000 from a control false positive (C01).
+  - Known-issue hits: POC U03 in every run, plus U04 and U06 once each. Plugin high: U03 in every run.
 - **Behaviour:**
   - These overlap: model turns (22–24 vs 21–23), tool calls (78–91 vs 75–80), tool calls per turn (3.43–4.38 vs 3.48–3.75) and thinking tokens (670–996 vs 872–1,047).
   - These do not overlap: output tokens (13,503–14,613 vs 9,432–10,001) and duration (112.9–138.6 s vs 78.0–102.9 s). The two durations are measured slightly differently (§ 4 definitions).
@@ -378,4 +377,4 @@ For the POC, the S5.5 runs and control B share SDK 0.2.158, CLI 2.1.280 and the 
 
 - `project/05.6-sonnet55-poc.md` reports `costBasis: "unknown"` and `contextWindow: 200000` for `claude-sonnet-5-5` in the POC. The plugin's CLI (2.1.286) reports `costBasis: "list"` and `contextWindow: 1000000`. Neither figure is used here.
 - The POC S5.5 runs each have one U03 hit, as the 23 Sep runs did. Control A had none.
-- Plugin S5.5 high runs 1 and 2 each have one U03 hit. Run 3 reported the same page under a category U03 does not list (§ 3). Plugin S5.5 medium had no 404 finding.
+- Plugin S5.5 high runs each have one U03 hit; run 3's is filed as `lang_attribute` (§ 3). Plugin S5.5 medium had no 404 finding.

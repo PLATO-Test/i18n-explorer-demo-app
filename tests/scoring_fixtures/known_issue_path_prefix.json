@@ -17,6 +17,7 @@
     { "page_path": "/fr/nonexistent", "data_testid": null, "category": "plural", "observed": "404 Not Found", "expected": null, "description": "not-u03-wrong-category", "severity": "low", "evidence": null },
     { "page_path": "/en/nonexistent", "data_testid": null, "category": "missing_translation", "observed": "404 Not Found", "expected": null, "description": "not-u03-english-path", "severity": "low", "evidence": null },
     { "page_path": "/fr/calculator", "data_testid": null, "category": "missing_translation", "observed": "something else", "expected": null, "description": "not-u03-mapped-page", "severity": "low", "evidence": null },
-    { "page_path": "/frost", "data_testid": null, "category": "missing_translation", "observed": "404 Not Found", "expected": null, "description": "not-u03-prefix-needs-slash", "severity": "low", "evidence": null }
+    { "page_path": "/frost", "data_testid": null, "category": "missing_translation", "observed": "404 Not Found", "expected": null, "description": "not-u03-prefix-needs-slash", "severity": "low", "evidence": null },
+    { "page_path": "/fr/nonexistent", "data_testid": null, "category": "lang_attribute", "observed": "Not Found", "expected": null, "description": "u03-hit-lang-attribute", "severity": "low", "evidence": null }
   ]
 }

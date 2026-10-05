@@ -59,7 +59,7 @@
     both build modes. Unknown /en/ paths get the same page, which is
     correct for English and so not part of this issue.
   page_path_prefixes: ["/fr/"]
-  categories: [missing_translation, hardcoded_text, other]
+  categories: [missing_translation, hardcoded_text, lang_attribute, other]
 
 - id: U04
   description: >

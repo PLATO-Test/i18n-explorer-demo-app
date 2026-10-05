@@ -70,19 +70,17 @@ None.
 
 | known-issue id | count |
 |---|---|
-| U03 | 2 |
+| U03 | 3 |
 
 ### Unclassified findings (manual review)
 
-| run | page | testid | observed |
-|---|---|---|---|
-| 20261001-134521-localhost-5002 | /fr/nonexistent | None | Not Found / The requested URL was not found on the server. |
+None.
 
 ### Precision / recall
 
-- precision: 0.983
+- precision: 1.000
 - recall: 0.921
-- false positive count: 1
+- false positive count: 0
 
 ### Cost / tokens / duration
 

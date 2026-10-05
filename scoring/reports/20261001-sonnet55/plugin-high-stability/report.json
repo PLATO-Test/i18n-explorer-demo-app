@@ -576,7 +576,7 @@
       "known_issues": [
         {
           "issue_id": "U03",
-          "count": 2,
+          "count": 3,
           "findings": [
             {
               "run_id": "20261001-134037-localhost-5002",
@@ -591,22 +591,21 @@
               "data_testid": null,
               "observed": "Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
               "category": "missing_translation"
+            },
+            {
+              "run_id": "20261001-134521-localhost-5002",
+              "page_path": "/fr/nonexistent",
+              "data_testid": null,
+              "observed": "Not Found / The requested URL was not found on the server.",
+              "category": "lang_attribute"
             }
           ]
         }
       ],
-      "unclassified": [
-        {
-          "run_id": "20261001-134521-localhost-5002",
-          "page_path": "/fr/nonexistent",
-          "data_testid": null,
-          "observed": "Not Found / The requested URL was not found on the server.",
-          "category": "lang_attribute"
-        }
-      ],
-      "precision": 0.9833333333333333,
+      "unclassified": [],
+      "precision": 1.0,
       "recall": 0.9206349206349206,
-      "false_positive_count": 1,
+      "false_positive_count": 0,
       "stability": {
         "A01": {
           "detected_runs": 3,

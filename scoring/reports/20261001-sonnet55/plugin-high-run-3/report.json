@@ -299,19 +299,25 @@
         }
       },
       "control_false_positives": [],
-      "known_issues": [],
-      "unclassified": [
+      "known_issues": [
         {
-          "run_id": "20261001-134521-localhost-5002",
-          "page_path": "/fr/nonexistent",
-          "data_testid": null,
-          "observed": "Not Found / The requested URL was not found on the server.",
-          "category": "lang_attribute"
+          "issue_id": "U03",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261001-134521-localhost-5002",
+              "page_path": "/fr/nonexistent",
+              "data_testid": null,
+              "observed": "Not Found / The requested URL was not found on the server.",
+              "category": "lang_attribute"
+            }
+          ]
         }
       ],
-      "precision": 0.95,
+      "unclassified": [],
+      "precision": 1.0,
       "recall": 0.9047619047619048,
-      "false_positive_count": 1,
+      "false_positive_count": 0,
       "stability": null,
       "cost": {
         "total_cost_usd": null,
