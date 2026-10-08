@@ -18,31 +18,151 @@ it must not be shared with, or read by, any test suite exercising it.
 - Plain CSS, no frontend framework
 - pytest for self-verification tests
 
-## Environment
+## Quick start: run the app locally
 
-- The project lives on **Windows**. Docker Engine is **not** installed on
-  Windows — it runs inside **WSL2 Ubuntu** and is invoked from Windows
-  through `wsl.exe`.
-- Python tooling on Windows is [`uv`](https://docs.astral.sh/uv/) with
-  Python 3.14.
-- WSL2 distro `Ubuntu` has Docker Engine + the Compose plugin installed
-  (not Docker Desktop).
+These steps run both builds of the app directly on Windows, with no
+Docker. Every command below is for **PowerShell**.
 
-### Running Docker commands from Windows
+The app always runs as two separate servers, one per build:
 
-Always call Docker as:
+| Build  | Port | `SEEDED_DEFECTS` |
+|--------|------|-------------------|
+| clean  | 5001 | `0` |
+| seeded | 5002 | `1` |
+
+### Prerequisites
+
+- Windows 10 or 11.
+- [`uv`](https://docs.astral.sh/uv/), the Python package and project
+  manager. Install it with:
+
+  ```powershell
+  winget install --id astral-sh.uv -e
+  ```
+
+  Then close and reopen PowerShell so `uv` is on your `PATH`. Check it
+  with `uv --version`.
+- You don't need to install Python yourself. The app needs Python 3.14,
+  and `uv` downloads it automatically in step 1 if it isn't already
+  installed.
+- A copy of this repository. Clone it, or unpack the archive you were
+  given.
+
+### 1. Install the dependencies
+
+Open PowerShell in the repository's root folder (the folder that
+contains `pyproject.toml`) and run:
+
+```powershell
+uv sync
+```
+
+This creates a `.venv` folder with Python 3.14 and all dependencies. You
+only need to do this once, and again after pulling changes that touch
+`pyproject.toml` or `uv.lock`.
+
+### 2. Start the clean build
+
+The local servers and the Docker containers (see
+[Running with Docker](#running-with-docker)) use the same ports, so run
+one or the other, never both. If you have started the Docker containers,
+stop them first (see [Stop](#stop)). The local server does not report a
+busy port: it prints `Running on ...` as usual, and you can't tell
+whether your requests reach it or the container.
+
+In the same PowerShell window:
+
+```powershell
+$env:SEEDED_DEFECTS = "0"
+uv run flask --app wsgi:app run --port 5001
+```
+
+You should see:
+
+```
+ * Serving Flask app 'wsgi:app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5001
+Press CTRL+C to quit
+```
+
+The `WARNING` line is normal. Leave this window open: the server runs
+until you stop it.
+
+### 3. Start the seeded build
+
+Open a **second** PowerShell window in the same root folder and run:
+
+```powershell
+$env:SEEDED_DEFECTS = "1"
+uv run flask --app wsgi:app run --port 5002
+```
+
+The output is the same as in step 2, except that it ends with
+`Running on http://127.0.0.1:5002`.
+
+Always set `SEEDED_DEFECTS` explicitly before starting a server. The
+value stays set in that PowerShell window until you close it, so a
+leftover `"1"` would start the seeded build on the clean port.
+
+### 4. Check that it works
+
+Open these pages in a browser:
+
+| | Clean build | Seeded build |
+|---|---|---|
+| English | http://127.0.0.1:5001/en/ | http://127.0.0.1:5002/en/ |
+| French  | http://127.0.0.1:5001/fr/ | http://127.0.0.1:5002/fr/ |
+
+The root URL (`/`) redirects to `/en/` or `/fr/` according to your
+browser's language, so use the links above to open a specific language.
+
+To check from the command line, open a third PowerShell window and run:
+
+```powershell
+curl.exe http://127.0.0.1:5001/health
+curl.exe http://127.0.0.1:5002/health
+```
+
+They should print `{"build":"clean","status":"ok"}` and
+`{"build":"seeded","status":"ok"}`. Type `curl.exe`, not `curl`: in
+Windows PowerShell 5.1, `curl` is an alias for `Invoke-WebRequest`.
+
+Use `127.0.0.1` rather than `localhost` for the local servers. They
+listen on IPv4 only, and some clients try IPv6 (`::1`) first for
+`localhost`, which adds about 2 seconds to every request. Python's
+`requests` library, which the test suite uses, is one of them.
+
+### 5. Stop the servers
+
+Press `Ctrl+C` in each server window. Stop them before you start the
+Docker containers on the same ports.
+
+## Running with Docker
+
+This is an alternative to the local run above. It runs the same two
+builds, on the same ports, in Docker containers.
+
+On the maintainer's machine, Docker Engine and the Compose plugin are
+installed inside **WSL2 Ubuntu** (distro `Ubuntu`), not as Docker
+Desktop, so every Docker command is called from Windows through
+`wsl.exe`:
 
 ```
 wsl -d Ubuntu -- docker ...
 wsl -d Ubuntu -- docker compose ...
 ```
 
-Run these from the project root in a Windows shell (PowerShell or Git
-Bash). `wsl.exe` maps the current Windows directory to its
-`/mnt/<drive>/...` equivalent, so Docker sees the project files there.
+Run these from the repository's root folder in PowerShell or Git Bash.
+`wsl.exe` maps the current Windows directory to its `/mnt/<drive>/...`
+equivalent, so Docker sees the project files there. If Git Bash mangles
+path arguments passed to `wsl.exe`, prefix the command with
+`MSYS_NO_PATHCONV=1`, or use relative paths only.
 
-If Git Bash mangles path arguments passed to `wsl.exe`, prefix the
-command with `MSYS_NO_PATHCONV=1`, or stick to relative paths.
+If you use Docker Desktop instead, run the same commands without the
+`wsl -d Ubuntu --` prefix. This setup hasn't been tested with this
+project.
 
 Optional PowerShell helper, so you can just type `docker ...`:
 
@@ -50,34 +170,44 @@ Optional PowerShell helper, so you can just type `docker ...`:
 function docker { wsl -d Ubuntu -- docker @args }
 ```
 
-## Running with Docker (recommended)
+### Start
 
-From the project root:
+1. Open a separate PowerShell window, run the following, and leave the
+   window open for as long as you need the containers:
+
+   ```
+   wsl -d Ubuntu
+   ```
+
+   WSL shuts the `Ubuntu` distro down shortly after the last WSL window
+   or command exits, and the containers stop with it. On the maintainer's
+   machine (WSL 2.7.14) they stopped 15–30 seconds after
+   `docker compose up -d` returned when nothing else kept WSL open.
+
+2. In another PowerShell window, from the repository's root folder:
+
+   ```
+   wsl -d Ubuntu -- docker compose up -d --build
+   ```
+
+This builds one image and starts two containers from it, `clean` on
+port 5001 and `seeded` on port 5002. Check them with:
+
+```powershell
+curl.exe http://localhost:5001/health
+curl.exe http://localhost:5002/health
+```
+
+They should print `{"build":"clean","status":"ok"}` and
+`{"build":"seeded","status":"ok"}`. The pages are at the same paths as in
+the local run, for example http://localhost:5001/fr/. The containers
+listen on both IPv4 and IPv6, so `localhost` is fine here.
+
+### Stop
 
 ```
-wsl -d Ubuntu -- docker compose up -d --build
+wsl -d Ubuntu -- docker compose stop
 ```
-
-This builds and starts two containers from the same image:
-
-| Build  | Port | `SEEDED_DEFECTS` |
-|--------|------|-------------------|
-| clean  | 5001 | `0` |
-| seeded | 5002 | `1` |
-
-Open in a Windows browser:
-
-- http://localhost:5001/
-- http://localhost:5002/
-
-Health checks:
-
-```
-curl http://localhost:5001/health
-curl http://localhost:5002/health
-```
-
-Each returns `{"status": "ok", "build": "clean" | "seeded"}`.
 
 Source is built into the image — the default `docker-compose.yml` does
 **not** bind-mount source from Windows, since bind mounts from the
@@ -87,31 +217,17 @@ source to see the change in the containers.
 
 ### Troubleshooting
 
-- **Containers not reachable / "connection refused":** if WSL2 was
-  stopped or restarted, its containers are not running. Start WSL first
-  (`wsl -d Ubuntu`) and re-run `docker compose up -d`.
+- **Containers not reachable / "connection refused":** the `Ubuntu`
+  distro was shut down, which stops its containers (they show as
+  `Exited (255)` in `wsl -d Ubuntu -- docker ps -a`). This happens when
+  no WSL window was left open (see step 1 of [Start](#start)), or after
+  WSL was stopped or restarted. Open a WSL window and re-run
+  `wsl -d Ubuntu -- docker compose up -d`.
+- **Unexpected responses on port 5001 or 5002:** check that no local
+  server from the quick start is still running on the same port, and
+  stop it with `Ctrl+C`.
 - **Path issues from Git Bash:** prefix commands with
   `MSYS_NO_PATHCONV=1` or use relative paths only.
-
-## Running locally on Windows without Docker
-
-```powershell
-uv sync
-$env:SEEDED_DEFECTS = "0"
-$env:APP_TODAY = "2026-09-16"
-$env:FLASK_APP = "wsgi:app"
-uv run flask run --host=0.0.0.0 --port=5000
-```
-
-For the seeded build in a separate shell/port:
-
-```powershell
-uv sync
-$env:SEEDED_DEFECTS = "1"
-$env:APP_TODAY = "2026-09-16"
-$env:FLASK_APP = "wsgi:app"
-uv run flask run --host=0.0.0.0 --port=5001
-```
 
 ## Build modes
 
@@ -150,15 +266,24 @@ uv sync
 uv run pytest -q
 ```
 
-Against the running containers:
+Against running servers (the local servers from the quick start, or the
+Docker containers):
 
 ```powershell
-$env:POC_BASE_URL_CLEAN = "http://localhost:5001"
-$env:POC_BASE_URL_SEEDED = "http://localhost:5002"
+$env:POC_BASE_URL_CLEAN = "http://127.0.0.1:5001"
+$env:POC_BASE_URL_SEEDED = "http://127.0.0.1:5002"
 uv run pytest -q
 ```
 
-(Bash/WSL equivalent: `POC_BASE_URL_CLEAN=http://localhost:5001 POC_BASE_URL_SEEDED=http://localhost:5002 uv run pytest -q`.)
+(Bash/WSL equivalent: `POC_BASE_URL_CLEAN=http://127.0.0.1:5001 POC_BASE_URL_SEEDED=http://127.0.0.1:5002 uv run pytest -q`.)
+
+Use `127.0.0.1`, not `localhost`: against the local servers, `localhost`
+makes every request about 2 seconds slower (see step 4 of the quick
+start), and the full run takes minutes instead of seconds.
+
+These variables stay set in that PowerShell window. To go back to the
+in-process run there, clear them first:
+`Remove-Item Env:POC_BASE_URL_CLEAN, Env:POC_BASE_URL_SEEDED`.
 
 ## Scoring AI test findings
 

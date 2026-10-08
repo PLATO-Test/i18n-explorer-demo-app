@@ -37,6 +37,21 @@ mistakes, not like obvious test fixtures.
 - Ports 5001 (clean build) and 5002 (seeded build) are published by
   Docker inside WSL2 and must be reachable from Windows at
   `http://localhost:5001` / `:5002`.
+- The containers live only as long as the `Ubuntu` distro does, and WSL
+  (2.7.14 here) shuts an idle distro down 15–30 s after the last
+  `wsl.exe` client exits; the containers then show `Exited (255)`. So
+  `wsl -d Ubuntu -- docker compose up -d` in one command and tests in a
+  later one hit dead containers unless something keeps the distro
+  attached: the user's open WSL window, or a background
+  `wsl -d Ubuntu -- sleep 600`.
+- Local (non-Docker) runs: `uv run flask --app wsgi:app run --port 5001`
+  (or `5002`) with `SEEDED_DEFECTS` set. Flask's dev server listens on
+  `127.0.0.1` only, and Python `requests` tries `::1` first for
+  `localhost`, adding ~2 s per request (the pytest run goes from ~3 s to
+  ~4.5 min), so use `127.0.0.1` in `POC_BASE_URL_*`. Local servers and
+  the containers share ports 5001/5002, and the local server starts
+  without any error while the containers hold them; stop one before
+  starting the other.
 - Timezone is `America/Toronto`, set explicitly (containers do not
   inherit the host timezone). "Today" is fixed via `APP_TODAY` (default
   `2026-09-16`) so all output is reproducible — there is no randomness
