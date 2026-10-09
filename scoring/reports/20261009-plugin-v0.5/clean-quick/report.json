@@ -1,0 +1,59 @@
+{
+  "build": "clean",
+  "n_defects": 21,
+  "sources": {
+    "ai_explorer": {
+      "n_runs": 1,
+      "defect_table": null,
+      "layer_breakdown": null,
+      "control_false_positives": [],
+      "known_issues": [],
+      "unclassified": [
+        {
+          "run_id": "20261009-094056-localhost-5001",
+          "page_path": "/fr/calculator",
+          "data_testid": "calculator-early-repayment-note",
+          "observed": "Aucuns frais ne s'appliquent au remboursement anticipé.",
+          "category": "other"
+        },
+        {
+          "run_id": "20261009-094056-localhost-5001",
+          "page_path": "/fr/calculator",
+          "data_testid": null,
+          "observed": "Calculateur de prêt",
+          "category": "mistranslation"
+        },
+        {
+          "run_id": "20261009-094056-localhost-5001",
+          "page_path": "/fr/dashboard",
+          "data_testid": "dashboard-due-date",
+          "observed": "2026-10-01",
+          "category": "date_format"
+        }
+      ],
+      "precision": null,
+      "recall": null,
+      "false_positive_count": 3,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": null,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "mean_duration_s": 43.6,
+        "models": [
+          "claude-sonnet-5-5"
+        ]
+      },
+      "runs": [
+        {
+          "run_id": "20261009-094056-localhost-5001",
+          "model": "claude-sonnet-5-5",
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 43.6
+        }
+      ]
+    }
+  }
+}

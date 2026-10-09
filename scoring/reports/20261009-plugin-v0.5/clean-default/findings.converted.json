@@ -1,0 +1,35 @@
+{
+  "run": {
+    "run_id": "20261009-093920-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-09T09:39:20.159096-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 83.3
+  },
+  "findings": [
+    {
+      "page_path": "/fr/nonexistent",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Localized 404 page, e.g. \"Page introuvable\" with the site header, in French under /fr/.",
+      "description": "Unknown URLs under /fr/ return the default English server 404 page, unbranded and with no French text or language-aware layout.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=64"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-due-date",
+      "category": "date_format",
+      "observed": "2026-10-01",
+      "expected": "1 octobre 2026 (1er octobre 2026), consistent with the long date format used on the application summary page.",
+      "description": "Due date and transaction dates are shown as raw ISO strings, identical to English, while the application summary page formats dates as \"16 septembre 2026\"; the French dashboard dates are not localized.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=43"
+    }
+  ]
+}

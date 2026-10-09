@@ -1,0 +1,45 @@
+{
+  "run": {
+    "run_id": "20261009-094056-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-09T09:40:56.692261-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 43.6
+  },
+  "findings": [
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "other",
+      "observed": "Aucuns frais ne s'appliquent au remboursement anticipé.",
+      "expected": "Aucuns frais -> Aucun frais ne s'applique au remboursement anticipé. (ou: Aucuns frais ... is non-standard; use \"Aucun frais ne s'applique\")",
+      "description": "\"Aucuns frais\" is a grammatical error; standard usage is \"Aucun frais\".",
+      "severity": "low",
+      "evidence": "screenshots/028.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": null,
+      "category": "mistranslation",
+      "observed": "Calculateur de prêt",
+      "expected": "Recalculer",
+      "description": "The recalculate button (testid calculator-recalculate-button) is labelled with the page title instead of an action; the English has the same flaw.",
+      "severity": "medium",
+      "evidence": "screenshots/028.png"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-due-date",
+      "category": "date_format",
+      "observed": "2026-10-01",
+      "expected": "1 octobre 2026 (1er octobre 2026)",
+      "description": "Due date and transaction dates are shown in raw ISO format, unlike the localized \"16 septembre 2026\" on the confirmation page.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=18"
+    }
+  ]
+}
