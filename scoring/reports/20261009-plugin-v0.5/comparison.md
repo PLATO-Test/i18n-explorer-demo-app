@@ -58,10 +58,10 @@ Source paths are relative to `C:\Users\AlexHotvianskyi\AppData\Local\Temp\i18n-m
 
 - Precision is matched ÷ (findings − known-issue findings), as the scorer computes it.
 - The scorer's `false_positive_count` adds control false positives and unclassified findings together.
-- The median of six runs is the mean of the 3rd and 4th values. The default median, 0.881, equals the `default-stability` report's recall.
+- The median of six runs is the mean of the 3rd and 4th values. The stability reports' recall is the pooled figure (detections ÷ (6 × 21)), which is the mean: default 111/126 (0.881, equal to the median here), quick 88/126 (0.698).
 - No run has two findings on one defect.
 
-† **A01 in `quick-20261009-run-2` looks misclassified.** Finding F006 has element `calculator-paylater-checkbox`, `fr_text` "Payer maintenant", `en_text` "Pay later", fix "Payer plus tard", and the description `"Pay later" translated as "Pay now", opposite meaning; contradicts the help text about deferral.` That is A01's text and problem, but A01 is on `calculator-paylater-label`, so the scorer leaves the finding unclassified and marks A01 missed. Credited to A01, the run would be 16/21 (0.762), precision 1.000, 0 false positives, and the quick preset's recall median 15 (0.714). The figures above are the scorer's. Not changed in this task.
+† **A01 in `quick-20261009-run-2` looks misclassified.** Finding F006 has element `calculator-paylater-checkbox`, `fr_text` "Payer maintenant", `en_text` "Pay later", fix "Payer plus tard", and the description `"Pay later" translated as "Pay now", opposite meaning; contradicts the help text about deferral.` That is A01's text and problem, but A01 is on `calculator-paylater-label`, so the scorer leaves the finding unclassified and marks A01 missed. Credited to A01, the run would be 16/21 (0.762), precision 1.000, 0 false positives. The quick preset's recall min, max and median would stay 14, 16 and 14.5; its precision min would become 1.000 and its false-positive max 0. The figures above are the scorer's. Not changed in this task.
 
 ## 2. Per-defect detection (seeded build)
 
