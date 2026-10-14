@@ -1,0 +1,45 @@
+{
+  "run": {
+    "run_id": "20261014-162641-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-14T16:26:41.977119-04:00",
+    "model": "claude-opus-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 224.1
+  },
+  "findings": [
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-amount-input",
+      "category": "number_currency_format",
+      "observed": "12500,50 → \"Entrez un montant entre 1 000,00 $ et 50 000,00 $.\"",
+      "expected": "Parse the loan amount using fr-CA conventions (comma decimal separator, space thousands separator), e.g. accept \"12 500,50\" and \"12500,50\".",
+      "description": "The French loan form rejects amounts typed in Canadian French format (12500,50 or 12 500,50), which are within range, and says the amount is out of range. A French user typing a normal French amount cannot submit the form.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=43"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-count",
+      "category": "terminology",
+      "observed": "3 opérations récentes / Transactions récentes",
+      "expected": "Use one term consistently, e.g. \"3 opérations récentes\" and \"Opérations récentes\".",
+      "description": "The same English term \"transactions\" is translated as \"opérations\" in the counter and as \"Transactions\" in the section heading on the same page; \"opérations\" is the preferred Quebec banking term.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=53"
+    },
+    {
+      "page_path": "/fr/introuvable",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "404 Not Found / Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Provide a localized 404 page under /fr/, e.g. \"Page introuvable — La page demandée est introuvable. Si vous avez saisi l'adresse manuellement, vérifiez-la et réessayez.\", with the site header and lang=\"fr-CA\".",
+      "description": "An unknown URL under /fr/ shows the framework's default English 404 page, with no French text and no site navigation.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=87"
+    }
+  ]
+}
