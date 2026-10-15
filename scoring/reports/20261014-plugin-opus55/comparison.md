@@ -76,7 +76,7 @@ Checks on the inputs and on the baseline:
 | Opus low | 20 (0.952) | 21 (1.000) | 20.67 (0.984) | 1.000 / 1.000 / 0.952 |
 | Sonnet | 18 (0.857) | 19 (0.905) | 18.67 (0.889) | 1.000 / 1.000 / 1.000 |
 
-- Precision is matched ÷ (findings − known-issue findings), as the scorer computes it. `low-stability/` gives pooled precision and recall of 0.984 for Opus low.
+- Precision is matched ÷ (findings − known-issue findings), as the scorer computes it. No run in any group has a control false positive, and `low-run-3` is the only run with an unclassified finding. `low-stability/` gives pooled precision and recall of 0.984 for Opus low.
 - **`low-run-3`, unclassified finding:** F021 (`lang_attribute`, `/fr/application/AP-100482`, `element: "html"`, `fr_text` `lang="en"`, `suggested_fix` `lang="fr-CA"`, evidence seq 81) describes D07. The adapter takes `html` as a testid (it has no space, quote, bracket or "="), so the converted finding has `data_testid: "html"`. The matcher then tries only testid matches, none of which fits, and D07's category rule for testid-less findings is never reached. The scorer therefore counts D07 as missed and F021 as unclassified, which it counts as a false positive.
   - **By hand:** a scratch copy of the converted file with that one `data_testid` set to null, scored outside the repo, gives D07 detected, recall 21/21 and precision 1.000. This is not used in any table or mean in this document.
 - **`low-run-2`, two findings on D07:** F014 and F015 are both `lang_attribute` on `/fr/application/AP-100482` with no testid, and both are credited to D07 by its category rule.
