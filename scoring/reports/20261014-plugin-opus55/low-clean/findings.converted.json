@@ -1,0 +1,35 @@
+{
+  "run": {
+    "run_id": "20261015-184252-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-15T18:42:52.771143-04:00",
+    "model": "claude-opus-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 158.8
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "terminology",
+      "observed": "Transactions récentes",
+      "expected": "Opérations récentes",
+      "description": "The same concept is called \"opérations récentes\" in the counter and \"Transactions récentes\" in the heading; Quebec banking usage prefers \"opérations\" consistently.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=39"
+    },
+    {
+      "page_path": "/fr/nexistepas",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "Not Found — The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Page introuvable — La page demandée est introuvable. Si vous avez saisi l'adresse manuellement, vérifiez-en l'orthographe.",
+      "description": "The 404 page under /fr/ is the default English server page, with no French translation or site layout.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=61"
+    }
+  ]
+}
