@@ -213,7 +213,7 @@
     },
     {
       "page_path": "/fr/application/AP-100482",
-      "data_testid": "html",
+      "data_testid": null,
       "category": "lang_attribute",
       "observed": "lang=\"en\"",
       "expected": "lang=\"fr-CA\"",

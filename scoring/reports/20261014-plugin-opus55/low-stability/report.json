@@ -197,6 +197,13 @@
               "data_testid": null,
               "observed": "en",
               "category": "lang_attribute"
+            },
+            {
+              "run_id": "20261015-183839-localhost-5002",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": null,
+              "observed": "lang=\"en\"",
+              "category": "lang_attribute"
             }
           ],
           "category_correct": true
@@ -610,18 +617,10 @@
       },
       "control_false_positives": [],
       "known_issues": [],
-      "unclassified": [
-        {
-          "run_id": "20261015-183839-localhost-5002",
-          "page_path": "/fr/application/ap-100482",
-          "data_testid": "html",
-          "observed": "lang=\"en\"",
-          "category": "lang_attribute"
-        }
-      ],
-      "precision": 0.9841269841269841,
-      "recall": 0.9841269841269841,
-      "false_positive_count": 1,
+      "unclassified": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_count": 0,
       "stability": {
         "A01": {
           "detected_runs": 3,
@@ -676,7 +675,7 @@
           "total_runs": 3
         },
         "D07": {
-          "detected_runs": 2,
+          "detected_runs": 3,
           "total_runs": 3
         },
         "D08": {

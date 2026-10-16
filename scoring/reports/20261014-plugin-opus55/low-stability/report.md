@@ -20,7 +20,7 @@
 | D04 | yes | yes | 20261015-182801-localhost-5002:/fr/apply#apply-submit-button; 20261015-183415-localhost-5002:/fr/apply#apply-submit-button; 20261015-183839-localhost-5002:/fr/apply#apply-submit-button |
 | D05 | yes | yes | 20261015-182801-localhost-5002:/fr/calculator#calculator-payment-value; 20261015-183415-localhost-5002:/fr/calculator#calculator-payment-value; 20261015-183839-localhost-5002:/fr/calculator#calculator-payment-value |
 | D06 | yes | yes | 20261015-182801-localhost-5002:/fr/dashboard#dashboard-txn-date-0; 20261015-183415-localhost-5002:/fr/dashboard#dashboard-txn-date-0; 20261015-183839-localhost-5002:/fr/dashboard#dashboard-txn-date-0 |
-| D07 | yes | yes | 20261015-182801-localhost-5002:/fr/application/ap-100482#None; 20261015-183415-localhost-5002:/fr/application/ap-100482#None; 20261015-183415-localhost-5002:/fr/application/ap-100482#None |
+| D07 | yes | yes | 20261015-182801-localhost-5002:/fr/application/ap-100482#None; 20261015-183415-localhost-5002:/fr/application/ap-100482#None; 20261015-183415-localhost-5002:/fr/application/ap-100482#None; 20261015-183839-localhost-5002:/fr/application/ap-100482#None |
 | D08 | yes | yes | 20261015-182801-localhost-5002:/fr/dashboard#dashboard-estimate-loan-link; 20261015-183415-localhost-5002:/fr/dashboard#dashboard-estimate-loan-link; 20261015-183839-localhost-5002:/fr/dashboard#dashboard-estimate-loan-link |
 | D09 | yes | yes | 20261015-182801-localhost-5002:/fr/apply#None; 20261015-183415-localhost-5002:/fr/apply#apply-error-fullname; 20261015-183839-localhost-5002:/fr/apply#apply-error-fullname |
 | D10 | yes | yes | 20261015-182801-localhost-5002:/fr/dashboard#dashboard-active-loans-count; 20261015-183415-localhost-5002:/fr/dashboard#dashboard-active-loans-count; 20261015-183839-localhost-5002:/fr/dashboard#dashboard-active-loans-count |
@@ -53,7 +53,7 @@
 | D04 | 3 | 3 |
 | D05 | 3 | 3 |
 | D06 | 3 | 3 |
-| D07 | 2 | 3 |
+| D07 | 3 | 3 |
 | D08 | 3 | 3 |
 | D09 | 3 | 3 |
 | D10 | 3 | 3 |
@@ -72,15 +72,13 @@ None.
 
 ### Unclassified findings (manual review)
 
-| run | page | testid | observed |
-|---|---|---|---|
-| 20261015-183839-localhost-5002 | /fr/application/ap-100482 | html | lang="en" |
+None.
 
 ### Precision / recall
 
-- precision: 0.984
-- recall: 0.984
-- false positive count: 1
+- precision: 1.000
+- recall: 1.000
+- false positive count: 0
 
 ### Cost / tokens / duration
 

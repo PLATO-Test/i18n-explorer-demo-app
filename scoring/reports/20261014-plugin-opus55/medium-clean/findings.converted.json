@@ -1,0 +1,45 @@
+{
+  "run": {
+    "run_id": "20261016-100123-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-16T10:01:23.038095-04:00",
+    "model": "claude-opus-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 137.4
+  },
+  "findings": [
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-amount-input",
+      "category": "number_currency_format",
+      "observed": "15000,50 / 15 000,50 → \"Entrez un montant entre 1 000,00 $ et 50 000,00 $.\"",
+      "expected": "Accept fr-CA number input (comma decimal separator, space/narrow-space thousands separator) on the French form.",
+      "description": "On the French loan form, amounts typed in Canadian French format (15000,50 or 15 000,50) are rejected as out of range; only the English format 15000.50 is accepted, while the error message itself displays amounts in the French format.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=44"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-count",
+      "category": "terminology",
+      "observed": "3 opérations récentes / Transactions récentes",
+      "expected": "Use one term consistently, preferably \"Opérations récentes\" for the heading (matching \"3 opérations récentes\").",
+      "description": "The same English concept \"transactions\" is rendered as \"opérations\" in the counter and \"Transactions\" in the section heading on the same page.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=51"
+    },
+    {
+      "page_path": "/fr/introuvable",
+      "data_testid": null,
+      "category": "missing_translation",
+      "observed": "Not Found — The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Page introuvable — L'adresse demandée est introuvable. Si vous l'avez saisie manuellement, vérifiez l'orthographe et réessayez. (with lang=\"fr-CA\" and site header)",
+      "description": "The 404 page under /fr/ is the default English server page with html lang=\"en\", no French text and no site navigation back to the French site.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=79"
+    }
+  ]
+}

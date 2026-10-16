@@ -6,7 +6,7 @@
 
 | layer | detected | missed |
 |---|---|---|
-| deterministic | 9 | 1 |
+| deterministic | 10 | 0 |
 | ai | 6 | 0 |
 | both | 5 | 0 |
 
@@ -20,7 +20,7 @@
 | D04 | yes | yes | 20261015-183839-localhost-5002:/fr/apply#apply-submit-button |
 | D05 | yes | yes | 20261015-183839-localhost-5002:/fr/calculator#calculator-payment-value |
 | D06 | yes | yes | 20261015-183839-localhost-5002:/fr/dashboard#dashboard-txn-date-0 |
-| D07 | no | n/a | - |
+| D07 | yes | yes | 20261015-183839-localhost-5002:/fr/application/ap-100482#None |
 | D08 | yes | yes | 20261015-183839-localhost-5002:/fr/dashboard#dashboard-estimate-loan-link |
 | D09 | yes | yes | 20261015-183839-localhost-5002:/fr/apply#apply-error-fullname |
 | D10 | yes | yes | 20261015-183839-localhost-5002:/fr/dashboard#dashboard-active-loans-count |
@@ -46,15 +46,13 @@ None.
 
 ### Unclassified findings (manual review)
 
-| run | page | testid | observed |
-|---|---|---|---|
-| 20261015-183839-localhost-5002 | /fr/application/ap-100482 | html | lang="en" |
+None.
 
 ### Precision / recall
 
-- precision: 0.952
-- recall: 0.952
-- false positive count: 1
+- precision: 1.000
+- recall: 1.000
+- false positive count: 0
 
 ### Cost / tokens / duration
 
