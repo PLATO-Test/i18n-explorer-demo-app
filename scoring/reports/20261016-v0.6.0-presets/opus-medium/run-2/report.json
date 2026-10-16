@@ -1,0 +1,372 @@
+{
+  "build": "seeded",
+  "n_defects": 21,
+  "sources": {
+    "ai_explorer": {
+      "n_runs": 1,
+      "defect_table": [
+        {
+          "id": "D01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-heading",
+              "observed": "Recent transactions",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": "summary-confirmation-message",
+              "observed": "Merci. Votre demande pour {montant} a été reçue.",
+              "category": "placeholder"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "hardcoded_text"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-submit-button",
+              "observed": "Soumettre ma demande de prêt",
+              "category": "truncation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$450.91",
+              "category": "number_currency_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-0",
+              "observed": "09/15/2026",
+              "category": "date_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D07",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": null,
+              "observed": "lang=\"en\"",
+              "category": "lang_attribute"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D08",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-estimate-loan-link",
+              "observed": "Estimer un nouveau prêt -> /en/calculator",
+              "category": "locale_navigation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D09",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D10",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-active-loans-count",
+              "observed": "0 prêts actifs",
+              "category": "plural"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-email-label",
+              "observed": "Adresse e-mail",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-balance-label",
+              "observed": "Balance du compte",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-cta-apply",
+              "observed": "Appliquer pour un prêt",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-paylater-label",
+              "observed": "Payer maintenant",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-modal-close",
+              "observed": "Proche",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-statement-link",
+              "observed": "Déclaration mensuelle",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-early-repayment-note",
+              "observed": "Aucune accusation pour un remboursement anticipé.",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-rate-note",
+              "observed": "Taux variable de 5,2 %.",
+              "category": "omission"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-banner-image",
+              "observed": "banner-en.png",
+              "category": "image_text"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A07",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-promo-image",
+              "observed": "promo-c.png (image text \"Taux fixe : 4,9 %\", alt \"Taux variable : 5,2 %\")",
+              "category": "image_text"
+            }
+          ],
+          "category_correct": true
+        }
+      ],
+      "layer_breakdown": {
+        "deterministic": {
+          "detected": 10,
+          "missed": 0
+        },
+        "ai": {
+          "detected": 6,
+          "missed": 0
+        },
+        "both": {
+          "detected": 5,
+          "missed": 0
+        }
+      },
+      "control_false_positives": [],
+      "known_issues": [
+        {
+          "issue_id": "U03",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/inexistant",
+              "data_testid": null,
+              "observed": "Not Found — The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+              "category": "hardcoded_text"
+            }
+          ]
+        },
+        {
+          "issue_id": "U05",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261016-141629-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-amount-input",
+              "observed": "12500,50 → \"Entrez un montant entre 1 000,00 $ et 50 000,00 $.\"",
+              "category": "number_currency_format"
+            }
+          ]
+        }
+      ],
+      "unclassified": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_count": 0,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": null,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "mean_duration_s": 218.8,
+        "models": [
+          "claude-opus-5-5"
+        ]
+      },
+      "runs": [
+        {
+          "run_id": "20261016-141629-localhost-5002",
+          "model": "claude-opus-5-5",
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 218.8
+        }
+      ]
+    }
+  }
+}

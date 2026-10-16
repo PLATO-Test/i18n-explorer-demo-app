@@ -1,0 +1,35 @@
+{
+  "run": {
+    "run_id": "20261016-153317-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-16T15:33:17.127141-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 93.6
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-count",
+      "category": "terminology",
+      "observed": "3 opérations récentes",
+      "expected": "3 transactions récentes",
+      "description": "\"transactions\" is translated as \"opérations\" in the counter but as \"Transactions\" in the section heading (\"Transactions récentes\"), giving two terms for the same concept.",
+      "severity": "low",
+      "evidence": "screenshots/010.png"
+    },
+    {
+      "page_path": "/fr/inexistant",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Localized 404 page: \"Page introuvable\" with a French explanation and link back to /fr/.",
+      "description": "The 404 error page under /fr/ is the generic English server page with no site header, no French text and no way back.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=66"
+    }
+  ]
+}

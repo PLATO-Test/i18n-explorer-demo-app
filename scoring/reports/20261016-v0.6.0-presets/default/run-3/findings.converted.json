@@ -1,0 +1,205 @@
+{
+  "run": {
+    "run_id": "20261016-152403-localhost-5002",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-16T15:24:03.596499-04:00",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 109.1
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-banner-image",
+      "category": "image_text",
+      "observed": "/static/img/banner-en.png",
+      "expected": "Use a French banner image (e.g. banner-fr.png) with French text.",
+      "description": "French page uses the English banner image containing the text \"Financing that fits your plans / Competitive rates. Clear terms. No surprises.\"",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "missing_translation",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "Footer is left in English on the French page (also brand name differs from header \"Banque Northstar\").",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "Uses tu form while the rest of the page (title \"vous ressemble\") uses vous.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-cta-apply",
+      "category": "terminology",
+      "observed": "Appliquer pour un prêt",
+      "expected": "Demander un prêt",
+      "description": "\"Appliquer pour\" is an anglicism; Quebec French uses \"faire une demande de prêt\" / \"Demander un prêt\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "Empty full name validation error is in English on the French page; other fields are translated.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=20"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-email-label",
+      "category": "terminology",
+      "observed": "Adresse e-mail",
+      "expected": "Adresse courriel",
+      "description": "Label uses \"e-mail\" while the error message uses \"courriel\"; Quebec usage is \"courriel\", and terms should be consistent.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=20"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande de 12 500,00 $ a été reçue.",
+      "description": "Raw template variable {montant} shown instead of the formatted amount.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=40"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "Monthly payment uses English currency format on the French page (dollar sign first, decimal point) instead of 450,91 $.",
+      "severity": "medium",
+      "evidence": "screenshots/051.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "\"Pay later\" translated as \"Pay now\", the opposite meaning; contradicts the help text \"Premier paiement reporté de 30 jours\".",
+      "severity": "high",
+      "evidence": "screenshots/051.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "mistranslation",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais ne s'appliquent en cas de remboursement anticipé.",
+      "description": "\"charges\" (fees) mistranslated as \"accusation\" (criminal accusation).",
+      "severity": "medium",
+      "evidence": "screenshots/051.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve de l'approbation du crédit.",
+      "description": "French drops the condition \"subject to credit approval\".",
+      "severity": "high",
+      "evidence": "screenshots/051.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-promo-image",
+      "category": "image_text",
+      "observed": "promo-c.png (shows \"Taux fixe : 4,9 %\"; alt \"Taux variable : 5,2 %\")",
+      "expected": "Use French image showing \"Taux variable : 5,2 %\".",
+      "description": "French promo image text says fixed rate 4.9% while alt text and page say variable rate 5.2%; the value in the image differs from English.",
+      "severity": "high",
+      "evidence": "screenshots/051.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "\"Close\" translated as the adjective \"Proche\" (near) instead of the verb \"Fermer\".",
+      "severity": "medium",
+      "evidence": "screenshots/051.png"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15 (or 15 septembre 2026)",
+      "description": "Transaction dates use US MM/DD/YYYY on the French page (09/15, 09/12, 09/08), ambiguous and not fr-CA format.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=62"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "Heading left in English on the French dashboard.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=62"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "observed": "Estimer un nouveau prêt -> /en/calculator",
+      "expected": "Link to /fr/calculator",
+      "description": "The French dashboard link points to the English calculator page, switching language.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=62"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-active-loans-count",
+      "category": "plural",
+      "observed": "0 prêts actifs",
+      "expected": "0 prêt actif",
+      "description": "In French, zero takes the singular form (0 prêt actif).",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=62"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-balance-label",
+      "category": "terminology",
+      "observed": "Balance du compte",
+      "expected": "Solde du compte",
+      "description": "\"Balance\" is an anglicism for account balance; \"solde\" is correct. Also \"Déclaration mensuelle\" for \"Monthly statement\" should be \"Relevé mensuel\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=62"
+    },
+    {
+      "page_path": "/fr/nonexistent",
+      "data_testid": null,
+      "category": "missing_translation",
+      "observed": "Not Found / The requested URL was not found on the server.",
+      "expected": "Custom French 404 page with site header.",
+      "description": "The 404 page under /fr/ is a default English error page without site chrome.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=71"
+    }
+  ]
+}

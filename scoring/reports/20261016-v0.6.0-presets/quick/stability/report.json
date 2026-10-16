@@ -1,0 +1,645 @@
+{
+  "build": "seeded",
+  "n_defects": 21,
+  "sources": {
+    "ai_explorer": {
+      "n_runs": 3,
+      "defect_table": [
+        {
+          "id": "D01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-heading",
+              "observed": "Recent transactions",
+              "category": "missing_translation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-heading",
+              "observed": "Recent transactions",
+              "category": "missing_translation"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-heading",
+              "observed": "Recent transactions",
+              "category": "missing_translation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": "summary-confirmation-message",
+              "observed": "Merci. Votre demande pour {montant} a été reçue.",
+              "category": "placeholder"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": "summary-confirmation-message",
+              "observed": "Merci. Votre demande pour {montant} a été reçue.",
+              "category": "placeholder"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/application/ap-100482",
+              "data_testid": "summary-confirmation-message",
+              "observed": "Merci. Votre demande pour {montant} a été reçue.",
+              "category": "placeholder"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "missing_translation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "hardcoded_text"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "site-footer",
+              "observed": "© 2026 Northstar Bank. All rights reserved.",
+              "category": "hardcoded_text"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D04",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$450.91",
+              "category": "number_currency_format"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$450.91",
+              "category": "number_currency_format"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-payment-value",
+              "observed": "$450.91",
+              "category": "number_currency_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-0",
+              "observed": "09/15/2026",
+              "category": "date_format"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-0",
+              "observed": "09/15/2026",
+              "category": "date_format"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-txn-date-0",
+              "observed": "09/15/2026",
+              "category": "date_format"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D07",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "D08",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-estimate-loan-link",
+              "observed": "/en/calculator",
+              "category": "locale_navigation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-estimate-loan-link",
+              "observed": "Estimer un nouveau prêt -> /en/calculator",
+              "category": "locale_navigation"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-estimate-loan-link",
+              "observed": "/en/calculator",
+              "category": "locale_navigation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D09",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/apply",
+              "data_testid": "apply-error-fullname",
+              "observed": "This field is required.",
+              "category": "untranslated_validation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "D10",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-active-loans-count",
+              "observed": "0 prêts actifs",
+              "category": "plural"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-active-loans-count",
+              "observed": "0 prêts actifs",
+              "category": "plural"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G01",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        },
+        {
+          "id": "G02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-balance-label",
+              "observed": "Balance du compte",
+              "category": "terminology"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-balance-label",
+              "observed": "Balance du compte",
+              "category": "terminology"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-balance-label",
+              "observed": "Balance du compte",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-cta-apply",
+              "observed": "Appliquer pour un prêt",
+              "category": "terminology"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-cta-apply",
+              "observed": "Appliquer pour un prêt",
+              "category": "terminology"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-cta-apply",
+              "observed": "Appliquer pour un prêt",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "G04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-hero-subtitle",
+              "observed": "Découvre tes options de financement",
+              "category": "register"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A01",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-paylater-label",
+              "observed": "Payer maintenant",
+              "category": "mistranslation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-paylater-label",
+              "observed": "Payer maintenant",
+              "category": "mistranslation"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-paylater-label",
+              "observed": "Payer maintenant",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A02",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-modal-close",
+              "observed": "Proche",
+              "category": "mistranslation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-modal-close",
+              "observed": "Proche",
+              "category": "mistranslation"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-modal-close",
+              "observed": "Proche",
+              "category": "mistranslation"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A03",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-statement-link",
+              "observed": "Déclaration mensuelle",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": false
+        },
+        {
+          "id": "A04",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-early-repayment-note",
+              "observed": "Aucune accusation pour un remboursement anticipé.",
+              "category": "mistranslation"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-early-repayment-note",
+              "observed": "Aucune accusation pour un remboursement anticipé.",
+              "category": "terminology"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-early-repayment-note",
+              "observed": "Aucune accusation pour un remboursement anticipé.",
+              "category": "terminology"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A05",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-rate-note",
+              "observed": "Taux variable de 5,2 %.",
+              "category": "omission"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-rate-note",
+              "observed": "Taux variable de 5,2 %.",
+              "category": "omission"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-rate-note",
+              "observed": "Taux variable de 5,2 %.",
+              "category": "omission"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A06",
+          "detected": true,
+          "matched_findings": [
+            {
+              "run_id": "20261016-135857-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-banner-image",
+              "observed": "/static/img/banner-en.png",
+              "category": "image_text"
+            },
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-banner-image",
+              "observed": "/static/img/banner-en.png",
+              "category": "image_text"
+            },
+            {
+              "run_id": "20261016-152613-localhost-5002",
+              "page_path": "/fr",
+              "data_testid": "landing-banner-image",
+              "observed": "/static/img/banner-en.png",
+              "category": "image_text"
+            }
+          ],
+          "category_correct": true
+        },
+        {
+          "id": "A07",
+          "detected": false,
+          "matched_findings": [],
+          "category_correct": null
+        }
+      ],
+      "layer_breakdown": {
+        "deterministic": {
+          "detected": 8,
+          "missed": 2
+        },
+        "ai": {
+          "detected": 5,
+          "missed": 1
+        },
+        "both": {
+          "detected": 4,
+          "missed": 1
+        }
+      },
+      "control_false_positives": [],
+      "known_issues": [
+        {
+          "issue_id": "U04",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261016-141105-localhost-5002",
+              "page_path": "/fr/calculator",
+              "data_testid": "calculator-recalculate-button",
+              "observed": "Calculateur de prêt",
+              "category": "mistranslation"
+            }
+          ]
+        }
+      ],
+      "unclassified": [],
+      "precision": 1.0,
+      "recall": 0.7619047619047619,
+      "false_positive_count": 0,
+      "stability": {
+        "A01": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "A02": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "A03": {
+          "detected_runs": 1,
+          "total_runs": 3
+        },
+        "A04": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "A05": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "A06": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "A07": {
+          "detected_runs": 0,
+          "total_runs": 3
+        },
+        "D01": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D02": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D03": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D04": {
+          "detected_runs": 0,
+          "total_runs": 3
+        },
+        "D05": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D06": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D07": {
+          "detected_runs": 0,
+          "total_runs": 3
+        },
+        "D08": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D09": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "D10": {
+          "detected_runs": 2,
+          "total_runs": 3
+        },
+        "G01": {
+          "detected_runs": 0,
+          "total_runs": 3
+        },
+        "G02": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "G03": {
+          "detected_runs": 3,
+          "total_runs": 3
+        },
+        "G04": {
+          "detected_runs": 3,
+          "total_runs": 3
+        }
+      },
+      "cost": {
+        "total_cost_usd": null,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "mean_duration_s": 94.03333333333333,
+        "models": [
+          "claude-sonnet-5-5"
+        ]
+      },
+      "runs": [
+        {
+          "run_id": "20261016-135857-localhost-5002",
+          "model": "claude-sonnet-5-5",
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 116.3
+        },
+        {
+          "run_id": "20261016-141105-localhost-5002",
+          "model": "claude-sonnet-5-5",
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 104.5
+        },
+        {
+          "run_id": "20261016-152613-localhost-5002",
+          "model": "claude-sonnet-5-5",
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 61.3
+        }
+      ]
+    }
+  }
+}

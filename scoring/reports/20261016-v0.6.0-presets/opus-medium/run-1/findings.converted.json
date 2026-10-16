@@ -1,0 +1,235 @@
+{
+  "run": {
+    "run_id": "20261016-140405-localhost-5002",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-16T14:04:05.362057-04:00",
+    "model": "claude-opus-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 215.2
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "hardcoded_text",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "Footer copyright line is in English on the French site.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "Subtitle uses informal \"tu\" while the rest of the site (e.g. title \"qui vous ressemble\") uses \"vous\".",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-cta-apply",
+      "category": "terminology",
+      "observed": "Appliquer pour un prêt",
+      "expected": "Faire une demande de prêt",
+      "description": "\"Appliquer pour\" is a well-known anglicism (calque of \"apply for\"); Quebec usage is \"faire une demande de\".",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-banner-image",
+      "category": "image_text",
+      "observed": "/static/img/banner-en.png",
+      "expected": "Use a French banner (e.g. banner-fr.png) reading \"Un financement adapté à vos projets — Taux concurrentiels. Modalités claires. Aucune surprise.\"",
+      "description": "The French landing page displays the English banner image with English text \"Financing that fits your plans / Competitive rates. Clear terms. No surprises.\"",
+      "severity": "medium",
+      "evidence": "screenshots/009.png"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "Required-field error for \"Nom complet\" is shown in English on the French form, while other fields' errors are translated.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=19"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-submit-button",
+      "category": "truncation",
+      "observed": "Soumettre ma demande de prêt",
+      "expected": "Remove fixed width / overflow hidden on .btn-compact, or shorten to \"Soumettre la demande\".",
+      "description": "Submit button text is clipped to \"Soumettre ma demande\" (scrollWidth 290 > clientWidth 210, overflow hidden, nowrap).",
+      "severity": "medium",
+      "evidence": "screenshots/021.png"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-email-label",
+      "category": "terminology",
+      "observed": "Adresse e-mail",
+      "expected": "Adresse courriel",
+      "description": "\"e-mail\" is not standard Canadian French usage; the OQLF term is \"courriel\".",
+      "severity": "low",
+      "evidence": "screenshots/021.png"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande de 25 000,00 $ a été reçue.",
+      "description": "The confirmation message shows the raw template token {montant} instead of the loan amount (the French key name likely doesn't match the variable passed).",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=47"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "\"Pay later\" is translated as \"Payer maintenant\" (pay now), the opposite meaning, contradicting the help text about a deferred first payment.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=52"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "Estimated monthly payment uses English currency format on the French page.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=52"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "mistranslation",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais pour un remboursement anticipé.",
+      "description": "\"Charges\" was translated in its legal sense (\"accusation\" = criminal charge) instead of fees (\"frais\").",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=52"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve de l'approbation du crédit.",
+      "description": "The French rate note drops the \"subject to credit approval\" condition.",
+      "severity": "high",
+      "evidence": "trajectory.jsonl#seq=52"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-promo-image",
+      "category": "image_text",
+      "observed": "promo-c.png (image text: \"Taux fixe : 4,9 %\"; alt \"Taux variable : 5,2 %\")",
+      "expected": "Use the French version of promo-a showing \"Taux variable : 5,2 %\".",
+      "description": "The French page shows a different promo image advertising a fixed 4.9% rate, contradicting its alt text and the English page (variable 5.2%).",
+      "severity": "high",
+      "evidence": "screenshots/060.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "\"Close\" (the verb, to close the dialog) was translated as the adjective \"Proche\" (near).",
+      "severity": "medium",
+      "evidence": "screenshots/060.png"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-balance-label",
+      "category": "terminology",
+      "observed": "Balance du compte",
+      "expected": "Solde du compte",
+      "description": "\"Balance\" is an anglicism for an account balance; the correct banking term in French is \"solde\".",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=73"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-active-loans-count",
+      "category": "plural",
+      "observed": "0 prêts actifs",
+      "expected": "0 prêt actif",
+      "description": "In French, zero takes the singular; the English plural rule was applied.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=73"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "Section heading left in English on the French dashboard.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=73"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15 (or 15 septembre 2026)",
+      "description": "Transaction dates on the French dashboard use US MM/DD/YYYY order, which is ambiguous and not Canadian French convention (applies to all rows).",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=73"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-statement-link",
+      "category": "mistranslation",
+      "observed": "Déclaration mensuelle",
+      "expected": "Relevé mensuel",
+      "description": "A bank \"statement\" is a \"relevé\" in French; \"déclaration\" means a declaration/filing.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=73"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "observed": "Estimer un nouveau prêt (-> /en/calculator)",
+      "expected": "Link to /fr/calculator",
+      "description": "The French dashboard link points to the English calculator, switching the user to English.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=73"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": null,
+      "category": "lang_attribute",
+      "observed": "lang=\"en\"",
+      "expected": "lang=\"fr-CA\"",
+      "description": "The French application confirmation page declares its document language as English.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=88"
+    },
+    {
+      "page_path": "/fr/inexistant",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "Not Found — The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Page introuvable — La page demandée est introuvable. Si vous avez saisi l'adresse manuellement, vérifiez l'orthographe et réessayez.",
+      "description": "The 404 page under /fr/ is the default English server error page, with no localization.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=98"
+    }
+  ]
+}

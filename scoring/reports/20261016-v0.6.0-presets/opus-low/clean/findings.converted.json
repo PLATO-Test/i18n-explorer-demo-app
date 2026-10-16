@@ -1,0 +1,35 @@
+{
+  "run": {
+    "run_id": "20261016-153604-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-16T15:36:04.540859-04:00",
+    "model": "claude-opus-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 129.3
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "terminology",
+      "observed": "Transactions récentes",
+      "expected": "Opérations récentes",
+      "description": "The same concept is called \"opérations récentes\" in the counter and \"Transactions récentes\" in the heading on the same page; use one term consistently.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=36"
+    },
+    {
+      "page_path": "/fr/inexistant",
+      "data_testid": null,
+      "category": "missing_translation",
+      "observed": "Not Found — The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Page introuvable — La page demandée est introuvable. Si vous avez saisi l'adresse manuellement, vérifiez l'orthographe et réessayez.",
+      "description": "The 404 page under /fr/ is a generic English server page (html lang=\"en\"), with no French text or site navigation.",
+      "severity": "medium",
+      "evidence": "trajectory.jsonl#seq=62"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "build": "clean",
+  "n_defects": 21,
+  "sources": {
+    "ai_explorer": {
+      "n_runs": 1,
+      "defect_table": null,
+      "layer_breakdown": null,
+      "control_false_positives": [],
+      "known_issues": [
+        {
+          "issue_id": "U02",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261016-153317-localhost-5001",
+              "page_path": "/fr/dashboard",
+              "data_testid": "dashboard-recent-transactions-count",
+              "observed": "3 opérations récentes",
+              "category": "terminology"
+            }
+          ]
+        },
+        {
+          "issue_id": "U03",
+          "count": 1,
+          "findings": [
+            {
+              "run_id": "20261016-153317-localhost-5001",
+              "page_path": "/fr/inexistant",
+              "data_testid": null,
+              "observed": "Not Found / The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+              "category": "hardcoded_text"
+            }
+          ]
+        }
+      ],
+      "unclassified": [],
+      "precision": null,
+      "recall": null,
+      "false_positive_count": 0,
+      "stability": null,
+      "cost": {
+        "total_cost_usd": null,
+        "total_input_tokens": null,
+        "total_output_tokens": null,
+        "mean_duration_s": 93.6,
+        "models": [
+          "claude-sonnet-5-5"
+        ]
+      },
+      "runs": [
+        {
+          "run_id": "20261016-153317-localhost-5001",
+          "model": "claude-sonnet-5-5",
+          "input_tokens": null,
+          "output_tokens": null,
+          "cost_usd": null,
+          "duration_s": 93.6
+        }
+      ]
+    }
+  }
+}

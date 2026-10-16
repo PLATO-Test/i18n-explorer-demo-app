@@ -1,0 +1,45 @@
+{
+  "run": {
+    "run_id": "20261016-153832-localhost-5001",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5001",
+    "started_at": "2026-10-16T15:38:32.201101-04:00",
+    "model": "claude-opus-5-5",
+    "input_tokens": null,
+    "output_tokens": null,
+    "cost_usd": null,
+    "duration_s": 148.5
+  },
+  "findings": [
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-count",
+      "category": "terminology",
+      "observed": "3 opérations récentes",
+      "expected": "3 transactions récentes",
+      "description": "The same concept (\"recent transactions\") is rendered as \"opérations récentes\" in the counter but \"Transactions récentes\" in the section heading on the same page.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=62"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-amount-input",
+      "category": "number_currency_format",
+      "observed": "2500,50 → Entrez un montant entre 1 000,00 $ et 50 000,00 $.",
+      "expected": "Parse the loan amount with fr-CA conventions (decimal comma, space as thousands separator) on the French form.",
+      "description": "On the French form, an amount typed with the French decimal comma (2500,50), which is within range, is rejected with the out-of-range message, while the equivalent 2500.50 is accepted in English. The parser only understands the English decimal point, and the error message misleads French users.",
+      "severity": "medium",
+      "evidence": "screenshots/073.png"
+    },
+    {
+      "page_path": "/fr/inexistant",
+      "data_testid": null,
+      "category": "hardcoded_text",
+      "observed": "Not Found — The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.",
+      "expected": "Page introuvable — La page demandée est introuvable. Si vous avez saisi l'adresse manuellement, vérifiez-la et réessayez.",
+      "description": "The 404 error page under the /fr/ prefix is the server's default English page, with no site header and no French text.",
+      "severity": "low",
+      "evidence": "trajectory.jsonl#seq=105"
+    }
+  ]
+}
