@@ -10,7 +10,9 @@ Mapping rules, per finding:
   fragment. Case and trailing slashes are left to the scorer's own
   normalize_path.
 - data_testid: `element` when it looks like a data-testid - a non-empty
-  string with no whitespace, quote characters, brackets or "=". Some runs
+  string with no whitespace, quote characters, brackets or "=", that is
+  not an HTML element name (`html`, `body`, `button`, ... in any case;
+  such a value names an element type, not a testid). Some runs
   instead copy the plugin's own read_page notation, `[testid=X]`, or
   write it without brackets, `testid=X`, either optionally after a role
   (`img [testid=X]`); X is taken from that when it is the only testid in
@@ -44,6 +46,18 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 SCORER_SCHEMA_PATH = ROOT / "scoring" / "findings.schema.json"
 
 _TESTID_RE = re.compile(r"""^[^\s"'‘’“”\[\]=]+$""")
+# The element names of the WHATWG HTML standard, current and obsolete.
+_HTML_ELEMENT_NAMES = frozenset("""
+    a abbr acronym address applet area article aside audio b base basefont bdi bdo bgsound big
+    blink blockquote body br button canvas caption center cite code col colgroup data datalist dd
+    del details dfn dialog dir div dl dt em embed fieldset figcaption figure font footer form frame
+    frameset h1 h2 h3 h4 h5 h6 head header hgroup hr html i iframe img input ins isindex kbd keygen
+    label legend li link listing main map mark marquee menu meta meter multicol nav nobr noembed
+    noframes noscript object ol optgroup option output p param picture plaintext pre progress q rb
+    rp rt rtc ruby s samp script search section select slot small source spacer span strike strong
+    style sub summary sup table tbody td template textarea tfoot th thead time title tr track tt u
+    ul var video wbr xmp
+""".split())
 _BRACKETED_TESTID_RE = re.compile(r"""^(?:[a-z]+\s+)?(?:\[testid=([^\s"'‘’“”\[\]=]+)\]|testid=([^\s"'‘’“”\[\]=]+))$""")
 
 
@@ -63,7 +77,8 @@ def scorer_categories() -> set[str]:
 
 
 def looks_like_testid(element: str | None) -> bool:
-    return bool(element) and _TESTID_RE.match(element) is not None
+    return (bool(element) and _TESTID_RE.match(element) is not None
+            and element.lower() not in _HTML_ELEMENT_NAMES)
 
 
 def element_testid(element: str | None) -> str | None:
