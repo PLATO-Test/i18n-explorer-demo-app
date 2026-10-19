@@ -1,0 +1,156 @@
+{
+  "run": {
+    "run_id": "20261019-s5-low",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-19T18:02:50.606901+00:00",
+    "model": "claude-sonnet-5",
+    "input_tokens": 1157533,
+    "output_tokens": 11224,
+    "cost_usd": 0.471636,
+    "duration_s": 185.141,
+    "status": "completed"
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "missing_translation",
+      "severity": "low",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "The footer copyright text is left in English on the French landing page instead of being translated.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "severity": "low",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "The hero subtitle uses the informal \"tu\" form (Découvre tes) while the rest of the site (e.g., navigation, buttons) uses the formal \"vous\" register, creating an inconsistent register.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=2"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "severity": "medium",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "The validation error for the full name field is shown in English, while all other field validation errors on the same form are correctly translated to French.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=10"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "severity": "high",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande pour 5 000,00 $ a été reçue.",
+      "description": "The confirmation message on the French application summary page shows the unresolved template placeholder \"{montant}\" instead of the formatted loan amount, while the English version correctly shows \"$5,000.00\".",
+      "evidence": "explorer/2/trajectory.jsonl#seq=23"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "severity": "high",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "The checkbox labeled \"Pay later\" in English is translated as \"Payer maintenant\" (Pay now) in French, reversing its meaning. The help text below it still correctly describes a deferred first payment, contradicting the checkbox label.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=28"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "severity": "medium",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "The estimated monthly payment amount uses English currency formatting ($450.91) instead of the Canadian French convention (450,91 $), unlike other amounts on the site such as \"5 000,00 $\" on the application summary page.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=28"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "severity": "medium",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve de l'approbation du crédit.",
+      "description": "The French rate note omits the qualifier \"subject to credit approval\" that is present in the English version (\"Variable rate of 5.2%, subject to credit approval.\").",
+      "evidence": "explorer/2/trajectory.jsonl#seq=28"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "severity": "medium",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "The modal's close button, labeled \"Close\" in English, is translated as \"Proche\" (meaning \"near/close by\" as an adjective) instead of the verb \"Fermer\" used to close a dialog.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=36"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "mistranslation",
+      "severity": "medium",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais ne s'appliquent pour un remboursement anticipé.",
+      "description": "\"Accusation\" is a false cognate for the English \"charges\" (fees); in French \"accusation\" means a legal accusation/charge against someone, not a monetary fee. The correct term is \"frais\".",
+      "evidence": "explorer/2/trajectory.jsonl#seq=36"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "severity": "medium",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "The \"Recent transactions\" section heading on the French dashboard is left untranslated in English, while the summary count just above it correctly reads \"3 opérations récentes\".",
+      "evidence": "explorer/2/trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "severity": "medium",
+      "observed": "/en/calculator",
+      "expected": "/fr/calculator",
+      "description": "The \"Estimer un nouveau prêt\" link on the French dashboard page points to the English version of the calculator page (/en/calculator) instead of staying in French.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "severity": "medium",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15",
+      "description": "Transaction dates on the French dashboard are shown in US MM/DD/YYYY format (e.g. 09/15/2026), whereas the English version uses ISO format (2026-09-15). Canadian French convention uses YYYY-MM-DD or DD/MM/YYYY, not the US format.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=42"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-email-label",
+      "category": "terminology",
+      "severity": "low",
+      "observed": "Adresse e-mail",
+      "expected": "Adresse courriel",
+      "description": "The field label uses the anglicism \"e-mail\" while the validation error message for the same field correctly uses the Quebec French term \"courriel\" (\"Entrez une adresse courriel valide.\"), creating inconsistent terminology.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=66"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-promo-image",
+      "category": "image_text",
+      "severity": "high",
+      "observed": "Image text reads \"Taux fixe : 4,9 %\" but alt text and surrounding page text say \"Taux variable : 5,2 %\"; English version's image correctly reads \"Variable rate: 5.2%\" matching its alt text.",
+      "expected": "Image should display \"Taux variable : 5,2 %\" matching the alt text and the rest of the page content.",
+      "description": "The French promo banner image (promo-c.png) shows completely different text and a different rate (\"Taux fixe : 4,9 %\" - Fixed rate: 4.9%) than its alt attribute (\"Taux variable : 5,2 %\") and the rest of the page, which consistently refer to a 5.2% variable rate. This is a wrong image asset being used for the French locale.",
+      "evidence": "explorer/2/screenshots/071.png"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "run": {
+    "run_id": "20261019-s5-medium",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-19T18:06:06.999349+00:00",
+    "model": "claude-sonnet-5",
+    "input_tokens": 1726544,
+    "output_tokens": 15966,
+    "cost_usd": 0.6845092,
+    "duration_s": 197.047,
+    "status": "completed"
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "hardcoded_text",
+      "severity": "medium",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "The footer text remains in English on the French version of the site instead of being translated.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=3"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-banner-image",
+      "category": "image_text",
+      "severity": "high",
+      "observed": "Banner image shows English text \"Financing that fits your plans\" and \"Competitive rates. Clear terms. No surprises.\" even though alt text and page are French.",
+      "expected": "Banner image should show French text matching the French alt text, e.g. \"Un financement qui s'adapte à vos projets\".",
+      "description": "The hero banner image embeds English text that is not translated, while the rest of the page and the image's alt attribute are in French. The image filename itself is banner-en.png, suggesting no French version was used.",
+      "evidence": "explorer/2/screenshots/005.png"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "severity": "low",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "The subtitle uses the informal \"tu\" form (Découvre, tes) while the rest of the application (buttons, nav) uses the formal \"vous\" register, creating an inconsistent register.",
+      "evidence": "explorer/2/screenshots/005.png"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "severity": "high",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "The validation error for the Full name field is shown in English while all other field validation errors on the same form are correctly translated into French.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=13"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "severity": "high",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande pour 5 000,00 $ a été reçue.",
+      "description": "The confirmation message on the French application summary page shows the unresolved template placeholder \"{montant}\" instead of the formatted loan amount, while the English version correctly substitutes the value ($5,000.00).",
+      "evidence": "explorer/2/trajectory.jsonl#seq=26"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "missing_translation",
+      "severity": "medium",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "The \"Recent transactions\" section heading on the dashboard remains untranslated in English, even though the related count label above it (\"3 opérations récentes\") is correctly translated.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "severity": "medium",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15 (or 15/09/2026)",
+      "description": "Transaction dates on the French dashboard are shown in US MM/DD/YYYY format, while the English version correctly uses ISO format (YYYY-MM-DD). This is both inconsistent with the rest of the French page (which uses YYYY-MM-DD for due date) and not a valid fr-CA date format.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "severity": "medium",
+      "observed": "Link \"Estimer un nouveau prêt\" points to /en/calculator",
+      "expected": "/fr/calculator",
+      "description": "On the French dashboard, the \"Estimer un nouveau prêt\" link navigates to the English calculator page (/en/calculator) instead of staying in French, switching the user's language unexpectedly.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "severity": "medium",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "The estimated monthly payment is shown using US currency formatting ($450.91) on the French page instead of fr-CA formatting (450,91 $), unlike other currency values on the site such as the dashboard balance.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=38"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "severity": "high",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "The checkbox labeled \"Pay later\" in English (name=\"pay_later\", with help text about deferring the first payment by 30 days) is mistranslated as \"Payer maintenant\" (Pay now) in French, reversing its meaning.",
+      "evidence": "explorer/2/trajectory.jsonl#seq=38"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "mistranslation",
+      "severity": "medium",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais pour un remboursement anticipé.",
+      "description": "\"Accusation\" is a mistranslation of \"charges/fees\" (it means a legal accusation in French). The English \"No charges apply for early repayment.\" should use \"frais\" instead of \"accusation\".",
+      "evidence": "explorer/2/trajectory.jsonl#seq=38"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "severity": "medium",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve de l'approbation de crédit.",
+      "description": "The French rate note omits the qualifier \"subject to credit approval\" that is present in the English version (\"Variable rate of 5.2%, subject to credit approval.\").",
+      "evidence": "explorer/2/trajectory.jsonl#seq=38"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "severity": "high",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "The modal's \"Close\" button is mistranslated as \"Proche\" (which means \"near/nearby\", an adjective) instead of \"Fermer\" (the verb meaning to close), a false-friend translation error.",
+      "evidence": "explorer/2/screenshots/046.png"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-promo-image",
+      "category": "image_text",
+      "severity": "high",
+      "observed": "Promo image displays \"Taux fixe : 4,9 %\" while its alt text says \"Taux variable : 5,2 %\" and the adjacent text says \"Taux variable de 5,2 %.\"",
+      "expected": "Image should show \"Taux variable : 5,2 %\" matching the alt text and English version's image (promo-a.png, \"Variable rate: 5.2%\").",
+      "description": "The French page loads a different promo image (promo-c.png) showing a fixed rate of 4.9%, which contradicts the alt text, the surrounding rate note, and the English version's image (promo-a.png showing \"Variable rate: 5.2%\"). This is a factual inconsistency that could mislead users about loan terms.",
+      "evidence": "explorer/2/screenshots/053.png"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-cta-apply",
+      "category": "terminology",
+      "severity": "medium",
+      "observed": "Appliquer pour un prêt",
+      "expected": "Faire une demande de prêt",
+      "description": "\"Appliquer pour\" is an anglicism (calque of \"to apply for\") flagged by the OQLF as incorrect in Quebec French; the correct term is \"faire une demande de\". The site itself uses the correct term elsewhere (\"Faites votre demande dès maintenant\" on the calculator page, \"Demande de prêt\" as the apply page title), making this inconsistent as well.",
+      "evidence": "explorer/2/screenshots/005.png"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-balance-label",
+      "category": "terminology",
+      "severity": "medium",
+      "observed": "Balance du compte",
+      "expected": "Solde du compte",
+      "description": "\"Balance\" is an anglicism when referring to an account balance in Quebec French banking terminology; the correct term is \"solde du compte\".",
+      "evidence": "explorer/2/screenshots/086.png"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-submit-button",
+      "category": "truncation",
+      "severity": "medium",
+      "observed": "Button text \"Soumettre ma demande de prêt\" is visually cut off to \"Soumettre ma demande\" (scrollWidth 290px > clientWidth 210px, overflow hidden, white-space nowrap).",
+      "expected": "Full text \"Soumettre ma demande de prêt\" should be visible; button should widen or wrap to fit the longer French text, like the English \"Submit application\" button does.",
+      "description": "The submit button on the loan application form is sized for the shorter English text (\"Submit application\") and clips the longer French translation, hiding the words \"de prêt\" from the user.",
+      "evidence": "explorer/2/screenshots/092.png"
+    }
+  ]
+}

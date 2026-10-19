@@ -1,0 +1,2 @@
+# keep the scored findings byte-identical to the files hashed in project/05.15
+* -text

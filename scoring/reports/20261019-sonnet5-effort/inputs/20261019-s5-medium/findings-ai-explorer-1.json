@@ -1,0 +1,156 @@
+{
+  "run": {
+    "run_id": "20261019-s5-medium",
+    "source": "ai_explorer",
+    "base_url": "http://localhost:5002",
+    "started_at": "2026-10-19T17:49:44.800139+00:00",
+    "model": "claude-sonnet-5",
+    "input_tokens": 1100293,
+    "output_tokens": 13312,
+    "cost_usd": 0.5049586000000001,
+    "duration_s": 213.203,
+    "status": "completed"
+  },
+  "findings": [
+    {
+      "page_path": "/fr/",
+      "data_testid": "site-footer",
+      "category": "hardcoded_text",
+      "severity": "medium",
+      "observed": "© 2026 Northstar Bank. All rights reserved.",
+      "expected": "© 2026 Banque Northstar. Tous droits réservés.",
+      "description": "The site footer is left entirely in English on the French version of the page instead of being translated.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=3"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-error-fullname",
+      "category": "untranslated_validation",
+      "severity": "high",
+      "observed": "This field is required.",
+      "expected": "Ce champ est obligatoire.",
+      "description": "The validation error for the full name field is shown in English, while all other field errors on the same form are correctly shown in French.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=10"
+    },
+    {
+      "page_path": "/fr/application/AP-100482",
+      "data_testid": "summary-confirmation-message",
+      "category": "placeholder",
+      "severity": "high",
+      "observed": "Merci. Votre demande pour {montant} a été reçue.",
+      "expected": "Merci. Votre demande pour 15 000,00 $ a été reçue.",
+      "description": "The confirmation message on the French application summary page shows the raw template placeholder {montant} instead of the formatted loan amount, unlike the English version which correctly substitutes the value.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=19"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-recent-transactions-heading",
+      "category": "hardcoded_text",
+      "severity": "medium",
+      "observed": "Recent transactions",
+      "expected": "Opérations récentes",
+      "description": "The \"Recent transactions\" section heading on the dashboard is left untranslated in English on the French page.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=24"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-txn-date-0",
+      "category": "date_format",
+      "severity": "medium",
+      "observed": "09/15/2026",
+      "expected": "2026-09-15",
+      "description": "Transaction dates on the French dashboard are rendered in US MM/DD/YYYY format instead of the ISO/fr-CA format (YYYY-MM-DD) used on the English version of the same page.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=24"
+    },
+    {
+      "page_path": "/fr/dashboard",
+      "data_testid": "dashboard-estimate-loan-link",
+      "category": "locale_navigation",
+      "severity": "medium",
+      "observed": "/en/calculator",
+      "expected": "/fr/calculator",
+      "description": "The \"Estimer un nouveau prêt\" link on the French dashboard navigates to the English calculator page instead of staying in French.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=24"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-paylater-label",
+      "category": "mistranslation",
+      "severity": "high",
+      "observed": "Payer maintenant",
+      "expected": "Payer plus tard",
+      "description": "The checkbox label is translated with the opposite meaning: English says \"Pay later\" but French says \"Payer maintenant\" (Pay now), which contradicts the helper text about deferring the first payment by 30 days.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-payment-value",
+      "category": "number_currency_format",
+      "severity": "medium",
+      "observed": "$450.91",
+      "expected": "450,91 $",
+      "description": "The estimated monthly payment on the French calculator page is still formatted using US currency conventions ($450.91) instead of fr-CA conventions (450,91 $).",
+      "evidence": "explorer/1/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-early-repayment-note",
+      "category": "mistranslation",
+      "severity": "medium",
+      "observed": "Aucune accusation pour un remboursement anticipé.",
+      "expected": "Aucuns frais ne s'appliquent pour un remboursement anticipé.",
+      "description": "\"Accusation\" is a false cognate/anglicism meaning a legal accusation in French; it should be \"frais\" (fees/charges) to correctly convey \"No charges apply for early repayment.\"",
+      "evidence": "explorer/1/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-rate-note",
+      "category": "omission",
+      "severity": "medium",
+      "observed": "Taux variable de 5,2 %.",
+      "expected": "Taux variable de 5,2 %, sous réserve d'approbation de crédit.",
+      "description": "The French rate note drops the qualifier \"subject to credit approval\" that is present in the English version (\"Variable rate of 5.2%, subject to credit approval.\").",
+      "evidence": "explorer/1/trajectory.jsonl#seq=31"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-modal-close",
+      "category": "mistranslation",
+      "severity": "medium",
+      "observed": "Proche",
+      "expected": "Fermer",
+      "description": "The modal close button is translated as \"Proche\" (meaning \"near/close by\", an adjective) instead of \"Fermer\" (the verb \"to close\"), a mistranslation of \"Close\".",
+      "evidence": "explorer/1/trajectory.jsonl#seq=40"
+    },
+    {
+      "page_path": "/fr/calculator",
+      "data_testid": "calculator-promo-image",
+      "category": "image_text",
+      "severity": "high",
+      "observed": "Image text reads \"Taux fixe : 4,9 %\" while alt text and surrounding page text say \"Taux variable : 5,2 %\"",
+      "expected": "Image should display \"Taux variable : 5,2 %\" to match the English version's image (promo-a.png) and the alt text",
+      "description": "The French calculator page loads a different promo image (promo-c.png) than the English page (promo-a.png). The French image's embedded text \"Taux fixe : 4,9 %\" (Fixed rate: 4.9%) contradicts the alt text and the adjacent \"Taux variable de 5,2%\" note, showing wrong information.",
+      "evidence": "explorer/1/screenshots/045.png"
+    },
+    {
+      "page_path": "/fr/",
+      "data_testid": "landing-hero-subtitle",
+      "category": "register",
+      "severity": "low",
+      "observed": "Découvre tes options de financement",
+      "expected": "Découvrez vos options de financement",
+      "description": "The landing page uses informal \"tu\" register (\"Découvre tes...\") while the rest of the application (e.g. the apply form's \"Vous devez donner votre accord...\") uses formal \"vous\", producing an inconsistent register across the site.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=50"
+    },
+    {
+      "page_path": "/fr/apply",
+      "data_testid": "apply-email-label",
+      "category": "terminology",
+      "severity": "low",
+      "observed": "Adresse e-mail (label) vs \"Entrez une adresse courriel valide.\" (error message)",
+      "expected": "Adresse courriel",
+      "description": "The form label uses the anglicism \"e-mail\" while the validation error for the same field uses the preferred Quebec French term \"courriel\", producing inconsistent terminology on one page.",
+      "evidence": "explorer/1/trajectory.jsonl#seq=78"
+    }
+  ]
+}
